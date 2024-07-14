@@ -3,3 +3,4 @@
 @tailwind utilities;
 
 .max-w-9xl {     max-width: 110rem/* 1280px */; }
+.max-w-8xl {     max-width: 100rem/* 1280px */; }
