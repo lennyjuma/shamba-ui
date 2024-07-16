@@ -1,25 +1,17 @@
-<!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <template>
   <div class="bg-gray-50">
-    <div class="mx-auto max-w-7xl py-24 sm:px-2 sm:py-32 lg:px-4">
+    <div class="mx-auto max-w-7xl py-6 sm:px-2 sm:py-12 lg:px-4">
       <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
         <div class="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
           <div>
             <h2 class="text-4xl font-bold tracking-tight text-gray-900">We built our business on great customer service</h2>
-            <p class="mt-4 text-gray-500">At the beginning at least, but then we realized we could make a lot more money if we kinda stopped caring about that. Our new strategy is to write a bunch of things that look really good in the headlines, then clarify in the small print but hope people don't actually read it.</p>
+            <p class="mt-4 text-gray-500">
+              ShambaLab is a cutting-edge solution for comprehensive soil and environmental monitoring. It
+              is designed to provide farmers with precise, real-time data to optimize crop health, reduce
+              excessive fertilizer application and boost agricultural productivity. The device offers a holistic
+              approach to farm management by tracking critical soil and air parameters along with precise
+              location data.
+            </p>
           </div>
           <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg bg-gray-100">
             <img src="https://tailwindui.com/img/ecommerce-images/incentives-07-hero.jpg" alt="" class="object-cover object-center" />
