@@ -4,7 +4,7 @@
       <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
         <div class="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
           <div>
-            <h2 class="text-4xl font-bold tracking-tight text-gray-900">We built our business on great customer service</h2>
+            <h2 class="text-4xl font-bold tracking-tight text-gray-900">A product made with farmers in mind.</h2>
             <p class="mt-4 text-gray-500">
               ShambaLab is a cutting-edge solution for comprehensive soil and environmental monitoring. It
               is designed to provide farmers with precise, real-time data to optimize crop health, reduce
@@ -36,20 +36,20 @@
 <script setup>
 const incentives = [
   {
-    name: 'Free shipping',
+    name: 'Soil Health',
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-shipping-simple.svg',
-    description: "It's not actually free we just price it into the products. Someone's paying for it, and it's not us.",
+    description: "Monitors soil health by collecting real-time data on potassium, nitrogen, phosphorus, moisture, pH, temperature, and electrical conductivity, helping you optimize crop management.",
   },
   {
-    name: '10-year warranty',
+    name: 'Air Conditions',
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-warranty-simple.svg',
-    description: "If it breaks in the first 10 years we'll replace it. After that you're on your own though.",
+    description: "Monitors air conditions by continuously collecting real-time data on humidity and temperature, ensuring optimal environmental management.",
   },
   {
-    name: 'Exchanges',
+    name: 'GPS Tracking',
     imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-exchange-simple.svg',
     description:
-      "If you don't like it, trade it to one of your friends for something of theirs. Don't send it here though.",
+      "GPS tracking provides precise latitude and longitude for field mapping and records the date and time for accurate monitoring and trend analysis.",
   },
 ]
 </script>
