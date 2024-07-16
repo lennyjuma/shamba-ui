@@ -1,24 +1,10 @@
-<!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <template>
   <div class="bg-white">
-    <div class="mx-auto max-w-7xl py-24 sm:px-2 sm:py-32 lg:px-4">
+    <div class="mx-auto max-w-7xl py-6 sm:px-2 sm:py-10 lg:px-4">
       <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
         <div class="max-w-3xl">
-          <h2 class="font-semibold text-gray-500">Drawstring Canister</h2>
-          <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Use it your way</p>
+          <h2 class="font-semibold text-gray-500">Soil properties   </h2>
+          <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Get to know your farm</p>
           <p class="mt-4 text-gray-500">The Drawstring Canister comes with multiple strap and handle options to adapt throughout your day. Shoulder sling it, backpack it, or handy carry it.</p>
         </div>
 
