@@ -29,12 +29,14 @@
 
 <script setup>
 import {
-  ChatBubbleOvalLeftEllipsisIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
   ClockIcon,
-  BanknotesIcon, CheckBadgeIcon, GlobeEuropeAfricaIcon, GlobeAltIcon, MapPinIcon, RssIcon, SignalIcon, RocketLaunchIcon
+  BanknotesIcon,
+  CheckBadgeIcon,
+  GlobeEuropeAfricaIcon,
+  MapPinIcon,
+  SignalIcon,
+  RocketLaunchIcon,
+  CloudIcon, FaceSmileIcon
 } from '@heroicons/vue/24/outline'
 
 const features = [
@@ -76,7 +78,7 @@ const features = [
     name: 'Increased Resilience',
     description:
       'Monitor and adjust to changing environmental conditions, enhancing your farm’s resilience to climate variations and extreme weather events.',
-    icon: HeartIcon,
+    icon: CloudIcon,
   },
   {
     name: 'Precision Agriculture',
@@ -88,7 +90,7 @@ const features = [
     name: 'User-Friendly Experience',
     description:
       'With an intuitive GUI and easy-to-use features, ShambaLab is accessible to farmers of all technical backgrounds, making advanced soil testing simple and straightforward..',
-    icon: HeartIcon,
+    icon: FaceSmileIcon,
   },
   {
     name: ' Remote Monitoring',

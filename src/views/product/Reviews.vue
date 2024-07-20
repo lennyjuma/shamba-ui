@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white">
-    <div class="mx-auto max-w-2xl px-4 py-3 sm:px-6 sm:py-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-lg font-medium text-gray-900">Recent reviews</h2>
-      <div class="mt-6 space-y-10 divide-y divide-gray-200 border-b border-t border-gray-200 pb-10">
-        <div v-for="review in reviews" :key="review.id" class="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+    <div class="mx-auto lg:mt-6 max-w-2xl py-3 sm:py-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-lg md:text-xl font-medium text-gray-900">Recent reviews</h2>
+      <div class="mt-4 space-y-10 divide-y divide-gray-200 border-b border-t border-gray-200 pb-10">
+        <div v-for="review in reviews" :key="review.id" class="pt-4 lg:grid lg:grid-cols-12 lg:gap-x-8">
           <div class="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
             <div class="flex items-center xl:col-span-1">
               <div class="flex items-center">
