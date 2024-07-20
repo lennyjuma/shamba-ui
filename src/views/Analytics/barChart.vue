@@ -38,7 +38,7 @@ export default defineComponent({
   setup() {
     const chartOptions = ref<ChartOptions>({
       chart: {
-        type: 'bar',
+        type: 'column',
       },
       title: {
         text: 'Fruit Consumption',
@@ -54,7 +54,7 @@ export default defineComponent({
       series: [
         {
           name: 'Jane',
-          data: [1, 0, 4],
+          data: [1, 30, 4],
         },
         {
           name: 'John',
