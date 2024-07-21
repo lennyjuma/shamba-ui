@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mx-auto max-w-9xl px-6 lg:px-8">
     <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
@@ -41,10 +41,10 @@ export default defineComponent({
         type: 'column',
       },
       title: {
-        text: 'Fruit Consumption',
+        text: 'Air properties',
       },
       xAxis: {
-        categories: ['Apples', 'Bananas', 'Oranges'],
+        categories: ['January', 'February', 'March'],
       },
       yAxis: {
         title: {
@@ -53,11 +53,11 @@ export default defineComponent({
       },
       series: [
         {
-          name: 'Jane',
+          name: 'Humidity',
           data: [1, 30, 4],
         },
         {
-          name: 'John',
+          name: 'Temperature',
           data: [5, 7, 3],
         },
       ],
