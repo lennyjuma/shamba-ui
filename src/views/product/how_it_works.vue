@@ -27,20 +27,23 @@
 </template>
 
 <script setup>
+import result from "@/assets/svg/result-svgrepo-com.svg"
+import switch_on from "@/assets/svg/switch_on.svg"
+import insert from "@/assets/svg/soil_insert.svg"
 const incentives = [
   {
     name: 'Switch on',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-shipping-simple.svg',
+    imageSrc: switch_on,
     description: "Intuitive design, with a single push of a button, to make soil monitoring seamless.",
   },
   {
     name: 'Insert into soil',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-warranty-simple.svg',
+    imageSrc: insert,
     description: "Follow simple steps by Sampling unlimited parts of your farm, with each datapoint captured instantly.",
   },
   {
     name: 'Get results',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-exchange-simple.svg',
+    imageSrc: result,
     description:
       "Get reports and recommendations on your phone in realtime. .",
   },

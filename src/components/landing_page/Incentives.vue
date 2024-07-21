@@ -35,20 +35,23 @@
 </template>
 
 <script setup>
+import gps from "@/assets/svg/gps-location-map-marker-navigation-svgrepo-com.svg"
+import soil from "@/assets/svg/soil-svgrepo-com.svg"
+import air from "@/assets/svg/air-cloud-brain-svgrepo-com.svg"
 const incentives = [
   {
     name: 'Soil Health',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-shipping-simple.svg',
+    imageSrc: soil,
     description: "Monitors soil health by collecting real-time data on potassium, nitrogen, phosphorus, moisture, pH, temperature, and electrical conductivity, helping you optimize crop management.",
   },
   {
     name: 'Air Conditions',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-warranty-simple.svg',
+    imageSrc: air,
     description: "Monitors air conditions by continuously collecting real-time data on humidity and temperature, ensuring optimal environmental management.",
   },
   {
     name: 'GPS Tracking',
-    imageSrc: 'https://tailwindui.com/img/ecommerce/icons/icon-exchange-simple.svg',
+    imageSrc: gps,
     description:
       "GPS tracking provides precise latitude and longitude for field mapping and records the date and time for accurate monitoring and trend analysis.",
   },

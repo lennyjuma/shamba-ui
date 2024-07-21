@@ -8,7 +8,7 @@
       <h1 class="mt-4 text-3xl font-bold tracking-tight uppercase text-white sm:text-5xl">Shamba Lab</h1>
       <p class="mt-4 text-semibold text-white sm:mt-6">{{props.description}}</p>
       <div class="mt-10 flex justify-start">
-        <a href="#" class="text-sm text-indigo-600 leading-7"><span aria-hidden="true">&larr;</span> Get yours soon</a>
+        <a href="#" class="text-sm text-white leading-7"><span aria-hidden="true">&larr;</span> Get yours soon</a>
       </div>
     </div>
   </main>
