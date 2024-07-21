@@ -10,6 +10,13 @@ export default defineConfig({
     vue(),
     vueDevTools(),
   ],
+  vue: {
+    template: {
+      compilerOptions: {
+        isCustomElement: (tag) => tag.startsWith('swiper-')
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
