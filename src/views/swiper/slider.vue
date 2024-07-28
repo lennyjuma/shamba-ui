@@ -4,7 +4,7 @@
                     :slides-per-view="1"
                     :space-between="spaceBetween"
                     :centered-slides="true"
-                    :autoplay="{delay: 100}"
+                    :autoplay="{delay: 5000}"
                     :loop="true"
                     :breakpoints="{
       768: {
