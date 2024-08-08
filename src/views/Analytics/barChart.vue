@@ -69,7 +69,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-/* Add any styles for your component here */
-</style>

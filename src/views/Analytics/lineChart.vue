@@ -35,40 +35,25 @@ export default defineComponent({
   components: {
     highcharts: HighchartsVue.component,
   },
-  setup() {
+
+  props:["title","series","categories","x_axis_unit"],
+  setup(props) {
     const chartOptions = ref<ChartOptions>({
       chart: {
         type: 'line',
       },
       title: {
-        text: 'Soil properties',
+        text: props.title,
       },
       xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        categories: props.categories,
       },
       yAxis: {
         title: {
-          text: 'Amount',
+          text: props.x_axis_unit,
         },
       },
-      series: [
-        {
-          name: 'Nitrogen',
-          data: [5.0, 6.9, 6.5, 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
-        },
-        {
-          name: 'Phosphorus',
-          data: [7.0, 3.9, 4.5, 14.5, 18.4, 11.5, 10.2, 8.5, 13.3, 18.3, 21.9, 19.6],
-        },
-        {
-          name: 'Potassium',
-          data: [13.0, 16.9, 9.5, 24.5, 11.4, 21.5, 15.2, 11.5, 23.3, 10.3, 13.9, 9.6],
-        },
-        {
-          name: 'Electrical Conductivity',
-          data: [17.0, 26.9, 11.5, 29.5, 7.4, 13.5, 12.2, 3.5, 27.3, 18.3, 13.9, 9.6],
-        },
-      ],
+      series: props.series,
     });
 
     return {
