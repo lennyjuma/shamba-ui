@@ -6,14 +6,16 @@
         <p class="mt-2 text-sm text-gray-700">A table with recent soil properties readings</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update credit card</button>
+        <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Data analytics</button>
       </div>
     </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
         <tr>
-          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Nitrogen</th>
+          <th scope="col" class="lg:hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Soil properties</th>
+          <th scope="col" class="md:table-cell lg:hidden hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Other properties</th>
+          <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell">Nitrogen</th>
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Phosphorus</th>
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Potassium</th>
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Conductivity</th>
@@ -27,17 +29,30 @@
         <tbody>
         <tr v-for="(soil, planIdx) in soil_properties" :key="soil.id">
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-4 pl-4 pr-3 text-sm sm:pl-6']">
-            <div class="font-medium text-gray-900">
+            <div class="font-medium text-gray-900 hidden lg:inline-block">
               {{ soil.nitrogen }} mg/kg
             </div>
-            <div class="mt-1 flex flex-col text-gray-500 sm:block lg:hidden">
-              <span>{{ soil.memory }} / {{ soil.cpu }}</span>
-              <span class="hidden sm:inline">·</span>
-              <span>{{ soil.storage }}</span>
+            <div class="mt-1 flex flex-col text-gray-500 sm:block md:hidden">
+              <span>N/P/K - {{ soil.nitrogen }} / {{ soil.phosphorous }} / {{ soil.potassium }} mg/kg</span>
+              <div>Conductivity - {{ soil.conductivity }} µS/cm</div>
+              <div>Moisture - {{ soil.moisture }} %</div>
+              <div>Temperature - {{ soil.temperature }} °C</div>
+              <div>pH - {{ soil.ph }} </div>
+            </div>
+            <div class="mt-1 flex flex-col text-gray-500 sm:hidden md:block lg:hidden">
+              <div>Nitrogen - {{ soil.conductivity }} µS/cm</div>
+              <div>Phosphorus - {{ soil.moisture }} %</div>
+              <div>Potassium - {{ soil.temperature }} °C</div>
             </div>
             <div v-if="planIdx !== 0" class="absolute -top-px left-6 right-0 h-px bg-gray-200" />
           </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.phosphorous }} mg/kg</td>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 md:table-cell lg:hidden']">
+            <div>Conductivity - {{ soil.conductivity }} µS/cm</div>
+            <div>Moisture - {{ soil.moisture }} %</div>
+            <div>Temperature - {{ soil.temperature }} °C</div>
+            <div>pH - {{ soil.ph }} </div>
+          </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.potassium }} mg/kg</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.conductivity }} µS/cm</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.moisture }} %</td>
