@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/charts',
       name: 'Analytics',
       component: () => import('../views/Analytics/index.vue')
+    },
+    {
+      path: '/tables',
+      name: 'Tables',
+      component: () => import('../views/tables/index.vue')
     }
   ]
 })

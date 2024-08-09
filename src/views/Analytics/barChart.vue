@@ -16,6 +16,8 @@ interface ChartOptions {
   title: {
     text: string;
   };
+
+  // colors: string[]
   xAxis: {
     categories: string[];
   };
@@ -35,32 +37,26 @@ export default defineComponent({
   components: {
     highcharts: HighchartsVue.component,
   },
-  setup() {
+
+  props:["title","series","categories","x_axis_unit"],
+  setup(props) {
     const chartOptions = ref<ChartOptions>({
       chart: {
         type: 'column',
       },
       title: {
-        text: 'Air properties',
+        text: props.title,
       },
       xAxis: {
-        categories: ['January', 'February', 'March'],
+        categories:props.categories,
       },
       yAxis: {
         title: {
-          text: 'Fruit eaten',
+          text: props.x_axis_unit,
         },
       },
-      series: [
-        {
-          name: 'Humidity',
-          data: [1, 30, 4],
-        },
-        {
-          name: 'Temperature',
-          data: [5, 7, 3],
-        },
-      ],
+      series: props.series,
+      // colors:["#a16207"]
     });
 
     return {

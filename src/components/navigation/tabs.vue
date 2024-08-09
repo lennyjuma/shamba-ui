@@ -26,7 +26,7 @@ const emit = defineEmits(["current_tab"])
 const tabs = ref([
   { name: 'Soil', href: '#', count: '52', current: true },
   { name: 'Air', href: '#', count: '6', current: false },
-  { name: 'Location', href: '#', count: '4', current: false },
+  { name: 'Realtime', href: '#', count: '4', current: false },
 ])
 const change_tab = (idx:number) => {
   tabs.value.forEach((tab, index) => {
