@@ -6,14 +6,15 @@
         <p class="mt-2 text-sm text-gray-700">A table with recent soil properties readings</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <button type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Data analytics</button>
+        <router-link  to="/charts"  class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Data analytics</router-link>
       </div>
     </div>
     <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
         <tr>
-          <th scope="col" class="lg:hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Soil properties</th>
+          <th scope="col" class="md:hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Soil properties</th>
+          <th scope="col" class="md:table-cell lg:hidden hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">N/P/K</th>
           <th scope="col" class="md:table-cell lg:hidden hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 ">Other properties</th>
           <th scope="col" class="hidden py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:table-cell">Nitrogen</th>
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">Phosphorus</th>
@@ -69,10 +70,14 @@
         </tbody>
       </table>
     </div>
+    <pagination class="mt-2" />
+
   </div>
 </template>
 
 <script setup>
+import Pagination from '@/components/navigation/pagination.vue'
+
 const soil_properties = [
   {
     "createdAt": "2024-08-08T20:37:47.204006Z",
