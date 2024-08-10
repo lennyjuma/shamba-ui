@@ -81,6 +81,7 @@ import { useSoilStore } from '@/stores/soil/index'
 import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { soilT } from '@/types'
+const page_size = 10;
 
 const soil_store = useSoilStore();
 const {fetchSoilByDeviceId,changePage} = soil_store
@@ -92,13 +93,13 @@ const go_to_maps = () => {
 }
 
 onMounted(()=>{
-  fetchSoilByDeviceId(0,2)
+  fetchSoilByDeviceId(0,page_size)
 })
 
 watch(get_soil,()=>{
   soil_properties.value = get_soil.value
 })
 const changePagewithPagination = (param: number) => {
-  changePage(param);
+  changePage(param,page_size);
 };
 </script>
