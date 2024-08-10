@@ -70,7 +70,7 @@
         </tbody>
       </table>
     </div>
-    <pagination class="mt-2" />
+    <pagination :pagination-data="getPagination" @fetchTransaction="(p)=> changePagewithPagination(p)"  class="mt-2" />
 
   </div>
 </template>
@@ -83,8 +83,8 @@ import { storeToRefs } from 'pinia'
 import type { soilT } from '@/types'
 
 const soil_store = useSoilStore();
-const {fetchSoilByDeviceId} = soil_store
-const {get_soil} = storeToRefs(soil_store)
+const {fetchSoilByDeviceId,changePage} = soil_store
+const {get_soil,getPagination} = storeToRefs(soil_store)
 const soil_properties = ref<soilT[]>([] as soilT[])
 const go_to_maps = () => {
   window.open('https://maps.google.com/?q=-1.181423908681221, 36.935804866892255', '_blank');
@@ -92,11 +92,13 @@ const go_to_maps = () => {
 }
 
 onMounted(()=>{
-  fetchSoilByDeviceId()
+  fetchSoilByDeviceId(0,2)
 })
 
 watch(get_soil,()=>{
   soil_properties.value = get_soil.value
 })
-
+const changePagewithPagination = (param: number) => {
+  changePage(param);
+};
 </script>

@@ -11,3 +11,12 @@ export type soilT = {
   deviceId: string
   ph: string
 };
+
+export type paginationT = {
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  first: boolean;
+  pageNumber: number;
+  pageSize: number;
+};
