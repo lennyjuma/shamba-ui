@@ -75,143 +75,28 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Pagination from '@/components/navigation/pagination.vue'
+import { useSoilStore } from '@/stores/soil/index'
+import { onMounted, ref, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import type { soilT } from '@/types'
 
-const soil_properties = [
-  {
-    "createdAt": "2024-08-08T20:37:47.204006Z",
-    "updatedAt": "2024-08-08T20:37:47.204006Z",
-    "id": "05e7f8f8-5c29-4f13-905c-3702579e4f9e",
-    "nitrogen": "18",
-    "phosphorous": "956",
-    "potassium": "16",
-    "conductivity": "40",
-    "moisture": "37.42",
-    "temperature": "24.71",
-    "deviceId": "865992037613876",
-    "ph": "8.70"
-  },
-  {
-    "createdAt": "2024-08-08T10:40:07.322968Z",
-    "updatedAt": "2024-08-08T10:40:07.322968Z",
-    "id": "09cb7643-56fb-423a-b8d7-cd009921dd41",
-    "nitrogen": "13",
-    "phosphorous": "375",
-    "potassium": "20",
-    "conductivity": "85",
-    "moisture": "46.14",
-    "temperature": "25.25",
-    "deviceId": "865992037613876",
-    "ph": "8.34"
-  },
-  {
-    "createdAt": "2024-08-08T21:01:21.438817Z",
-    "updatedAt": "2024-08-08T21:01:21.438817Z",
-    "id": "0a280dd0-c61d-4d73-8427-9aaa06b220c6",
-    "nitrogen": "17",
-    "phosphorous": "645",
-    "potassium": "16",
-    "conductivity": "43",
-    "moisture": "32.85",
-    "temperature": "24.89",
-    "deviceId": "865992037613876",
-    "ph": "8.68"
-  },
-  {
-    "createdAt": "2024-08-08T11:12:03.133298Z",
-    "updatedAt": "2024-08-08T11:12:03.133298Z",
-    "id": "0b0701f2-8faf-4eb7-aad5-38742f54c309",
-    "nitrogen": "13",
-    "phosphorous": "165",
-    "potassium": "20",
-    "conductivity": "86",
-    "moisture": "51.85",
-    "temperature": "25.04",
-    "deviceId": "865992037613876",
-    "ph": "8.40"
-  },
-  {
-    "createdAt": "2024-08-09T07:23:37.345773Z",
-    "updatedAt": "2024-08-09T07:23:37.345773Z",
-    "id": "0c6ac576-e52e-4b64-9665-12f205e93360",
-    "nitrogen": "15",
-    "phosphorous": 34,
-    "potassium": "18",
-    "conductivity": "60",
-    "moisture": "42.85",
-    "temperature": "24.92",
-    "deviceId": "865992037613876",
-    "ph": "8.52"
-  },
-  {
-    "createdAt": "2024-08-08T09:20:21.675782Z",
-    "updatedAt": "2024-08-08T09:20:21.675782Z",
-    "id": "0dea0505-488d-4938-b9b0-17fcd4af7da0",
-    "nitrogen": "14",
-    "phosphorous": 87,
-    "potassium": "19",
-    "conductivity": "70",
-    "moisture": "63.85",
-    "temperature": "21.81",
-    "deviceId": "865992037613876",
-    "ph": "8.14"
-  },
-  {
-    "createdAt": "2024-08-08T16:52:18.817054Z",
-    "updatedAt": "2024-08-08T16:52:18.817054Z",
-    "id": "103a34dc-a960-4a58-8f2f-ff5cc7c1f55c",
-    "nitrogen": "14",
-    "phosphorous": "844",
-    "potassium": "20",
-    "conductivity": "78",
-    "moisture": "44.14",
-    "temperature": "24.59",
-    "deviceId": "865992037613876",
-    "ph": "8.35"
-  },
-  {
-    "createdAt": "2024-08-07T23:26:27.930211Z",
-    "updatedAt": "2024-08-07T23:26:27.930211Z",
-    "id": "11317ca9-ed08-433b-8efd-3a96b7e8b121",
-    "nitrogen": "10",
-    "phosphorous": "87",
-    "potassium": "24",
-    "conductivity": "117",
-    "moisture": "55.14",
-    "temperature": "25.16",
-    "deviceId": "865992037613876",
-    "ph": "8.18"
-  },
-  {
-    "createdAt": "2024-08-09T07:28:51.486407Z",
-    "updatedAt": "2024-08-09T07:28:51.486407Z",
-    "id": "12ff1773-54a8-4372-8f6c-536c1e9e5fb1",
-    "nitrogen": "15",
-    "phosphorous": "65",
-    "potassium": "18",
-    "conductivity": "61",
-    "moisture": "42.85",
-    "temperature": "24.86",
-    "deviceId": "865992037613876",
-    "ph": "8.50"
-  },
-  {
-    "createdAt": "2024-08-08T17:55:59.203464Z",
-    "updatedAt": "2024-08-08T17:55:59.203464Z",
-    "id": "15f4b833-c61d-485a-902f-8e4ff8fc884a",
-    "nitrogen": "14",
-    "phosphorous": "234",
-    "potassium": "20",
-    "conductivity": "77",
-    "moisture": "42.85",
-    "temperature": "25.67",
-    "deviceId": "865992037613876",
-    "ph": "8.37"
-  } // More soil_properties...
-]
+const soil_store = useSoilStore();
+const {fetchSoilByDeviceId} = soil_store
+const {get_soil} = storeToRefs(soil_store)
+const soil_properties = ref<soilT[]>([] as soilT[])
 const go_to_maps = () => {
   window.open('https://maps.google.com/?q=-1.181423908681221, 36.935804866892255', '_blank');
 
 }
+
+onMounted(()=>{
+  fetchSoilByDeviceId()
+})
+
+watch(get_soil,()=>{
+  soil_properties.value = get_soil.value
+})
+
 </script>

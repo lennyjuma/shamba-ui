@@ -6,8 +6,10 @@ import router from '@/router'
 
 export const useSoilStore = defineStore('soil_store', () => {
   const path = 'soil'
-  const soil = ref<soilT[]>([] as soilT[])
-  const get_soil = computed(() => soil.value)
+  const soil = ref<soilT[]>([] as soilT[]);
+
+  const get_soil = computed(() => soil.value);
+
   async function fetchSoilByDeviceId() {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
     const url = `${path}/device?device_id=${deviceId}`;
