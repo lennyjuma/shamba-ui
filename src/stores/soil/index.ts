@@ -12,10 +12,10 @@ export const useSoilStore = defineStore('soil_store', () => {
 
   async function fetchSoilByDeviceId() {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    const url = `${path}/device?device_id=${deviceId}`;
+    const url = `${path}/device?device_id=${deviceId}&page=0&size=2`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
-      soil.value = responseDTO.value.data;
+      soil.value= responseDTO.value.data.content;
     });
   }
 
