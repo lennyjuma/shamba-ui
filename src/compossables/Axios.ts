@@ -15,7 +15,7 @@ export async function useRestController(
 
   // @ts-ignore
   // const url = `http://embedded.me.com/api/v1/${uri}`;
-  const baseUrl = `/api/v1/`;
+  const baseUrl = `/api/`;
 
   const url = `${import.meta.env.VITE_SPRING_URL}${baseUrl}${uri}`;
 
