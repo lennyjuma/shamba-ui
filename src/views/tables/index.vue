@@ -62,7 +62,7 @@
 
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
             <button @click="go_to_maps()" type="button" class="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" :disabled="soil.isCurrent">
-              Go to map<span class="sr-only">, {{ soil.name }}</span>
+              Go to map
             </button>
             <div v-if="planIdx !== 0" class="absolute -top-px left-0 right-6 h-px bg-gray-200" />
           </td>
