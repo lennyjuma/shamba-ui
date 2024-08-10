@@ -30,7 +30,7 @@
         <tbody>
         <tr v-for="(soil, planIdx) in soil_properties" :key="soil.id">
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-4 pl-4 pr-3 text-sm sm:pl-6']">
-            <div class="font-medium text-gray-900 hidden lg:inline-block">
+            <div class="font-medium text-gray-500 hidden lg:inline-block">
               {{ soil.nitrogen }} mg/kg
             </div>
             <div class="mt-1 flex flex-col text-gray-500 sm:block md:hidden">
