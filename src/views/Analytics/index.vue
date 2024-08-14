@@ -43,16 +43,12 @@ onBeforeMount(()=>{
  fetch_chart()
 })
 watch(get_charts,()=>{
-  let npk_series = [];
-  npk_series.push(get_charts.value.nitrogen)
-  npk_series.push(get_charts.value.potassium)
-  npk_series.push(get_charts.value.phosphorus)
-  console.log("npk_series",npk_series)
-  npk_categories.value = npk_series
-  moisture_categories.value = get_charts.value.moisture
-  pH_categories.value = get_charts.value.ph
-  conductivity_categories.value = get_charts.value.conductivity
-  temp_categories.value = get_charts.value.temperature
+  // data must be an array
+  npk_categories.value = [get_charts.value.nitrogen,get_charts.value.potassium,get_charts.value.phosphorus]
+  moisture_categories.value =[ get_charts.value.moisture]
+  pH_categories.value = [get_charts.value.ph]
+  conductivity_categories.value = [get_charts.value.conductivity]
+  temp_categories.value = [get_charts.value.temperature]
 })
 </script>
 

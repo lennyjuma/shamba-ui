@@ -1,6 +1,8 @@
 export type soilT = {
   createdAt: string
   updatedAt: string
+  reading_date: string
+  crop: string
   id: string
   nitrogen: string
   phosphorous: string

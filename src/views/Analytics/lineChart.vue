@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-9xl px-6 lg:px-8">
+  <div :id="title" class="mx-auto max-w-9xl px-6 lg:px-8">
     <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
@@ -38,6 +38,7 @@ export default defineComponent({
 
   props:["title","series","categories","x_axis_unit"],
   setup(props) {
+    const title = ref<string>(props.title);
     const chartOptions = ref<ChartOptions>({
       chart: {
         type: 'line',
@@ -62,6 +63,7 @@ export default defineComponent({
 
     return {
       chartOptions,
+      title
     };
   },
 });
