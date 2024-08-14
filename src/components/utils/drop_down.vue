@@ -12,7 +12,7 @@
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <ListboxOptions class="absolute z-10 mt-1 max-h-96 w-auto  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           <ListboxOption as="template" v-for="item in props.items" :key="item.id" :value="item" v-slot="{ active, selected }">
-            <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-8 pr-2']">
+            <li @click="select_item(item)" :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-8 pr-2']">
               <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item }}</span>
 
               <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 left-0 flex items-center pl-1.5']">
@@ -26,7 +26,7 @@
   </Listbox>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
@@ -45,6 +45,9 @@ const people = [
 ]
 
 let props = defineProps(["title","items"])
+let emits = defineEmits(["select_item"])
 const selected = ref(props.items[0])
-
+const select_item = (item:string) => {
+  emits("select_item", item)
+}
 </script>

@@ -37,7 +37,7 @@ const changed_tab_event = (idx:number) =>{
 }
 
 onBeforeMount(()=>{
- fetch_chart()
+ fetch_chart(5)
 })
 watch(get_charts,()=>{
   // data must be an array

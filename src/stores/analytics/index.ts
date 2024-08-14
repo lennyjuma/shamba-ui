@@ -9,9 +9,9 @@ export const useChartsStore = defineStore('charts_store', () => {
   const charts = ref<chartsT>({} as chartsT);
   const get_charts = computed(() => charts.value);
 
-  const fetch_chart = () => {
+  const fetch_chart = (size:number) => {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${path}?deviceID=${deviceId}`;
+    const url = `${path}?deviceID=${deviceId}&size=${size}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       charts.value= responseDTO.value.data;
