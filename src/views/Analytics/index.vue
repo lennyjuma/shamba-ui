@@ -52,13 +52,17 @@ watch(get_charts,()=>{
 const farms = ref(["Farm1","Farm2","Farm3","Farm3","Farm5","Farm6","Farm7","Farm8","Farm9"])
 const frequency = ref(["5","10","15","20","25","30","35"])
 const date = ref(["Last month","Last three months","Last six months","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"])
+
+const select_item_event = (item:string) =>{
+  fetch_chart(item)
+}
 </script>
 
 <template>
   <div class="flex max-w-9xl mx-auto justify-center items-center">
     <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex space-x-2">
-      <drop_down :items="frequency" :title="`Frequency`" class="ml-auto"/>
+      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="ml-auto"/>
       <drop_down :items="date" :title="`Date`" class="ml-auto"/>
     </div>
