@@ -34,4 +34,5 @@ export type chartsT = {
   moisture: seriesT
   temperature: seriesT
   ph: seriesT
+  categories: String[]
 };

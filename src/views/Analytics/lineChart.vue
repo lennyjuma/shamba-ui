@@ -59,6 +59,7 @@ export default defineComponent({
 
     watch(() => props.series, (newTitle) => {
       chartOptions.value.series = props.series;
+      chartOptions.value.xAxis.categories = props.categories;
     })
 
     return {

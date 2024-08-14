@@ -6,7 +6,7 @@ import router from '@/router'
 
 export const useChartsStore = defineStore('charts_store', () => {
   const path = 'analytics'
-  const charts = ref<chartsT[]>([] as chartsT[]);
+  const charts = ref<chartsT>({} as chartsT);
   const get_charts = computed(() => charts.value);
 
   const fetch_chart = () => {
