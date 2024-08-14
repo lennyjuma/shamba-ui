@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
 
@@ -55,6 +55,10 @@ export default defineComponent({
       },
       series: props.series,
     });
+
+    watch(() => props.series, (newTitle) => {
+      chartOptions.value.series = props.series;
+    })
 
     return {
       chartOptions,

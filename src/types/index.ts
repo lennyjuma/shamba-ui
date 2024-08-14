@@ -20,3 +20,16 @@ export type paginationT = {
   pageNumber: number;
   pageSize: number;
 };
+export type seriesT = {
+  name: string;
+  data: string[];
+};
+export type chartsT = {
+  nitrogen: seriesT
+  potassium: seriesT
+  phosphorus: seriesT
+  conductivity: seriesT
+  moisture: seriesT
+  temperature: seriesT
+  ph: seriesT
+};

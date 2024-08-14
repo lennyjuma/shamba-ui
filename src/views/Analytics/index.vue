@@ -1,11 +1,18 @@
 <script setup lang="ts">
 import BarChartComponent from '@/views/Analytics/barChart.vue'
 import LineChart from '@/views/Analytics/lineChart.vue'
-import Piechart from '@/views/Analytics/piechart.vue'
 import PieChartComponent from '@/views/Analytics/piechart.vue'
 import DonutChartComponent from '@/views/Analytics/donutChart.vue'
-import { ref } from 'vue'
+import Piechart from '@/views/Analytics/piechart.vue'
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Tabs from '@/components/navigation/tabs.vue'
+import { useChartsStore } from '@/stores/analytics'
+import { storeToRefs } from 'pinia'
+
+let chartsStore = useChartsStore()
+
+const {fetch_chart} = chartsStore
+const {get_charts} = storeToRefs(chartsStore)
 
 const npk_categories = ref(
   [
@@ -32,7 +39,7 @@ const conductivity_categories = ref([
 const moisture_categories = ref([
     {
       name: 'Moisture',
-      data: [855.0, 6.9, 6.5, 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
+      data: ["855.0", "6.9", "6.5", 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
     }
   ])
 const temp_categories = ref([
@@ -65,6 +72,24 @@ const current_tab = ref(0)
 const changed_tab_event = (idx:number) =>{
   current_tab.value = idx
 }
+
+onBeforeMount(()=>{
+ fetch_chart()
+})
+watch(get_charts,()=>{
+  let npk_series = [];
+  npk_series.push(get_charts.value.nitrogen)
+  npk_series.push(get_charts.value.potassium)
+  npk_series.push(get_charts.value.phosphorus)
+  console.log("npk_series",npk_series)
+  npk_categories.value = npk_series
+  moisture_categories.value = get_charts.value.moisture
+  pH_categories.value = get_charts.value.pH
+  conductivity_categories.value = get_charts.value.conductivity
+  temp_categories.value = get_charts.value.temp_categories
+
+  console.log("Moisture",moisture_categories.value)
+})
 </script>
 
 <template>
