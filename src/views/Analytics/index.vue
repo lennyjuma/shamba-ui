@@ -58,9 +58,9 @@ const date = ref(["Last month","Last three months","Last six months","Jan","Feb"
   <div class="flex max-w-9xl mx-auto justify-center items-center">
     <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex space-x-2">
+      <drop_down :items="frequency" :title="`Frequency`" class="ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="ml-auto"/>
       <drop_down :items="date" :title="`Date`" class="ml-auto"/>
-      <drop_down :items="frequency" :title="`Frequency`" class="ml-auto"/>
     </div>
   </div>
 
