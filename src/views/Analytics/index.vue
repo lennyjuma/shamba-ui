@@ -8,52 +8,18 @@ import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Tabs from '@/components/navigation/tabs.vue'
 import { useChartsStore } from '@/stores/analytics'
 import { storeToRefs } from 'pinia'
+import type { seriesT } from '@/types'
 
 let chartsStore = useChartsStore()
 
 const {fetch_chart} = chartsStore
 const {get_charts} = storeToRefs(chartsStore)
 
-const npk_categories = ref(
-  [
-    {
-      name: 'Nitrogen',
-      data: [5000.0, 6.9, 6.5, 10.5, 80.4, 18.5, 250.2, 26.5, 6.3, 8.3, 1300.9, 9.6],
-    },
-    {
-      name: 'Phosphorus',
-      data: [1897.0, 3.9, 400.5, 14.5, 180.4, 11.5, 10.2, 80.5, 13.3, 1808.3, 521.9, 190.6],
-    },
-    {
-      name: 'Potassium',
-      data: [130.0, 160.9, 9.5, 24.5, 11.4, 210.5, 15.2, 110.5, 623.3, 100.3, 13.9, 9.6],
-    }
-  ]
-)
-const conductivity_categories = ref([
-    {
-      name: 'Conductivity',
-      data: [5.0, 6.9, 6.5, 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
-    }
-  ])
-const moisture_categories = ref([
-    {
-      name: 'Moisture',
-      data: ["855.0", "6.9", "6.5", 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
-    }
-  ])
-const temp_categories = ref([
-    {
-      name: 'Temperature',
-      data: [5.0, 6.9, 6.5, 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
-    }
-  ])
-const pH_categories = ref([
-    {
-      name: 'pH',
-      data: [5.0, 6.9, 6.5, 10.5, 8.4, 18.5, 25.2, 26.5, 6.3, 8.3, 13.9, 9.6],
-    }
-  ])
+const npk_categories = ref<seriesT[]>([] as seriesT[])
+const conductivity_categories = ref<seriesT[]>([] as seriesT[])
+const moisture_categories = ref<seriesT[]>([] as seriesT[])
+const temp_categories = ref<seriesT[]>([] as seriesT[])
+const pH_categories = ref<seriesT[]>([] as seriesT[])
 const air_temp_series = ref([
   {
     name: 'Temperature',
@@ -84,11 +50,9 @@ watch(get_charts,()=>{
   console.log("npk_series",npk_series)
   npk_categories.value = npk_series
   moisture_categories.value = get_charts.value.moisture
-  pH_categories.value = get_charts.value.pH
+  pH_categories.value = get_charts.value.ph
   conductivity_categories.value = get_charts.value.conductivity
-  temp_categories.value = get_charts.value.temp_categories
-
-  console.log("Moisture",moisture_categories.value)
+  temp_categories.value = get_charts.value.temperature
 })
 </script>
 
