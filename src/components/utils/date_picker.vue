@@ -7,13 +7,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, defineEmits } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { Listbox, ListboxLabel } from '@headlessui/vue'
 
 const date = ref();
-const date_formated = ref();
+
+let emits = defineEmits(['range'])
 
 // For demo purposes assign range from the current date
 onMounted(() => {
@@ -36,6 +37,11 @@ watch(date, ()=>{
   const start_date = `${day_0}/${month_0}/${year_0} ${time_0}:${mins_0}`
   const end_date = `${day_1}/${month_1}/${year_1} ${time_1}:${mins_1}`
 
-  console.log(start_date,end_date)
+  const range = {
+    start: start_date,
+    end: end_date,
+  }
+  emits("range", range);
+  // console.log(start_date,end_date)
 })
 </script>

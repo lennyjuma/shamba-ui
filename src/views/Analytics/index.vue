@@ -56,6 +56,9 @@ const frequency = ref(["5","10","15","20","25","30","35"])
 const select_item_event = (item:string) =>{
   fetch_chart(item)
 }
+const range_date = (item:object)=>{
+  console.log(item)
+}
 </script>
 
 <template>
@@ -64,7 +67,7 @@ const select_item_event = (item:string) =>{
     <div class="flex flex-col  md:flex-row  md:space-x-2">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
-      <date_picker class="md:mt-auto my-2 md:my-0"/>
+      <date_picker @range="args => range_date(args)" class="md:mt-auto my-2 md:my-0"/>
     </div>
   </div>
 
