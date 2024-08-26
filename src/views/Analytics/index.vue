@@ -7,6 +7,7 @@ import { useChartsStore } from '@/stores/analytics'
 import { storeToRefs } from 'pinia'
 import type { seriesT } from '@/types'
 import Drop_down from '@/components/utils/drop_down.vue'
+import Date_picker from '@/components/utils/date_picker.vue'
 
 let chartsStore = useChartsStore()
 
@@ -59,12 +60,13 @@ const select_item_event = (item:string) =>{
 </script>
 
 <template>
-  <div class="flex max-w-9xl mx-auto justify-center items-center">
+  <div class="flex flex-col ml-6  md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
-    <div class="flex space-x-2">
-      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="ml-auto"/>
-      <drop_down :items="farms" :title="`Farm`" class="ml-auto"/>
-      <drop_down :items="date" :title="`Date`" class="ml-auto"/>
+    <div class="flex flex-col  md:flex-row  md:space-x-2">
+      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
+      <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
+      <drop_down :items="date" :title="`Date`" class="md:ml-auto"/>
+      <date_picker class="md:mt-auto my-2 md:my-0"/>
     </div>
   </div>
 
