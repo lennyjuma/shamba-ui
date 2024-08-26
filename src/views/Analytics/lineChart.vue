@@ -1,5 +1,6 @@
 <template>
   <div :id="title" class="mx-auto max-w-9xl px-6 lg:px-8">
+    <drop_down @select_item="args => select_item_event(args)" :items="chart_type" :title="`Chart type`" class=""/>
     <highcharts :options="chartOptions"></highcharts>
   </div>
 </template>
@@ -8,6 +9,8 @@
 import { defineComponent, ref, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
+import Drop_down from '@/components/utils/drop_down.vue'
+import { i } from 'vite/dist/node/types.d-aGj9QkWt'
 
 interface ChartOptions {
   chart: {
@@ -33,6 +36,7 @@ interface ChartOptions {
 export default defineComponent({
   name: 'LineChartComponent',
   components: {
+    Drop_down,
     highcharts: HighchartsVue.component,
   },
 
@@ -62,8 +66,20 @@ export default defineComponent({
       chartOptions.value.xAxis.categories = props.categories;
     })
 
+    const select_item_event = (item:string) => {
+      if (item == "Line chart"){
+        chartOptions.value.chart.type = "line";
+      }else if (item == "Bar chart"){
+        chartOptions.value.chart.type = "column";
+      }
+    }
+
+    const chart_type = ref(["Line chart","Bar chart",])
+
     return {
       chartOptions,
+      chart_type,
+      select_item_event,
       title
     };
   },
