@@ -15,19 +15,26 @@ interface ChartOptions {
   chart: {
     type: string;
   };
+  tooltip?: {
+    formatter: any
+  };
   title: {
     text: string;
   };
   xAxis: {
-    categories: string[];
+    crosshair: boolean;
+    tickInterval: number
+    // categories: string[];
   };
   yAxis: {
+    crosshair: boolean;
     title: {
       text: string;
     };
   };
   series: Array<{
     name: string;
+    reading_date: string;
     data: number[];
   }>;
 }
@@ -51,19 +58,33 @@ export default defineComponent({
         text: props.title,
       },
       xAxis: {
-        categories: props.categories,
+        // categories: props.categories,
+        crosshair:false,
+        tickInterval:1
       },
       yAxis: {
+        crosshair:true,
         title: {
           text: props.x_axis_unit,
         },
       },
       series: props.series,
+      tooltip: {
+        formatter: function () {
+          let data = this.series.data
+          let map = data.map(function (item:any) {return item.y; })
+          let index = map.indexOf(this.y)
+          console.log(index);
+          let category = props.categories[index]
+          return `Date: <b>${category}</b><br/>Crop: <b>Maize</b><br/>Property: <b>${this.series.name}</b><br/>Value: <b>${this.y}</b>`;
+        }
+      }
     });
 
     watch(() => props.series, (newTitle) => {
       chartOptions.value.series = props.series;
-      chartOptions.value.xAxis.categories = props.categories;
+      // chartOptions.value.xAxis.categories = props.categories;
+      console.log("series prop", chartOptions.value.series);
     })
 
     const select_item_event = (item:string) => {

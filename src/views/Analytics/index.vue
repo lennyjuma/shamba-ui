@@ -5,9 +5,10 @@ import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Tabs from '@/components/navigation/tabs.vue'
 import { useChartsStore } from '@/stores/analytics'
 import { storeToRefs } from 'pinia'
-import type { seriesT } from '@/types'
+import type { rangeT, seriesT } from '@/types'
 import Drop_down from '@/components/utils/drop_down.vue'
 import Date_picker from '@/components/utils/date_picker.vue'
+import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
 
 let chartsStore = useChartsStore()
 
@@ -38,7 +39,7 @@ const changed_tab_event = (idx:number) =>{
 }
 
 onBeforeMount(()=>{
- fetch_chart(5)
+ fetch_chart("5")
 })
 watch(get_charts,()=>{
   // data must be an array
@@ -47,7 +48,7 @@ watch(get_charts,()=>{
   pH_categories.value = [get_charts.value.ph]
   conductivity_categories.value = [get_charts.value.conductivity]
   temp_categories.value = [get_charts.value.temperature]
-  console.log(get_charts.value.categories)
+  console.log("chart data",get_charts.value)
 })
 
 const farms = ref(["Farm1","Farm2","Farm3","Farm3","Farm5","Farm6","Farm7","Farm8","Farm9"])
@@ -56,7 +57,7 @@ const frequency = ref(["5","10","15","20","25","30","35"])
 const select_item_event = (item:string) =>{
   fetch_chart(item)
 }
-const range_date = (item:object)=>{
+const range_date = (item:rangeT)=>{
   console.log(item)
 }
 </script>
@@ -67,7 +68,7 @@ const range_date = (item:object)=>{
     <div class="flex flex-col  md:flex-row  md:space-x-2">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
-      <date_picker @range="args => range_date(args)" class="md:mt-auto my-2 md:my-0"/>
+      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto my-2 md:my-0"/>
     </div>
   </div>
 
@@ -82,7 +83,11 @@ const range_date = (item:object)=>{
     <line-chart :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
     <line-chart  :x_axis_unit="`Degree celsius`" :title="`Temperature`" :series="air_temp_series" :categories="air_categories"  />
   </div>
-  <div v-else>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" v-else>
+    <semi_circle_chart/>
+    <semi_circle_chart/>
+    <semi_circle_chart/>
+    <semi_circle_chart/>
   </div>
 
 </template>

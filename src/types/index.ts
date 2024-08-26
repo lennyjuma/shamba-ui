@@ -36,3 +36,8 @@ export type chartsT = {
   ph: seriesT
   categories: String[]
 };
+
+export interface rangeT {
+  start: string
+  end: string
+}
