@@ -42,6 +42,7 @@ export default defineComponent({
 
   props:["title","series","categories","x_axis_unit"],
   setup(props) {
+    const chart_type = ref(["Line chart","Bar chart","Bar horizontal chart"])
     const title = ref<string>(props.title);
     const chartOptions = ref<ChartOptions>({
       chart: {
@@ -71,10 +72,10 @@ export default defineComponent({
         chartOptions.value.chart.type = "line";
       }else if (item == "Bar chart"){
         chartOptions.value.chart.type = "column";
+      }else if (item == "Bar horizontal chart"){
+        chartOptions.value.chart.type = "bar";
       }
     }
-
-    const chart_type = ref(["Line chart","Bar chart",])
 
     return {
       chartOptions,
