@@ -1,5 +1,7 @@
 <template>
-  <highcharts :options="chartOptions"></highcharts>
+  <div class=" max-w-7xl">
+    <highcharts :options="chartOptions"></highcharts>
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,7 +14,9 @@ export default {
   components: {
     highcharts: HighchartsVue.component
   },
-  setup(): { chartOptions: Ref<Highcharts.Options> } {
+
+  props:["title_data","series"],
+  setup(props): { chartOptions: Ref<Highcharts.Options> } {
     const chartOptions = ref<Highcharts.Options>({
       chart: {
         plotBackgroundColor: null,
@@ -21,7 +25,7 @@ export default {
         type: 'pie'
       },
       title: {
-        text: '221',
+        text:props.title_data + "<br>  " + props.series[0] ,
         align: 'center',
         verticalAlign: 'middle',
         y: 60
@@ -37,8 +41,8 @@ export default {
       plotOptions: {
         pie: {
           dataLabels: {
-            enabled: true,
-            distance: -50,
+            enabled: false,
+            distance: -30,
             style: {
               fontWeight: 'bold',
               color: 'white'
@@ -47,17 +51,17 @@ export default {
           startAngle: -90,
           endAngle: 90,
           center: ['50%', '75%'],
-          size: '110%'
+          size: '105%'
         }
       },
       series: [{
         type: 'pie',
-        name: 'Browser share',
-        innerSize: '50%',
+        name: 'Value',
+        innerSize: '70%',
         data: [
-          ['Chrome', 58.9],
+          props.series,
           {
-            name: 'Other',
+            name: 'Deficit',
             y: 41.1,
             dataLabels: {
               enabled: false

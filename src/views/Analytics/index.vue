@@ -83,11 +83,26 @@ const range_date = (item:rangeT)=>{
     <line-chart :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
     <line-chart  :x_axis_unit="`Degree celsius`" :title="`Temperature`" :series="air_temp_series" :categories="air_categories"  />
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" v-else>
-    <semi_circle_chart/>
-    <semi_circle_chart/>
-    <semi_circle_chart/>
-    <semi_circle_chart/>
+  <div class="max-w-9xl mx-auto" v-else>
+    <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Soil properties.</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 ">
+      <semi_circle_chart :title_data="221" :series="['Nitrogen', 58.9]" />
+      <semi_circle_chart :title_data="400" :series="['Potassium', 58.9]" />
+      <semi_circle_chart :title_data="800" :series="['Phosphorus', 58.9]" />
+      <semi_circle_chart :title_data="45" :series="['Electrical Conductivity', 58.9]" />
+      <semi_circle_chart :title_data="80" :series="['Moisture', 58.9]" />
+      <semi_circle_chart :title_data="25" :series="['Soil temperature', 58.9]" />
+      <semi_circle_chart :title_data="8" :series="['pH', 58.9]" />
+    </div>
+    <div class="">
+      <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Air properties.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 ">
+        <semi_circle_chart :title_data="27" :series="['Temperature', 58.9]" />
+        <semi_circle_chart :title_data="15" :series="['Humidity', 58.9]" />
+      </div>
+    </div>
+
+
   </div>
 
 </template>
