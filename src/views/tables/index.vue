@@ -1,15 +1,12 @@
 <template>
-  <div class="px-4 sm:px-6 lg:px-8 py-9 max-w-9xl mx-auto">
-    <div class="sm:flex sm:items-center">
-      <div class="sm:flex-auto">
-        <h1 class="text-base font-semibold leading-6 text-gray-900">Soil properties</h1>
-        <p class="mt-2 text-sm text-gray-700">A table with recent soil properties readings</p>
-      </div>
-      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <router-link  to="/charts"  class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Data analytics</router-link>
-      </div>
+  <div class="flex flex-col   md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
+    <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
+    <div class="mt-4 sm:mt-0 sm:flex-none">
+      <router-link  to="/charts?deviceId=SL00000001" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Data analytics</router-link>
     </div>
-    <div class="-mx-4 mt-10 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
+  </div>
+  <div class="px-4 sm:px-6 lg:px-8  max-w-9xl mx-auto">
+    <div class="-mx-4 mt-4 ring-1 ring-gray-300 sm:mx-0 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-300">
         <thead>
         <tr>
@@ -78,7 +75,7 @@
         </tbody>
       </table>
     </div>
-    <pagination :pagination-data="getPagination" @fetchTransaction="(p)=> changePagewithPagination(p)"  class="mt-2" />
+    <pagination :pagination-data="getPagination" @fetchTransaction="(p)=> changePagewithPagination(p)"  class="my-2" />
 
   </div>
 </template>
@@ -89,6 +86,9 @@ import { useSoilStore } from '@/stores/soil/index'
 import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { soilT } from '@/types'
+import Date_picker from '@/components/utils/date_picker.vue'
+import Drop_down from '@/components/utils/drop_down.vue'
+import Tabs from '@/components/navigation/tabs.vue'
 const page_size = 10;
 
 const soil_store = useSoilStore();
@@ -110,4 +110,8 @@ watch(get_soil,()=>{
 const changePagewithPagination = (param: number) => {
   changePage(param,page_size);
 };
+
+const changed_tab_event = (idx:number) =>{
+  current_tab.value = idx
+}
 </script>

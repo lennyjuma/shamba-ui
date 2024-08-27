@@ -63,7 +63,7 @@ const range_date = (item:rangeT)=>{
 </script>
 
 <template>
-  <div class="flex flex-col ml-6  md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
+  <div class="flex flex-col md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
