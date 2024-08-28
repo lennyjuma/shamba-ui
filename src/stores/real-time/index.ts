@@ -9,8 +9,8 @@ export const useRealTimeStore = defineStore('real_time', () => {
   const air_path = "air/latest"
   const air = ref<airT>({  } as airT)
   const soil = ref<soilT>({  } as soilT)
-  const getAir = computed(() => air.value )
-  const getSoil = computed(() => soil.value )
+  const getLatestAir = computed(() => air.value )
+  const getLatestSoil = computed(() => soil.value )
   function fetchLatestAir() {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
     const url = `${air_path}?device_id=${deviceId}`;
@@ -31,5 +31,10 @@ export const useRealTimeStore = defineStore('real_time', () => {
 
   }
 
-  return { getAir, getSoil, fetchLatestAir, fetchLatestSoil }
+  function fetchLatestData(){
+    fetchLatestSoil()
+    fetchLatestAir()
+  }
+
+  return { getLatestAir, getLatestSoil, fetchLatestData }
 })

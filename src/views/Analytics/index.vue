@@ -9,11 +9,15 @@ import type { rangeT, seriesT } from '@/types'
 import Drop_down from '@/components/utils/drop_down.vue'
 import Date_picker from '@/components/utils/date_picker.vue'
 import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
+import { useRealTimeStore } from '@/stores/real-time'
 
 let chartsStore = useChartsStore()
+let realTimeStore = useRealTimeStore()
 
 const {fetch_charts} = chartsStore
+const {fetchLatestData} = realTimeStore
 const {get_soil_charts,get_air_charts} = storeToRefs(chartsStore)
+const {getLatestSoil,getLatestAir} = storeToRefs(realTimeStore)
 
 const npk_categories = ref<seriesT[]>([] as seriesT[])
 const conductivity_categories = ref<seriesT[]>([] as seriesT[])
