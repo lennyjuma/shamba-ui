@@ -128,7 +128,7 @@ export default {
 
     const chartOptions = ref<Highcharts.Options>({
       chart: {
-        plotBackgroundColor: null,
+        plotBackgroundColor: "white",
         plotBorderWidth: 0,
         plotShadow: false,
         type: 'pie'

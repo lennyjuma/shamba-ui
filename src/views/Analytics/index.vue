@@ -69,12 +69,12 @@ const tabz = ref([
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
-    <tabs class="mr-auto" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
-    <div class="flex flex-col  md:flex-row  md:space-x-2">
-      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
+  <div class="flex flex-col my-4 md:my-0 md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
+    <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
+    <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
+      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
-      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto my-2 md:my-0"/>
+      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto w-1/2  my-2 md:my-0"/>
     </div>
   </div>
 
@@ -91,7 +91,7 @@ const tabz = ref([
   </div>
   <div class="max-w-9xl mx-auto" v-else>
     <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Soil properties.</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 ">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
       <semi_circle_chart :title_data="getLatestSoil.nitrogen + ' mg/kg' " :series="['Nitrogen', Number(getLatestSoil.nitrogen)]" />
       <semi_circle_chart :title_data="getLatestSoil.potassium + ' mg/kg' " :series="['Potassium', Number(getLatestSoil.potassium)]" />
       <semi_circle_chart :title_data="getLatestSoil.phosphorous + ' mg/kg' " :series="['Phosphorus', Number(getLatestSoil.phosphorous)]" />
