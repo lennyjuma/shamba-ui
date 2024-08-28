@@ -17,6 +17,53 @@ export default {
 
   props:["title_data","series"],
   setup(props): { chartOptions: Ref<Highcharts.Options> } {
+
+
+
+    const color_scheme = (property:string, value: number) =>{
+      let color = ''
+      if (property === 'Nitrogen' || property === 'Phosphorus' || property === 'Potassium' ) {
+        if(value >= 0 && value <= 500){
+          color = 'red'
+        }else if(value >= 501 && value <= 1500){
+          color = 'orange'
+        }else if( value >= 1501 && value <= 2000){
+          color = 'green'
+        }
+      }
+      else if (property === 'Temperature' ||property === 'temperature' || property === 'temp' ) {
+        if(value >= -40 && value <= 0.0){
+          color = 'red'
+        }else if(value >= 0.1 && value <= 10.0){
+          color = 'orange'
+        }else if( value >= 10.1 && value <= 30.0){
+          color = 'green'
+        }else if( value >= 30.1 && value <= 80.0){
+          color = 'red'
+        }
+      }
+      else if (property === 'Moisture' ||property === 'moisture'  ) {
+        if(value >= 0 && value <= 10.0){
+          color = 'red'
+        }else if(value >= 11 && value <= 30.0){
+          color = 'orange'
+        }else if( value >= 31 && value <= 80.0){
+          color = 'green'
+        }else if( value >= 81 && value <= 100.0){
+          color = 'red'
+        }
+      }else {
+        color = 'blue'
+      }
+
+      return {
+        name: property,
+        y: value,
+        color: color // Change color of this segment
+      }
+
+    }
+
     const chartOptions = ref<Highcharts.Options>({
       chart: {
         plotBackgroundColor: null,
@@ -59,7 +106,7 @@ export default {
         name: 'Value',
         innerSize: '70%',
         data: [
-          props.series,
+          color_scheme(props.series[0], props.series[1]),
           {
             name: 'Deficit',
             y: 41.1,
@@ -70,6 +117,8 @@ export default {
         ]
       }]
     });
+
+
 
     return { chartOptions };
   }

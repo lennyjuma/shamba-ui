@@ -39,13 +39,11 @@ watch(get_soil_charts,()=>{
   pH_categories.value = [get_soil_charts.value.ph]
   conductivity_categories.value = [get_soil_charts.value.conductivity]
   temp_categories.value = [get_soil_charts.value.temperature]
-  console.log("chart data",get_soil_charts.value)
 })
 watch(get_air_charts,()=>{
   // data must be an array
   air_temp_series.value = [get_air_charts.value.temp]
   air_humidity_series.value = [get_air_charts.value.humidity]
-  console.log("chart data",get_soil_charts.value)
 })
 
 const farms = ref(["Farm1","Farm2","Farm3","Farm3","Farm5","Farm6","Farm7","Farm8","Farm9"])
@@ -62,6 +60,7 @@ const tabz = ref([
   { name: 'Air', href: '#', count: '6', current: false },
   { name: 'Realtime', href: '#', count: '4', current: false },
 ])
+
 </script>
 
 <template>
@@ -88,12 +87,12 @@ const tabz = ref([
   <div class="max-w-9xl mx-auto" v-else>
     <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Soil properties.</h2>
     <div class="grid grid-cols-1 md:grid-cols-4 ">
-      <semi_circle_chart :title_data="221" :series="['Nitrogen', 58.9]" />
-      <semi_circle_chart :title_data="400" :series="['Potassium', 58.9]" />
+      <semi_circle_chart :title_data="221" :series="['Nitrogen', 221.9]" />
+      <semi_circle_chart :title_data="400" :series="['Potassium', 1558.9]" />
       <semi_circle_chart :title_data="800" :series="['Phosphorus', 58.9]" />
       <semi_circle_chart :title_data="45" :series="['Electrical Conductivity', 58.9]" />
       <semi_circle_chart :title_data="80" :series="['Moisture', 58.9]" />
-      <semi_circle_chart :title_data="25" :series="['Soil temperature', 58.9]" />
+      <semi_circle_chart :title_data="25" :series="['temperature', 58.9]" />
       <semi_circle_chart :title_data="8" :series="['pH', 58.9]" />
     </div>
     <div class="">
