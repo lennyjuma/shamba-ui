@@ -34,7 +34,8 @@ const changed_tab_event = (idx:number) =>{
 }
 
 onBeforeMount(()=>{
- fetch_charts("5")
+ fetch_charts("5");
+ fetchLatestData()
 })
 watch(get_soil_charts,()=>{
   // data must be an array
@@ -91,19 +92,19 @@ const tabz = ref([
   <div class="max-w-9xl mx-auto" v-else>
     <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Soil properties.</h2>
     <div class="grid grid-cols-1 md:grid-cols-4 ">
-      <semi_circle_chart :title_data="221" :series="['Nitrogen', 221.9]" />
-      <semi_circle_chart :title_data="400" :series="['Potassium', 1558.9]" />
-      <semi_circle_chart :title_data="800" :series="['Phosphorus', 58.9]" />
-      <semi_circle_chart :title_data="45" :series="['Electrical Conductivity', 58.9]" />
-      <semi_circle_chart :title_data="80" :series="['Moisture', 58.9]" />
-      <semi_circle_chart :title_data="25" :series="['temperature', 58.9]" />
-      <semi_circle_chart :title_data="8" :series="['pH', 58.9]" />
+      <semi_circle_chart :title_data="getLatestSoil.nitrogen + ' mg/kg' " :series="['Nitrogen', Number(getLatestSoil.nitrogen)]" />
+      <semi_circle_chart :title_data="getLatestSoil.potassium + ' mg/kg' " :series="['Potassium', Number(getLatestSoil.potassium)]" />
+      <semi_circle_chart :title_data="getLatestSoil.phosphorous + ' mg/kg' " :series="['Phosphorus', Number(getLatestSoil.phosphorous)]" />
+      <semi_circle_chart :title_data="getLatestSoil.conductivity + ' µS/cm'" :series="['Electrical Conductivity', Number(getLatestSoil.conductivity)]" />
+      <semi_circle_chart :title_data="getLatestSoil.moisture + ' %'" :series="['Moisture', Number(getLatestSoil.moisture)]" />
+      <semi_circle_chart :title_data="getLatestSoil.temperature + '  °C'" :series="['temperature', Number(getLatestSoil.temperature)]" />
+      <semi_circle_chart :title_data="getLatestSoil.ph" :series="['pH', Number(getLatestSoil.ph)]" />
     </div>
     <div class="">
       <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Air properties.</h2>
       <div class="grid grid-cols-1 md:grid-cols-4 ">
-        <semi_circle_chart :title_data="27" :series="['Temperature', 58.9]" />
-        <semi_circle_chart :title_data="15" :series="['Humidity', 58.9]" />
+        <semi_circle_chart :title_data="getLatestAir.temperature + '  °C'" :series="['Temperature', Number(getLatestAir.temperature)]" />
+        <semi_circle_chart :title_data="getLatestAir.humidity + ' %'" :series="['Humidity', Number(getLatestAir.humidity)]" />
       </div>
     </div>
   </div>
