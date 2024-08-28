@@ -14,6 +14,17 @@ export type soilT = {
   ph: string
 };
 
+export interface airT {
+  createdAt: string
+  updatedAt: string
+  id: string
+  reading_date: string
+  humidity: string
+  temperature: string
+  crop: string
+  deviceId: string
+}
+
 export type paginationT = {
   totalPages: number;
   totalElements: number;
