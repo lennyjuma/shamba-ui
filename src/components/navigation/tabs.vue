@@ -18,10 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref , defineEmits} from 'vue'
+import { ref, defineProps, watch, onMounted } from 'vue'
 
 
 const emit = defineEmits(["current_tab"])
+const props = defineProps(["tabw","kk"])
 
 const tabs = ref([
   { name: 'Soil', href: '#', count: '52', current: true },
@@ -35,4 +36,13 @@ const change_tab = (idx:number) => {
     emit("current_tab", idx)
   })
 }
+watch(
+  () => props.tabw,
+  function () {
+    alert("kkk")
+  }
+);
+onMounted(function () {
+  tabs.value = props.tabw;
+})
 </script>

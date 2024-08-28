@@ -60,11 +60,16 @@ const select_item_event = (item:string) =>{
 const range_date = (item:rangeT)=>{
   console.log(item)
 }
+const tabz = ref([
+  { name: 'Soil', href: '#', count: '52', current: true },
+  { name: 'Air', href: '#', count: '6', current: false },
+  { name: 'Realtime', href: '#', count: '4', current: false },
+])
 </script>
 
 <template>
   <div class="flex flex-col md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
-    <tabs class="mr-auto" @current_tab=" args => changed_tab_event(args)"></tabs>
+    <tabs class="mr-auto" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class="md:ml-auto"/>
       <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
@@ -101,8 +106,6 @@ const range_date = (item:rangeT)=>{
         <semi_circle_chart :title_data="15" :series="['Humidity', 58.9]" />
       </div>
     </div>
-
-
   </div>
 
 </template>
