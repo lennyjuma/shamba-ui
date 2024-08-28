@@ -1,26 +1,44 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { chartsT } from '@/types'
+import type { air_chartsT, chartsT } from '@/types'
 import { useRestController } from '@/compossables/Axios'
 import router from '@/router'
 
 export const useChartsStore = defineStore('charts_store', () => {
-  const path = 'analytics'
-  const charts = ref<chartsT>({} as chartsT);
-  const get_charts = computed(() => charts.value);
+  const soil_path = 'analytics/soil'
+  const air_path = 'analytics/air'
+  const soil_chart = ref<chartsT>({} as chartsT);
+  const air_chart = ref<air_chartsT>({} as air_chartsT);
+  const get_soil_charts = computed(() => soil_chart.value);
+  const get_air_charts = computed(() => air_chart.value);
 
-  const fetch_chart = (size:string) => {
+  const fetch_soil_chart = (size:string) => {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${path}?deviceID=${deviceId}&size=${size}`;
+    const url = `${soil_path}?deviceID=${deviceId}&size=${size}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
-      charts.value= responseDTO.value.data;
+      soil_chart.value= responseDTO.value.data;
     });
-    return charts.value
+    return soil_chart.value
 
+  }
+
+  const fetch_air_chart = (size:string) => {
+    const deviceId = `${router.currentRoute.value.query["deviceId"]}`
+    const url = `${air_path}?deviceID=${deviceId}&size=${size}`;
+    useRestController(url, "get", {}).then(({ responseDTO }) => {
+      // @ts-ignore
+      air_chart.value= responseDTO.value.data;
+    });
+    return soil_chart.value
+
+  }
+  const fetch_charts = (size:string) => {
+    fetch_soil_chart(size)
+    fetch_air_chart(size)
   }
 
 
 
-  return { get_charts ,fetch_chart}
+  return { get_soil_charts, get_air_charts , fetch_charts}
 })

@@ -47,6 +47,11 @@ export type chartsT = {
   ph: seriesT
   categories: String[]
 };
+export type air_chartsT = {
+  temp: seriesT
+  humidity: seriesT
+  categories: String[]
+};
 
 export interface rangeT {
   start: string

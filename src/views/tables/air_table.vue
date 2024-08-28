@@ -15,10 +15,10 @@
         <tbody class="divide-y divide-gray-200 bg-white">
         <tr v-for="air in air_properties" :key="air.id">
           <td class="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-4">
-            {{ air.temperature }}
+            {{ air.temperature }}  °C
 
           </td>
-          <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ air.humidity }}</td>
+          <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ air.humidity }} g/m3</td>
           <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ air.crop }}</td>
           <td class="px-3 py-4 text-sm text-gray-500">{{ air.reading_date }}</td>
           <td class="border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-left font-medium sm:pr-6">
@@ -32,7 +32,7 @@
       </table>
     </div>
 
-    <pagination :pagination-data="getPagination" @fetchTransaction="(p)=> changePagewithPagination(p)"  class="my-2" />
+    <pagination :pagination-data="getPagination" @fetchTransaction="(p)=> changePagewithPagination(p)"  class="my-3" />
   </div>
 </template>
 

@@ -12,26 +12,17 @@ import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
 
 let chartsStore = useChartsStore()
 
-const {fetch_chart} = chartsStore
-const {get_charts} = storeToRefs(chartsStore)
+const {fetch_charts} = chartsStore
+const {get_soil_charts,get_air_charts} = storeToRefs(chartsStore)
 
 const npk_categories = ref<seriesT[]>([] as seriesT[])
 const conductivity_categories = ref<seriesT[]>([] as seriesT[])
 const moisture_categories = ref<seriesT[]>([] as seriesT[])
 const temp_categories = ref<seriesT[]>([] as seriesT[])
 const pH_categories = ref<seriesT[]>([] as seriesT[])
-const air_temp_series = ref([
-  {
-    name: 'Temperature',
-    data: [21, 30, 24,40],
-  }
-])
-const air_humidity_series = ref([
-  {
-    name: 'Humidity',
-    data: [21, 30, 34 ,15],
-  }
-])
+const air_temp_series = ref<seriesT[]>([] as seriesT[])
+const air_humidity_series =ref<seriesT[]>([] as seriesT[])
+
 const air_categories = ref(['Sep', 'Oct', 'Nov', 'Dec'],)
 const current_tab = ref(0)
 const changed_tab_event = (idx:number) =>{
@@ -39,23 +30,29 @@ const changed_tab_event = (idx:number) =>{
 }
 
 onBeforeMount(()=>{
- fetch_chart("5")
+ fetch_charts("5")
 })
-watch(get_charts,()=>{
+watch(get_soil_charts,()=>{
   // data must be an array
-  npk_categories.value = [get_charts.value.nitrogen,get_charts.value.potassium,get_charts.value.phosphorus]
-  moisture_categories.value =[ get_charts.value.moisture]
-  pH_categories.value = [get_charts.value.ph]
-  conductivity_categories.value = [get_charts.value.conductivity]
-  temp_categories.value = [get_charts.value.temperature]
-  console.log("chart data",get_charts.value)
+  npk_categories.value = [get_soil_charts.value.nitrogen,get_soil_charts.value.potassium,get_soil_charts.value.phosphorus]
+  moisture_categories.value =[ get_soil_charts.value.moisture]
+  pH_categories.value = [get_soil_charts.value.ph]
+  conductivity_categories.value = [get_soil_charts.value.conductivity]
+  temp_categories.value = [get_soil_charts.value.temperature]
+  console.log("chart data",get_soil_charts.value)
+})
+watch(get_air_charts,()=>{
+  // data must be an array
+  air_temp_series.value = [get_air_charts.value.temp]
+  air_humidity_series.value = [get_air_charts.value.humidity]
+  console.log("chart data",get_soil_charts.value)
 })
 
 const farms = ref(["Farm1","Farm2","Farm3","Farm3","Farm5","Farm6","Farm7","Farm8","Farm9"])
 const frequency = ref(["5","10","15","20","25","30","35"])
 
 const select_item_event = (item:string) =>{
-  fetch_chart(item)
+  fetch_charts(item)
 }
 const range_date = (item:rangeT)=>{
   console.log(item)
@@ -78,11 +75,11 @@ const tabz = ref([
   </div>
 
   <div v-if="current_tab === 0">
-    <line-chart :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="get_charts.categories"/>
-    <line-chart :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="get_charts.categories"/>
-    <line-chart  :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="get_charts.categories"/>
-    <line-chart :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="get_charts.categories"/>
-    <line-chart  :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="get_charts.categories"/>
+    <line-chart :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="get_soil_charts.categories"/>
+    <line-chart :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="get_soil_charts.categories"/>
+    <line-chart  :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="get_soil_charts.categories"/>
+    <line-chart :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="get_soil_charts.categories"/>
+    <line-chart  :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="get_soil_charts.categories"/>
   </div>
   <div v-else-if="current_tab== 1">
     <line-chart :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
