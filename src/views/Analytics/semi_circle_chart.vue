@@ -67,37 +67,50 @@ export default {
       }else if(property === 'pH' ) {
         if(value >= 1 && value < 2){
           color = '#FF0000'
+          value_format = 60
         }else if(value >= 2 && value < 3){
           color = '#FF7F00'
+          value_format = 60
         }else if(value >= 3 && value < 4){
           color = '#FFBF00'
+          value_format = 60
         }else if(value >= 4 && value < 5){
           color = '#FFFF00'
+          value_format = 60
         }else if(value >= 5 && value < 6){
           color = '#BFFF00'
+          value_format = 60
         }else if(value >= 6 && value < 7){
           color = '#80FF00'
+          value_format = 60
         }else if(value >= 7 && value < 8){
           color = '#00FF00'
+          value_format = 60
         }else if(value >= 8 && value < 9){
           color = '#00FF80'
+          value_format = 85
         }else if(value >= 9 && value < 10){
           color = '#00FFFF'
+          value_format = 85
         }else if(value >= 10 && value < 11){
           color = '#00BFFF'
+          value_format = 85
         }else if(value >= 11 && value < 12){
           color = '#0080FF'
+          value_format = 85
         }else if(value >= 12 && value < 13){
           color = '#0040FF'
+          value_format = 85
         }else if(value >= 13 && value < 14){
           color = '#0000FF'
+          value_format = 85
         }else if(value >= 11 && value < 15){
           color = '#8000FF'
+          value_format = 85
         }else if(value >= 0 && value < 1){
           color = '#FF0000'
+          value_format = 85
         }
-
-        value_format = 60
 
       }
       else {
