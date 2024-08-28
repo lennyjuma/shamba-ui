@@ -22,43 +22,92 @@ export default {
 
     const color_scheme = (property:string, value: number) =>{
       let color = ''
-      if (property === 'Nitrogen' || property === 'Phosphorus' || property === 'Potassium' ) {
+      let value_format =  0
+      if (property === 'Nitrogen' || property === 'Phosphorus' || property === 'Potassium' || property === 'Electrical Conductivity' ) {
         if(value >= 0 && value <= 500){
           color = 'red'
+          value_format = 30
         }else if(value >= 501 && value <= 1500){
           color = 'orange'
+          value_format = 60
         }else if( value >= 1501 && value <= 2000){
           color = 'green'
+          value_format = 90
         }
       }
       else if (property === 'Temperature' ||property === 'temperature' || property === 'temp' ) {
         if(value >= -40 && value <= 0.0){
           color = 'red'
+          value_format = 25
         }else if(value >= 0.1 && value <= 10.0){
           color = 'orange'
+          value_format = 50
         }else if( value >= 10.1 && value <= 30.0){
           color = 'green'
+          value_format = 75
         }else if( value >= 30.1 && value <= 80.0){
           color = 'red'
+          value_format = 90
         }
       }
-      else if (property === 'Moisture' ||property === 'moisture'  ) {
+      else if (property === 'Moisture' || property === 'moisture' || property === 'Humidity'  ) {
         if(value >= 0 && value <= 10.0){
           color = 'red'
+          value_format = 25
         }else if(value >= 11 && value <= 30.0){
           color = 'orange'
+          value_format = 50
         }else if( value >= 31 && value <= 80.0){
           color = 'green'
+          value_format = 75
         }else if( value >= 81 && value <= 100.0){
           color = 'red'
+          value_format = 90
         }
-      }else {
+      }else if(property === 'pH' ) {
+        if(value >= 1 && value < 2){
+          color = '#FF0000'
+        }else if(value >= 2 && value < 3){
+          color = '#FF7F00'
+        }else if(value >= 3 && value < 4){
+          color = '#FFBF00'
+        }else if(value >= 4 && value < 5){
+          color = '#FFFF00'
+        }else if(value >= 5 && value < 6){
+          color = '#BFFF00'
+        }else if(value >= 6 && value < 7){
+          color = '#80FF00'
+        }else if(value >= 7 && value < 8){
+          color = '#00FF00'
+        }else if(value >= 8 && value < 9){
+          color = '#00FF80'
+        }else if(value >= 9 && value < 10){
+          color = '#00FFFF'
+        }else if(value >= 10 && value < 11){
+          color = '#00BFFF'
+        }else if(value >= 11 && value < 12){
+          color = '#0080FF'
+        }else if(value >= 12 && value < 13){
+          color = '#0040FF'
+        }else if(value >= 13 && value < 14){
+          color = '#0000FF'
+        }else if(value >= 11 && value < 15){
+          color = '#8000FF'
+        }else if(value >= 0 && value < 1){
+          color = '#FF0000'
+        }
+
+        value_format = 60
+
+      }
+      else {
         color = 'blue'
+        value_format = 60
       }
 
       return {
         name: property,
-        y: value,
+        y: value_format,
         color: color // Change color of this segment
       }
 
@@ -109,10 +158,11 @@ export default {
           color_scheme(props.series[0], props.series[1]),
           {
             name: 'Deficit',
-            y: 41.1,
+            y: 100 - color_scheme(props.series[0], props.series[1]).y,
             dataLabels: {
               enabled: false
-            }
+            },
+            color: '#f3f4f6'
           }
         ]
       }]
