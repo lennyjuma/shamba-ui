@@ -57,7 +57,7 @@
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.temperature }} °C</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.ph }}</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ soil.crop }}</td>
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ soil.reading_date }}</td>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
 
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
             <button @click="go_to_maps()" type="button" class="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" :disabled="soil.isCurrent">
@@ -79,6 +79,7 @@ import { useSoilStore } from '@/stores/soil/index'
 import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { soilT } from '@/types'
+
 const page_size = 10;
 
 const soil_store = useSoilStore();
@@ -101,5 +102,20 @@ const changePagewithPagination = (param: number) => {
   changePage(param,page_size);
 };
 
+const formatDate = (tarehe:string) => {
+  let date = new Date(tarehe);
+
+
+// Convert to local readable format with names
+  return date.toLocaleString('en-US', {
+    weekday: 'long',   // Day name
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  })
+}
 
 </script>

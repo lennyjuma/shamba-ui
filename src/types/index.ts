@@ -1,7 +1,7 @@
 export type soilT = {
   createdAt: string
   updatedAt: string
-  reading_date: string
+  readingDate: string
   crop: string
   id: string
   nitrogen: string
@@ -18,7 +18,7 @@ export interface airT {
   createdAt: string
   updatedAt: string
   id: string
-  reading_date: string
+  readingDate: string
   humidity: string
   temperature: string
   crop: string
