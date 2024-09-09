@@ -57,3 +57,17 @@ export interface rangeT {
   start: string
   end: string
 }
+
+export interface loginT {
+  email: string
+  password: string
+}
+export interface loggedInT {
+  token: string
+  id: string
+  email: string
+  f_name: string
+  l_name: string
+  fullName: string
+  role: any
+}

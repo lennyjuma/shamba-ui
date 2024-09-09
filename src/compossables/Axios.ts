@@ -30,11 +30,12 @@ export async function useRestController(
   function redirectToLoginAfter403(error: AxiosError<unknown, any>) {
     if (error.response && error.response.status === 403) {
       console.log("Received a 403 response. Redirecting to login page...");
-      localStorage.removeItem("access_token");
-      axios.defaults.headers.common["Authorization"] = "None";
-      router.push("login");
+      // localStorage.removeItem("access_token");
+      // axios.defaults.headers.common["Authorization"] = "None";
+      router.push({name : "sign in"});
     } else {
-      console.log("Error:", error.message);
+      // console.log("Error:", error.message);
+      console.log("Error:");
     }
   }
 

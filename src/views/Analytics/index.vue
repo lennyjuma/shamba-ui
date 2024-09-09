@@ -28,6 +28,7 @@ const air_temp_series = ref<seriesT[]>([] as seriesT[])
 const air_humidity_series =ref<seriesT[]>([] as seriesT[])
 
 const air_categories = ref(['Sep', 'Oct', 'Nov', 'Dec'],)
+const soil_categories = ref(['Sep', 'Oct', 'Nov', 'Dec'],)
 const current_tab = ref(0)
 const changed_tab_event = (idx:number) =>{
   current_tab.value = idx
@@ -44,6 +45,7 @@ watch(get_soil_charts,()=>{
   pH_categories.value = [get_soil_charts.value.ph]
   conductivity_categories.value = [get_soil_charts.value.conductivity]
   temp_categories.value = [get_soil_charts.value.temperature]
+  soil_categories.value = get_soil_charts.value.categories
 })
 watch(get_air_charts,()=>{
   // data must be an array
@@ -79,11 +81,11 @@ const tabz = ref([
   </div>
 
   <div v-if="current_tab === 0">
-    <line-chart :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="get_soil_charts.categories"/>
-    <line-chart :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="get_soil_charts.categories"/>
-    <line-chart  :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="get_soil_charts.categories"/>
-    <line-chart :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="get_soil_charts.categories"/>
-    <line-chart  :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="get_soil_charts.categories"/>
+    <line-chart :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="soil_categories"/>
+    <line-chart :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="soil_categories"/>
+    <line-chart  :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="soil_categories"/>
+    <line-chart :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="soil_categories"/>
+    <line-chart  :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="soil_categories"/>
   </div>
   <div v-else-if="current_tab== 1">
     <line-chart :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
