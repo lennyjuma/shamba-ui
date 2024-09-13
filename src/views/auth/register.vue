@@ -1,7 +1,6 @@
 <template>
   <form class="mx-auto max-w-7xl py-10">
-
-    <div class="border p-4 rounded-2xl shadow-2xl border-gray-900/10 pb-12">
+    <div class="border p-4 rounded-md border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
       <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
 

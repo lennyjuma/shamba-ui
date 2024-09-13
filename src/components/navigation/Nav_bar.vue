@@ -2,8 +2,8 @@
   <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
     <div class="mx-auto max-w-9xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
-        <div class="flex">
-          <div class="flex flex-shrink-0 items-center">
+        <div class="flex justify-start">
+          <div class="flex hidden lg:inline-block my-auto flex-shrink-0 items-center">
             <h1 class="text-indigo-600 uppercase">Shamba lab</h1>
           </div>
           <div class="hidden pl-5 sm:ml-6 sm:flex sm:space-x-8">
@@ -16,8 +16,13 @@
             <router-link to="/tables?deviceId=SL00000001" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
             <router-link to="/faq" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">FAQ</router-link>
           </div>
+
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+        <div  v-if="!get_logged_status" class=" flex mr-auto sm:mr-0 items-center sm:ml-4 sm:mt-0">
+          <router-link to="/login" type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Login</router-link>
+          <router-link to="/register" type="button" class="ml-3 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</router-link>
+        </div>
+        <div v-if="get_logged_status" class="hidden sm:ml-6 sm:flex sm:items-center">
           <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <span class="absolute -inset-1.5" />
             <span class="sr-only">View notifications</span>
@@ -48,9 +53,9 @@
             </transition>
           </Menu>
         </div>
-        <div class="-mr-2 flex items-center sm:hidden">
+        <div class="-mr-2 flex items-center  sm:hidden">
           <!-- Mobile menu button -->
-          <DisclosureButton class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+          <DisclosureButton class="relative inline-flex items-center justify-self-end rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
             <span class="absolute -inset-0.5" />
             <span class="sr-only">Open main menu</span>
             <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
@@ -69,6 +74,8 @@
         <router-link as="router-link" to="/contact" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Contact</router-link>
         <router-link as="router-link" to="/faq" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">FAQ</router-link>
       </div>
+
+
       <div class="border-t border-gray-200 pb-3 pt-4">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
@@ -97,4 +104,9 @@
 <script setup lang="ts">
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { useAuthStore } from '@/stores/auth'
+import { storeToRefs } from 'pinia'
+
+let authStore = useAuthStore()
+const {get_logged_status} = storeToRefs(authStore)
 </script>
