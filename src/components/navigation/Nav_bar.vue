@@ -12,8 +12,8 @@
             <router-link to="/product" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Product</router-link>
             <router-link to="/blogs" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Blogs</router-link>
             <router-link to="/contact" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Contact us</router-link>
-            <router-link to="/charts?deviceId=SL00000001" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Charts</router-link>
-            <router-link to="/tables?deviceId=SL00000001" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
+            <router-link to="/charts?deviceId=SL00000001" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Charts</router-link>
+            <router-link to="/tables?deviceId=SL00000001" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
             <router-link to="/faq" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">FAQ</router-link>
           </div>
 
@@ -47,7 +47,7 @@
                   <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
+                  <button @click="signOut()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign aout</button>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -109,4 +109,10 @@ import { storeToRefs } from 'pinia'
 
 let authStore = useAuthStore()
 const {get_logged_status} = storeToRefs(authStore)
+const {set_loggedIn_to_false} = authStore
+
+function signOut(): void {
+  localStorage.removeItem("access_token");
+  set_loggedIn_to_false()
+}
 </script>

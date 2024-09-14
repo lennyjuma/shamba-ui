@@ -71,3 +71,11 @@ export interface loggedInT {
   fullName: string
   role: any
 }
+export interface registerT {
+  email: string
+  f_name: string
+  l_name: string
+  password: string
+  country: string
+  phoneNumber: string
+}
