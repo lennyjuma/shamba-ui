@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
   const get_logged_status= computed(() => loggedIn.value || get_access_token_from_local_storage())
 
   function login(payload:loginT) {
-    const url = `${login_path}/login`;
+    const url = `${login_path}login`;
     useRestController(url, "auth", payload).then(({ responseDTO }) => {
       // @ts-ignore
       login_res.value= responseDTO.value.data;
@@ -40,14 +40,14 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem("access_token", access_token.value as string);
         localStorage.setItem("user_full_name" , login_res.value.fullName as string);
         localStorage.setItem("user_email", login_res.value.email as string);
+        router.push("/");
       }
-      router.push("/");
 
     });
 
   }
   function register(payload:registerT) {
-    const url = `${login_path}/register`;
+    const url = `${login_path}register`;
     useRestController(url, "auth", payload).then(({ responseDTO }) => {
       // @ts-ignore
       login_res.value= responseDTO.value.data;
