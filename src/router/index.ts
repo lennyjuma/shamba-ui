@@ -48,6 +48,11 @@ const router = createRouter({
       path: '/register',
       name: 'sign up',
       component: () => import('../views/auth/register.vue')
+    },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: () => import('../views/profile/shamba_table.vue')
     }
   ]
 })
