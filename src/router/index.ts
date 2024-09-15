@@ -53,6 +53,11 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile',
       component: () => import('../views/profile/shamba_table.vue')
+    },
+    {
+      path: '/add_farm',
+      name: 'Add Farm',
+      component: () => import('../views/profile/shamba.vue')
     }
   ]
 })
