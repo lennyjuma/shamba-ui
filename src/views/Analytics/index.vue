@@ -10,10 +10,15 @@ import Drop_down from '@/components/utils/drop_down.vue'
 import Date_picker from '@/components/utils/date_picker.vue'
 import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
 import { useRealTimeStore } from '@/stores/real-time'
+import { useShambaStore } from '@/stores/shamba'
+import Farm_drop_down from '@/components/utils/farm_drop_down.vue'
 
 let chartsStore = useChartsStore()
 let realTimeStore = useRealTimeStore()
 
+let shambaStore = useShambaStore()
+const {fetchShamba} = shambaStore
+const {get_shamba_drop_down} = storeToRefs(shambaStore)
 const {fetch_charts} = chartsStore
 const {fetchLatestData} = realTimeStore
 const {get_soil_charts,get_air_charts} = storeToRefs(chartsStore)
@@ -37,6 +42,7 @@ const changed_tab_event = (idx:number) =>{
 onBeforeMount(()=>{
  fetch_charts("5");
  fetchLatestData()
+  fetchShamba()
 })
 watch(get_soil_charts,()=>{
   // data must be an array
@@ -75,7 +81,7 @@ const tabz = ref([
     <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
-      <drop_down :items="farms" :title="`Farm`" class="md:ml-auto"/>
+      <farm_drop_down :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
       <date_picker @range=" (args) => range_date(args)" class="md:mt-auto w-1/2  my-2 md:my-0"/>
     </div>
   </div>
