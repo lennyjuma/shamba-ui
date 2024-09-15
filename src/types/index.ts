@@ -96,6 +96,10 @@ export interface shambaResT {
   location: string
   crop: CropT[]
 }
+export interface shambaDropDownT {
+  id: string
+  name: string
+}
 
 export interface CropT {
   createdAt: string
