@@ -37,13 +37,17 @@ import {
 } from '@headlessui/vue'
 
 const items = ref([
-  { id: 1, name: 'Loading' },
+  { "id": 1, "name": "Loading" },
 ])
-
+interface items {
+  id: number
+  name: string
+}
 let props = defineProps(["title", "items_prop"])
+let emits = defineEmits(["selected_farming_event"])
 
 const query = ref('')
-const selectedPerson = ref(null)
+const selectedPerson = ref<items>({} as items)
 const filteredPeople = computed(() =>
   query.value === ''
     ? items.value
@@ -55,5 +59,8 @@ onMounted(()=>{
   items.value = props.items_prop
 })
 
+watch(selectedPerson,()=>{
+  emits("selected_farming_event",selectedPerson.value.name)
+})
 
 </script>

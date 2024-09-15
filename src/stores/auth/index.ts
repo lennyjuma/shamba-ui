@@ -40,6 +40,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem("access_token", access_token.value as string);
         localStorage.setItem("user_full_name" , login_res.value.fullName as string);
         localStorage.setItem("user_email", login_res.value.email as string);
+        localStorage.setItem("user_id", login_res.value.id as string);
         router.push("/");
       }
 

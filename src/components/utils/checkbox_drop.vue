@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOptions } from '@headlessui/vue'
 import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
@@ -45,8 +45,11 @@ const people = [
   { id: 5, name: 'other' },
 ]
 
+const emits = defineEmits(["select_crops"])
+
 const selected = ref([] as string[])
-const AddCrops = (crop:string) => {
-  selected.value.push(crop)
-}
+
+watch(selected, (val) => {
+  emits("select_crops", val)
+})
 </script>

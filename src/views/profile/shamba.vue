@@ -8,23 +8,23 @@
         <div class="sm:col-span-3">
           <label for="farm_name" class="block text-sm font-medium leading-6 text-gray-900">Farm name</label>
           <div class="mt-2">
-            <input type="text" name="farm_name" id="farm_name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input v-model="shamba_payload.name" type="text" name="farm_name" id="farm_name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
 
 
         <div class="sm:col-span-3">
-          <combos :title="`Type of farming`" :items_prop="types_of_farming"/>
+          <combos @selected_farming_event="args => Listen_selected_farming_event(args)" :title="`Type of farming`" :items_prop="types_of_farming"/>
         </div>
 
 
         <div class="sm:col-span-3">
-          <checkbox_drop/>
+          <checkbox_drop @select_crops="crops => Listen_selected_crops_event(crops)" />
         </div>
         <div class="sm:col-span-3">
           <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location (County, Subcounty, location or Nearest town, village)</label>
           <div class="mt-2">
-            <input type="text" name="location" id="location" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input v-model="shamba_payload.location" type="text" name="location" id="location" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
 
@@ -43,18 +43,27 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import Combos from '@/components/utils/combos.vue'
 import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
+import { ref } from 'vue'
+import type { shambaT } from '@/types'
 
 const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { id: 2, name: 'Mixed cropping' }
 ]
-const countries = [
-  { id: 1, name: 'kenya' },
-  { id: 3, name: 'Tanzania' },
-  { id: 2, name: 'Uganda' }
-]
+const shamba_payload = ref<shambaT>({} as shambaT)
+
+const Listen_selected_crops_event = (crops:string[]) => {
+  console.log('Listen_selected_crops_event',crops)
+  shamba_payload.value.crops = crops;
+}
+const Listen_selected_farming_event = (farimingType:any) => {
+  console.log('Listen_selected_crops_event',farimingType.name)
+  shamba_payload.value.farmingType = farimingType;
+}
+
+
 </script>

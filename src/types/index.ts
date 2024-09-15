@@ -79,3 +79,28 @@ export interface registerT {
   country: string
   phoneNumber: string
 }
+export interface shambaT {
+  name: string
+  farmingType: string
+  location: string
+  crops: string[]
+}
+
+export interface shambaResT {
+  createdAt: string
+  updatedAt: string
+  id: string
+  readingDate: string
+  name: string
+  farmingType: string
+  location: string
+  crop: CropT[]
+}
+
+export interface CropT {
+  createdAt: string
+  updatedAt: string
+  id: string
+  readingDate: string
+  name: string
+}
