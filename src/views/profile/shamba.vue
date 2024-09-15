@@ -28,15 +28,11 @@
           </div>
         </div>
 
-<!--        <div class="sm:col-span-3">
-          <combos :title="`Country`" :items_prop="countries"/>
-        </div>-->
-
 
       </div>
       <div class="mt-6 flex items-center justify-end gap-x-6">
         <router-link to="/profile" class="text-sm font-semibold leading-6 text-gray-900">Cancel</router-link>
-        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        <button @click="add_shamba()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
       </div>
     </div>
 
@@ -49,7 +45,10 @@ import Combos from '@/components/utils/combos.vue'
 import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
 import { ref } from 'vue'
 import type { shambaT } from '@/types'
+import { useShambaStore } from '@/stores/shamba'
 
+let shambaStore = useShambaStore()
+const {addShamba} = shambaStore
 const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { id: 2, name: 'Mixed cropping' }
@@ -65,5 +64,8 @@ const Listen_selected_farming_event = (farimingType:any) => {
   shamba_payload.value.farmingType = farimingType;
 }
 
+const add_shamba = () => {
+  addShamba(shamba_payload.value)
+}
 
 </script>

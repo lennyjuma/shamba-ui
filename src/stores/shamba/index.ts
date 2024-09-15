@@ -6,16 +6,13 @@ import { useRestController } from '@/compossables/Axios'
 
 export const useShambaStore = defineStore('shamba', () => {
   const shamba_path = "shamba"
-  const shamba_res = ref<shambaResT>({} as shambaResT)
+  const shamba_res = ref<shambaResT[]>({} as shambaResT[])
 
   const get_shamba_res = computed(() => shamba_res.value);
 
   const addShamba = (payload:shambaT) => {
     const url = `${shamba_path}`;
-    useRestController(url, "post", payload).then(({ responseDTO }) => {
-      // @ts-ignore
-      soil_chart.value= responseDTO.value.data;
-    });
+    useRestController(url, "post", payload)
 
   }
   const fetchShamba = () => {
