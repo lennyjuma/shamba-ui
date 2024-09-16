@@ -12,10 +12,11 @@ export const useChartsStore = defineStore('charts_store', () => {
   const get_soil_charts = computed(() => soil_chart.value);
   const get_air_charts = computed(() => air_chart.value);
 
-  const fetch_soil_chart = (size:string) => {
-    const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${soil_path}?size=${size}`;
-    // const url = `${soil_path}?deviceID=${deviceId}&size=${size}`;
+  const fetch_soil_chart = (size:string, farmId?:string) => {
+    let url = `${soil_path}?size=${size}`;
+    if (farmId){
+      url = `${soil_path}?farm_id=${farmId}&size=${size}`;
+    }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil_chart.value= responseDTO.value.data;
@@ -24,10 +25,11 @@ export const useChartsStore = defineStore('charts_store', () => {
 
   }
 
-  const fetch_air_chart = (size:string) => {
-    const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${air_path}?size=${size}`;
-    // const url = `${air_path}?deviceID=${deviceId}&size=${size}`;
+  const fetch_air_chart = (size:string, farmId?:string) => {
+    let url = `${air_path}?size=${size}`;
+    if (farmId){
+      url = `${air_path}?farm_id=${farmId}&size=${size}`;
+    }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       air_chart.value= responseDTO.value.data;
@@ -35,9 +37,14 @@ export const useChartsStore = defineStore('charts_store', () => {
     return soil_chart.value
 
   }
-  const fetch_charts = (size:string) => {
-    fetch_soil_chart(size)
+  const fetch_charts = (size:string, farmId?:string) => {
+    if (farmId) {
+      fetch_soil_chart(size,farmId)
+      fetch_air_chart(size,farmId)
+    }else{
+      fetch_soil_chart(size)
     fetch_air_chart(size)
+  }
   }
 
 

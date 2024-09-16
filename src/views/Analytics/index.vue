@@ -5,7 +5,7 @@ import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import Tabs from '@/components/navigation/tabs.vue'
 import { useChartsStore } from '@/stores/analytics'
 import { storeToRefs } from 'pinia'
-import type { rangeT, seriesT } from '@/types'
+import type { rangeT, seriesT, shambaDropDownT } from '@/types'
 import Drop_down from '@/components/utils/drop_down.vue'
 import Date_picker from '@/components/utils/date_picker.vue'
 import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
@@ -59,10 +59,10 @@ watch(get_air_charts,()=>{
   air_humidity_series.value = [get_air_charts.value.humidity]
 })
 
-const farms = ref(["Farm1","Farm2","Farm3","Farm3","Farm5","Farm6","Farm7","Farm8","Farm9"])
 const frequency = ref(["5","10","15","20","25","30","35"])
-
+const page_size = ref("5")
 const select_item_event = (item:string) =>{
+  page_size.value = item
   fetch_charts(item)
 }
 const range_date = (item:rangeT)=>{
@@ -74,6 +74,10 @@ const tabz = ref([
   { name: 'Realtime', href: '#', count: '4', current: false },
 ])
 
+const changed_farm_event = (farm:shambaDropDownT) =>{
+  fetch_charts(page_size.value,farm.id)
+}
+
 </script>
 
 <template>
@@ -81,7 +85,7 @@ const tabz = ref([
     <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
       <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
-      <farm_drop_down :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
+      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
       <date_picker @range=" (args) => range_date(args)" class="md:mt-auto w-1/2  my-2 md:my-0"/>
     </div>
   </div>
