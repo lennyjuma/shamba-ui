@@ -11,20 +11,23 @@ export const useRealTimeStore = defineStore('real_time', () => {
   const soil = ref<soilT>({  } as soilT)
   const getLatestAir = computed(() => air.value )
   const getLatestSoil = computed(() => soil.value )
-  function fetchLatestAir() {
-    const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    // const url = `${air_path}?device_id=${deviceId}`;
-    const url = `${air_path}`;
+
+  function fetchLatestAir(farmId?:string) {
+    let url = `${air_path}`;
+    if(farmId){
+      url = `${air_path}?farm_id=${farmId}`
+    }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       air.value= responseDTO.value.data;
     });
 
   }
-  function fetchLatestSoil() {
-    const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    const url = `${soil_path}`;
-    // const url = `${soil_path}?device_id=${deviceId}`;
+  function fetchLatestSoil(farmId?:string) {
+    let url = `${soil_path}`;
+    if(farmId){
+      url = `${soil_path}?farm_id=${farmId}`
+    }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil.value= responseDTO.value.data;
@@ -33,9 +36,14 @@ export const useRealTimeStore = defineStore('real_time', () => {
 
   }
 
-  function fetchLatestData(){
-    fetchLatestSoil()
-    fetchLatestAir()
+  function fetchLatestData(farmId?:string){
+    if(farmId) {
+      fetchLatestSoil(farmId)
+      fetchLatestAir(farmId)
+    }else{
+      fetchLatestSoil()
+      fetchLatestAir()
+    }
   }
 
   return { getLatestAir, getLatestSoil, fetchLatestData }

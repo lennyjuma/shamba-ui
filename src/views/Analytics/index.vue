@@ -76,6 +76,7 @@ const tabz = ref([
 
 const changed_farm_event = (farm:shambaDropDownT) =>{
   fetch_charts(page_size.value,farm.id)
+  fetchLatestData(farm.id)
 }
 
 </script>
