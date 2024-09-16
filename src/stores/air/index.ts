@@ -13,9 +13,12 @@ export const useAirStore = defineStore('air_store', () => {
 
   const get_air = computed(() => air.value);
 
-  async function fetchAirByDeviceId(page:number,size:number) {
-    const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    const url = `${path}/device?device_id=${deviceId}&page=${page}&size=${size}`;
+  async function fetchAirByDeviceId(page:number,size:number, farm_id?:string) {
+
+    let url = `${path}/device?page=${page}&size=${size}`;
+    if (farm_id){
+      url = `${path}/device?farm_id=${farm_id}&page=${page}&size=${size}`;
+    }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       const response = responseDTO.value.data

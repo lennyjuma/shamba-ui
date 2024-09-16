@@ -14,7 +14,8 @@ export const useChartsStore = defineStore('charts_store', () => {
 
   const fetch_soil_chart = (size:string) => {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${soil_path}?deviceID=${deviceId}&size=${size}`;
+    const url = `${soil_path}?size=${size}`;
+    // const url = `${soil_path}?deviceID=${deviceId}&size=${size}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil_chart.value= responseDTO.value.data;
@@ -25,7 +26,8 @@ export const useChartsStore = defineStore('charts_store', () => {
 
   const fetch_air_chart = (size:string) => {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`
-    const url = `${air_path}?deviceID=${deviceId}&size=${size}`;
+    const url = `${air_path}?size=${size}`;
+    // const url = `${air_path}?deviceID=${deviceId}&size=${size}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       air_chart.value= responseDTO.value.data;

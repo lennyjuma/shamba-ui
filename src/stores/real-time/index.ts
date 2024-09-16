@@ -13,7 +13,8 @@ export const useRealTimeStore = defineStore('real_time', () => {
   const getLatestSoil = computed(() => soil.value )
   function fetchLatestAir() {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    const url = `${air_path}?device_id=${deviceId}`;
+    // const url = `${air_path}?device_id=${deviceId}`;
+    const url = `${air_path}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       air.value= responseDTO.value.data;
@@ -22,7 +23,8 @@ export const useRealTimeStore = defineStore('real_time', () => {
   }
   function fetchLatestSoil() {
     const deviceId = `${router.currentRoute.value.query["deviceId"]}`;
-    const url = `${soil_path}?device_id=${deviceId}`;
+    const url = `${soil_path}`;
+    // const url = `${soil_path}?device_id=${deviceId}`;
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil.value= responseDTO.value.data;

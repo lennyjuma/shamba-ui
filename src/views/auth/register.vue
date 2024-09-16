@@ -78,7 +78,7 @@ import { useAuthStore } from '@/stores/auth'
 
 let authStore = useAuthStore()
 const {register} = authStore
-const register_payload = ref<registerT>({} as registerT)
+const register_payload = ref<registerT>({email:"lenny@watt.com", password:"2fpLxthn"} as registerT)
 
 const submit_payload = () =>{
   register(register_payload.value)

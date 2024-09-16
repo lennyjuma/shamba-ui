@@ -35,8 +35,9 @@ export async function useRestController(
       console.log("Received a 403 response. Redirecting to login page...");
       localStorage.removeItem("access_token");
       axios.defaults.headers.common["Authorization"] = "None";
-      router.push({name : "sign in"});
+      // router.push("/");
       set_loggedIn_to_false()
+      router.replace("/")
     } else {
       // console.log("Error:", error.message);
       console.log("Error:");
