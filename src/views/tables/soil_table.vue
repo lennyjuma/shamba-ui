@@ -32,7 +32,12 @@
               <div>Moisture - {{ soil.moisture }} %</div>
               <div>Temperature - {{ soil.temperature }} °C</div>
               <div>pH - {{ soil.ph }} </div>
-              <div class="font-medium">Crop - {{ soil.crop }} </div>
+              <div class="flex"><span class="font-semibold">Crop(s) -</span>
+                <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id" class="flex pl-1">
+                  <span>{{crop.name}}</span>
+                  <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+                </div>
+              </div>
               <div class="font-semibold"> {{ soil.reading_date }} </div>
             </div>
             <div class="mt-1 flex flex-col text-gray-500 sm:hidden md:block lg:hidden">
@@ -48,7 +53,12 @@
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 md:table-cell lg:hidden']">
             <div>Temperature - {{ soil.temperature }} °C</div>
             <div>pH - {{ soil.ph }} </div>
-            <div class="font-medium">Crop - {{ soil.crop }} </div>
+            <div class="flex"><span class="font-semibold">Crop(s) -</span>
+              <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id" class="flex pl-1">
+                <span>{{crop.name}}</span>
+                <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+              </div>
+            </div>
             <div class="font-semibold"> {{ soil.reading_date }} </div>
           </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.potassium }} mg/kg</td>
@@ -56,7 +66,13 @@
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.moisture }} %</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.temperature }} °C</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.ph }}</td>
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ soil.crop }}</td>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-5 text-center text-sm text-gray-500 lg:flex justify-center items-center']">
+            <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id">
+              <span>{{crop.name}}</span>
+              <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+
+            </div>
+          </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
 
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
@@ -89,6 +105,7 @@ const {get_soil,getPagination} = storeToRefs(soil_store)
 const soil_properties = ref<soilT[]>([] as soilT[])
 const go_to_maps = () => {
   window.open('https://maps.google.com/?q=-1.181423908681221, 36.935804866892255', '_blank');
+  // window.open('https://api.whatsapp.com/send/?phone=254706086296&text=Hello shamba lab.&type=phone_number&app_absent=0', '_blank');
 
 }
 

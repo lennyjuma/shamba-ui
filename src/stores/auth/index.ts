@@ -13,18 +13,8 @@ export const useAuthStore = defineStore('auth', () => {
 
   const get_login_res = computed(() => login_res.value)
 
-  function get_access_token_from_local_storage() {
-    const token = localStorage.getItem('access_token')
-    if (token !== null && token !== undefined ) {
-      // alert("token not null")
-      return token.length > 0
-    }else {
-      // alert("token  null")
-      return false
-    }
-  }
 
-  const get_logged_status= computed(() => loggedIn.value || get_access_token_from_local_storage())
+  const get_logged_status= computed(() => loggedIn.value || localStorage.getItem('access_token') != null)
 
   function login(payload:loginT) {
     const url = `${login_path}login`;

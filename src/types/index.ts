@@ -12,6 +12,7 @@ export type soilT = {
   temperature: string
   deviceId: string
   ph: string
+  shamba: shambaResT
 };
 
 export interface airT {
