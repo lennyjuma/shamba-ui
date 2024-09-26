@@ -12,6 +12,7 @@ import Semi_circle_chart from '@/views/Analytics/semi_circle_chart.vue'
 import { useRealTimeStore } from '@/stores/real-time'
 import { useShambaStore } from '@/stores/shamba'
 import Farm_drop_down from '@/components/utils/farm_drop_down.vue'
+import { ListboxLabel } from '@headlessui/vue'
 
 let chartsStore = useChartsStore()
 let realTimeStore = useRealTimeStore()
@@ -85,9 +86,14 @@ const changed_farm_event = (farm:shambaDropDownT) =>{
   <div class="flex flex-col my-4 md:my-0 md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
+      <div v-for="(crop,idx) in getLatestSoil.shamba.crop" :key="crop.id" v-show="current_tab == 2"
+           class="block mt-auto capitalize text-normal  font-medium leading-6 text-gray-900" >
+        <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">{{ crop.name }}</span>
+      </div>
+
       <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
       <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
-      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
+      <date_picker v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
     </div>
   </div>
 

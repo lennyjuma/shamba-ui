@@ -73,7 +73,7 @@
 
             </div>
           </td>
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.createdAt )}}</td>
 
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
             <button @click="go_to_maps()" type="button" class="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" :disabled="soil.isCurrent">
