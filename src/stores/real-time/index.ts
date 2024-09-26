@@ -28,6 +28,7 @@ export const useRealTimeStore = defineStore('real_time', () => {
     if(farmId){
       url = `${soil_path}?farm_id=${farmId}`
     }
+    // alert("ll")
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil.value= responseDTO.value.data;

@@ -85,9 +85,9 @@ const changed_farm_event = (farm:shambaDropDownT) =>{
   <div class="flex flex-col my-4 md:my-0 md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
-      <drop_down @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
+      <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
       <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
-      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto w-1/2  my-2 md:my-0"/>
+      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
     </div>
   </div>
 

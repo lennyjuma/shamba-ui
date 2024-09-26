@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
 import { Ref } from '@vue/composition-api';
@@ -17,9 +17,6 @@ export default {
 
   props:["title_data","series"],
   setup(props): { chartOptions: Ref<Highcharts.Options> } {
-
-
-
     const color_scheme = (property:string, value: number) =>{
       let color = ''
       let value_format =  0
@@ -180,6 +177,19 @@ export default {
         ]
       }]
     });
+
+    watch(() => props.series[1],()=>{
+      if (chartOptions.value.series !== undefined){
+        let chart_data = chartOptions.value.series[0].data
+        chart_data[0] = color_scheme(props.series[0], props.series[1])
+        chart_data[1].y = 100 - color_scheme(props.series[0], props.series[1]).y
+        console.log("series prop", chart_data );
+      }
+      if (chartOptions.value.title !== undefined){
+        chartOptions.value.title.text = props.title_data + "<br>  " + props.series[0]
+      }
+
+    })
 
 
 
