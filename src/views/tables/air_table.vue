@@ -20,7 +20,7 @@
           </td>
           <td class="hidden px-3 py-4 text-sm text-gray-500 lg:table-cell">{{ air.humidity }} g/m3</td>
           <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ air.crop }}</td>
-          <td class="px-3 py-4 text-sm text-gray-500">{{ formatDate(air.createdAt) }}</td>
+          <td class="px-3 py-4 text-sm text-gray-500">{{ formatDate(air.readingDate) }}</td>
           <td class="border-t border-transparent', 'relative py-3.5 pl-3 pr-4 text-left font-medium sm:pr-6">
             <button @click="go_to_maps()" type="button" class="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" >
               Go to map
