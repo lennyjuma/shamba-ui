@@ -14,7 +14,7 @@ export const useSoilStore = defineStore('soil_store', () => {
   const get_soil = computed(() => soil.value);
 
   async function fetchSoilByDeviceId(page:number,size:number, farm_id ? : string) {
-    let url = `${path}/device?page=${page}&size=${size}`;
+    let url = `${path}/device?page=${page}&size=${size}&start=3/9/2020 21:31`;
     if (farm_id) {
       url = `${path}/device?page=${page}&size=${size}&farm_id=${farm_id}`;
     }

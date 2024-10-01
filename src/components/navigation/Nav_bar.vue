@@ -23,11 +23,7 @@
           <router-link to="/register" type="button" class="ml-3 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</router-link>
         </div>
         <div v-if="get_logged_status" class="hidden sm:ml-6 sm:flex sm:items-center">
-          <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-            <span class="absolute -inset-1.5" />
-            <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+          <farm_drop_down  :items="get_shamba_drop_down"  class="my-auto mx-2"/>
 
           <!-- Profile dropdown -->
           <Menu as="div" class="relative ml-3">
@@ -106,10 +102,21 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
+import Farm_drop_down from '@/components/utils/farm_drop_down.vue'
+import { useShambaStore } from '@/stores/shamba'
+import { onMounted } from 'vue'
+
+let shambaStore = useShambaStore()
 
 let authStore = useAuthStore()
 const {get_logged_status} = storeToRefs(authStore)
 const {set_loggedIn_to_false} = authStore
+const {get_shamba_drop_down} = storeToRefs(shambaStore)
+const {fetchShamba} = shambaStore
+
+onMounted(()=>{
+  fetchShamba()
+})
 
 function signOut(): void {
   localStorage.removeItem("access_token");

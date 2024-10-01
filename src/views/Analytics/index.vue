@@ -19,7 +19,7 @@ let realTimeStore = useRealTimeStore()
 
 let shambaStore = useShambaStore()
 const {fetchShamba} = shambaStore
-const {get_shamba_drop_down} = storeToRefs(shambaStore)
+const {get_shamba_drop_down, get_shamba_current} = storeToRefs(shambaStore)
 const {fetch_charts} = chartsStore
 const {fetchLatestData} = realTimeStore
 const {get_soil_charts,get_air_charts} = storeToRefs(chartsStore)
@@ -75,10 +75,11 @@ const tabz = ref([
   { name: 'Realtime', href: '#', count: '4', current: false },
 ])
 
-const changed_farm_event = (farm:shambaDropDownT) =>{
-  fetch_charts(page_size.value,farm.id)
-  fetchLatestData(farm.id)
-}
+watch(get_shamba_current,()=>{
+  let farmId = get_shamba_current.value.id
+  fetch_charts(page_size.value,farmId)
+  fetchLatestData(farmId)
+})
 
 </script>
 
@@ -92,7 +93,7 @@ const changed_farm_event = (farm:shambaDropDownT) =>{
       </div>
 
       <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
-      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>
+<!--      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>-->
       <date_picker v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
     </div>
   </div>
@@ -121,7 +122,7 @@ const changed_farm_event = (farm:shambaDropDownT) =>{
     </div>
     <div class="">
       <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Air properties.</h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 ">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         <semi_circle_chart :title_data="getLatestAir.temperature + '  °C'" :series="['Temperature', Number(getLatestAir.temperature)]" />
         <semi_circle_chart :title_data="getLatestAir.humidity + ' %'" :series="['Humidity', Number(getLatestAir.humidity)]" />
       </div>

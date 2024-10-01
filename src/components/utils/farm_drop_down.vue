@@ -31,14 +31,29 @@ import { onMounted, ref, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import type { shambaDropDownT } from '@/types'
+import router from '@/router'
+import { useShambaStore } from '@/stores/shamba'
 
 
 let props = defineProps(["title","items"])
 let emits = defineEmits(["select_item"])
 const selected = ref<shambaDropDownT>({} as shambaDropDownT)
+
+let shambaStore = useShambaStore()
+const {set_current_shamba} = shambaStore
+
+
 const select_item = (item:shambaDropDownT) => {
   console.log(item)
   emits("select_item", item)
+  router.push({
+    name: router.currentRoute.value.name, // Use the name of the route
+    query: {
+      farm_id:item.id // Set your desired query params here
+    }
+  })
+
+  set_current_shamba(item)
 }
 watch( ()=> props.items ,() =>{
   console.log( "post malone",props.items[0])
