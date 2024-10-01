@@ -17,7 +17,7 @@ export const useAirStore = defineStore('air_store', () => {
 
     let url = `${path}/device?page=${page}&size=${size}`;
     if (farm_id){
-      url = `${path}/device?farm_id=${farm_id}&page=${page}&size=${size}`;
+      url = `${url}&farm_id=${farm_id}`;
     }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore

@@ -96,9 +96,12 @@ import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { soilT } from '@/types'
 import router from '@/router'
+import { useShambaStore } from '@/stores/shamba'
 
-const page_size = 10;
+const page_size = 2;
 
+let shambaStore = useShambaStore()
+const {get_shamba_current} = storeToRefs(shambaStore)
 const soil_store = useSoilStore();
 const {fetchSoilByDeviceId,changePage} = soil_store
 const {get_soil,getPagination} = storeToRefs(soil_store)
@@ -110,7 +113,13 @@ const go_to_maps = () => {
 }
 
 onMounted(()=>{
-  fetchSoilByDeviceId(0,page_size)
+  console.log("shamba",JSON.stringify(get_shamba_current.value) == "{}")
+  console.log("shamba obj",(get_shamba_current.value) )
+  if(JSON.stringify(get_shamba_current.value) == "{}") {
+    fetchSoilByDeviceId(0, page_size)
+  }else {
+    fetchSoilByDeviceId(0, page_size,get_shamba_current.value.id)
+  }
 })
 
 watch(get_soil,()=>{
@@ -118,7 +127,12 @@ watch(get_soil,()=>{
 })
 
 const changePagewithPagination = (param: number) => {
-  changePage(param,page_size);
+  if(JSON.stringify(get_shamba_current.value) == "{}") {
+    changePage(param,page_size);
+  }else {
+    changePage(param,page_size,get_shamba_current.value.id);
+  }
+
 };
 
 const formatDate = (tarehe:string) => {

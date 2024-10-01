@@ -43,12 +43,16 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref, watch } from 'vue'
 import type { airT } from '@/types'
 import Pagination from '@/components/navigation/pagination.vue'
+import { useShambaStore } from '@/stores/shamba'
 
 let airStore = useAirStore()
+
+let shambaStore = useShambaStore()
+const {get_shamba_current} = storeToRefs(shambaStore)
 const {fetchAirByDeviceId,changePage} =  airStore
 const {get_air,getPagination} =  storeToRefs(airStore)
 
-const page_size = 10;
+const page_size = 2;
 const air_properties = ref<airT[]>([] as airT[])
 
 const go_to_maps = () => {
@@ -56,14 +60,23 @@ const go_to_maps = () => {
 
 }
 const changePagewithPagination = (param: number) => {
-  changePage(param,page_size);
+  if(JSON.stringify(get_shamba_current.value) == "{}") {
+    changePage(param,page_size);
+  }else {
+    changePage(param,page_size);
+  }
+
 };
 
 watch(get_air,() =>{
   air_properties.value =get_air.value
 })
 onMounted(()=>{
-  fetchAirByDeviceId(0,10)
+  if(JSON.stringify(get_shamba_current.value) == "{}") {
+    fetchAirByDeviceId(0, page_size)
+  }else {
+    fetchAirByDeviceId(0, page_size,get_shamba_current.value.id)
+  }
 })
 const formatDate = (tarehe:string) => {
   let date = new Date(tarehe);

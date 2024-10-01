@@ -41,9 +41,13 @@ const changed_tab_event = (idx:number) =>{
 }
 
 onBeforeMount(()=>{
- fetch_charts("5");
- fetchLatestData()
-  fetchShamba()
+  if(JSON.stringify(get_shamba_current.value) == "{}") {
+    fetch_charts("5");
+    fetchLatestData()
+  }else {
+    fetch_charts("5",get_shamba_current.value.id);
+    fetchLatestData()
+  }
 })
 watch(get_soil_charts,()=>{
   // data must be an array

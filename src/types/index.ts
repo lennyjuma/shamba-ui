@@ -101,6 +101,10 @@ export interface shambaDropDownT {
   id: string
   name: string
 }
+export interface rangeDateT {
+  start: string
+  end: string
+}
 
 export interface CropT {
   createdAt: string

@@ -33,9 +33,8 @@ export const useSoilStore = defineStore('soil_store', () => {
     });
   }
 
-  const changePage = (pageNumber: number,size:number) => {
-
-    fetchSoilByDeviceId( pageNumber,size).then();
+  const changePage = (pageNumber: number,size:number,farmId?:string) => {
+    fetchSoilByDeviceId( pageNumber,size,farmId).then();
   };
 
 

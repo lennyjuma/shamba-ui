@@ -33,6 +33,7 @@ const {fetchSoilByDeviceId} = soilStore
 const {fetchAirByDeviceId} = airStore
 const {get_shamba_current} = storeToRefs(shambaStore)
 
+const page_size = 2;
 const tabs_arr = ref([
   { name: 'Soil', href: '#', count: '52', current: true },
   { name: 'Air', href: '#', count: '6', current: false }
@@ -49,7 +50,7 @@ const changed_tab_event = (idx:number) =>{
 }
 watch(get_shamba_current,()=>{
   let farmId = get_shamba_current.value.id
-  fetchSoilByDeviceId(0,10,farmId)
-  fetchAirByDeviceId(0,10,farmId)
+  fetchSoilByDeviceId(0,page_size,farmId)
+  fetchAirByDeviceId(0,page_size,farmId)
 })
 </script>
