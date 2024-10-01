@@ -63,7 +63,7 @@ const changePagewithPagination = (param: number) => {
   if(JSON.stringify(get_shamba_current.value) == "{}") {
     changePage(param,page_size);
   }else {
-    changePage(param,page_size);
+    changePage(param,page_size,get_shamba_current.value.id);
   }
 
 };

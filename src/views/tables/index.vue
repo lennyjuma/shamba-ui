@@ -3,7 +3,7 @@
   <div class="flex flex-col my-4 md:my-0 md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto ml-4" :tabw="tabs_arr" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
-      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto  my-2 md:my-0"/>
+      <date_picker @range=" (args) => range_date(args)" class="md:mt-auto w-auto my-2 md:my-0"/>
     </div>
   </div>
   <div v-show="current_tab == 0">

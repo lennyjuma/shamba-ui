@@ -1,27 +1,40 @@
 <template>
-  <div class="">
+  <div class="w-full">
     <h1 class="block text-sm font-medium leading-6 text-gray-900">Date range</h1>
-    <VueDatePicker class="w-auto mt-1" :is-24="true" time-picker-inline v-model="date" range ></VueDatePicker>
+    <VueDatePicker class="w-full mt-1" :is-24="true" time-picker-inline v-model="date" range placeholder="Pick date range" ></VueDatePicker>
   </div>
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted, watch, defineEmits } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { Listbox, ListboxLabel } from '@headlessui/vue'
+import { useRangeDateStore } from '@/stores/date/index'
 
+let rangeDateStore = useRangeDateStore()
+const {set_range_date} = rangeDateStore
+
+const startDate = new Date();
+const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
 const date = ref();
 
 let emits = defineEmits(['range'])
 
 // For demo purposes assign range from the current date
-onMounted(() => {
-  const startDate = new Date();
-  const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
-  date.value = [startDate, endDate];
-})
+// onMounted(() => {
+//   const startDate = new Date();
+//   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+//   date.value = [startDate, endDate];
+//
+//   // let select_button = document.querySelector(".dp__action_select") as HTMLButtonElement
+//   // select_button.addEventListener("click", (e) => {
+//   //   alert("clickked")
+//   // })
+// })
+
+
 watch(date, ()=>{
   const day_0 = date.value[0].getDate();
   const month_0 = date.value[0].getMonth() + 1;
@@ -41,7 +54,9 @@ watch(date, ()=>{
     start: start_date,
     end: end_date,
   }
+  set_range_date(range)
   emits("range", range);
-  // console.log(start_date,end_date)
+  console.log("Date bla bla", date.value[0])
+
 })
 </script>

@@ -1,10 +1,14 @@
 import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import type { airT, paginationT, soilT } from '@/types'
 import { useRestController } from '@/compossables/Axios'
 import router from '@/router'
+import { useRangeDateStore } from '@/stores/date'
 
 export const useAirStore = defineStore('air_store', () => {
+
+  const rangeDateStore = useRangeDateStore()
+  const {get_range_date} = storeToRefs(rangeDateStore)
   const path = 'air'
   const air = ref<airT[]>([] as airT[]);
 
@@ -18,6 +22,10 @@ export const useAirStore = defineStore('air_store', () => {
     let url = `${path}/device?page=${page}&size=${size}`;
     if (farm_id){
       url = `${url}&farm_id=${farm_id}`;
+    }
+    if(get_range_date.value !== undefined){
+      console.log(`get_range_date: `, get_range_date.value);
+      url = `${url}&start=${get_range_date.value.start}&end=${get_range_date.value.end}`;
     }
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
@@ -34,8 +42,8 @@ export const useAirStore = defineStore('air_store', () => {
     });
   }
 
-  const changePage = (pageNumber: number,size:number) => {
-    fetchAirByDeviceId( pageNumber,size).then();
+  const changePage = (pageNumber: number,size:number,farmId?:string) => {
+    fetchAirByDeviceId( pageNumber,size,farmId).then();
   };
 
 
