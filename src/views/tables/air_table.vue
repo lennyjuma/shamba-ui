@@ -60,11 +60,7 @@ const go_to_maps = () => {
 
 }
 const changePagewithPagination = (param: number) => {
-  if(JSON.stringify(get_shamba_current.value) == "{}") {
-    changePage(param,page_size);
-  }else {
-    changePage(param,page_size,get_shamba_current.value.id);
-  }
+  changePage(param,page_size);
 
 };
 
@@ -72,11 +68,7 @@ watch(get_air,() =>{
   air_properties.value =get_air.value
 })
 onMounted(()=>{
-  if(JSON.stringify(get_shamba_current.value) == "{}") {
-    fetchAirByDeviceId(0, page_size)
-  }else {
-    fetchAirByDeviceId(0, page_size,get_shamba_current.value.id)
-  }
+  fetchAirByDeviceId(0, page_size)
 })
 const formatDate = (tarehe:string) => {
   let date = new Date(tarehe);

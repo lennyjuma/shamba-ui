@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <h1 class="block text-sm font-medium leading-6 text-gray-900">Date range</h1>
-    <VueDatePicker class="w-full mt-1" :is-24="false" time-picker-inline v-model="date" range placeholder="Pick date range" @update:model-value="handleDate"></VueDatePicker>
+    <VueDatePicker class="w-full mt-1" :is-24="true" time-picker-inline v-model="date" range placeholder="Pick date range" @update:model-value="handleDate"></VueDatePicker>
   </div>
 
 </template>
@@ -41,15 +41,13 @@ const handleDate = (date:Date[]) => {
   const day_0 = date[0].getDate();
   const month_0 = date[0].getMonth() + 1;
   const year_0 = date[0].getFullYear();
-  // const time_0 = date[0].getHours();
-  const time_0 = "00";
+  const time_0 = date[0].getHours();
   const mins_0 = date[0].getMinutes();
 
   const day_1 = date[1].getDate();
   const month_1 = date[1].getMonth() + 1;
   const year_1 = date[1].getFullYear();
-  // const time_1 = date[1].getHours();
-  const time_1 = "00";
+  const time_1 = date[1].getHours();
   const mins_1 = date[1].getMinutes();
   const start_date = `${day_0}/${month_0}/${year_0} ${time_0}:${mins_0}`
   const end_date = `${day_1}/${month_1}/${year_1} ${time_1}:${mins_1}`
