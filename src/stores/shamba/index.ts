@@ -33,6 +33,8 @@ export const useShambaStore = defineStore('shamba', () => {
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       shamba_res.value= responseDTO.value.data;
+      current_shamba.value.name = shamba_res.value[0].name;
+      current_shamba.value.id = shamba_res.value[0].id;
     });
 
   }
