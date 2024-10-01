@@ -3,8 +3,12 @@ import { defineStore } from 'pinia'
 import type { loggedInT, loginT, registerT } from '@/types'
 import router from '@/router'
 import { useRestController } from '@/compossables/Axios'
+import { useShambaStore } from '@/stores/shamba'
 
 export const useAuthStore = defineStore('auth', () => {
+  let shambaStore = useShambaStore()
+  const {fetchShamba} = shambaStore
+
   const login_path = "auth/"
   const login_payload = ref<loginT>({} as loginT)
   const loggedIn = ref(false)
@@ -34,6 +38,8 @@ export const useAuthStore = defineStore('auth', () => {
         router.push("/");
       }
 
+    }).finally(()=>{
+      fetchShamba()
     });
 
   }

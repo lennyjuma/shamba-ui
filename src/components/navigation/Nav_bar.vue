@@ -115,7 +115,9 @@ const {get_shamba_drop_down} = storeToRefs(shambaStore)
 const {fetchShamba} = shambaStore
 
 onMounted(()=>{
-  fetchShamba()
+  if (get_logged_status.value) {
+    fetchShamba()
+  }
 })
 
 function signOut(): void {
