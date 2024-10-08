@@ -25,13 +25,16 @@ import { useShambaStore } from '@/stores/shamba'
 import { storeToRefs } from 'pinia'
 import { useSoilStore } from '@/stores/soil'
 import { useAirStore } from '@/stores/air'
+import { useRangeDateStore } from '@/stores/date'
 
 let shambaStore = useShambaStore()
+let rangeDateStore = useRangeDateStore()
 let soilStore = useSoilStore()
 let airStore = useAirStore()
 const {fetchSoilByDeviceId} = soilStore
 const {fetchAirByDeviceId} = airStore
 const {get_shamba_current} = storeToRefs(shambaStore)
+const {get_range_date} = storeToRefs(rangeDateStore)
 
 const page_size = 2;
 const tabs_arr = ref([
@@ -49,6 +52,11 @@ const changed_tab_event = (idx:number) =>{
   current_tab.value = idx
 }
 watch(get_shamba_current,()=>{
+  let farmId = get_shamba_current.value.id
+  fetchSoilByDeviceId(0,page_size,farmId)
+  fetchAirByDeviceId(0,page_size,farmId)
+})
+watch(get_range_date,()=>{
   let farmId = get_shamba_current.value.id
   fetchSoilByDeviceId(0,page_size,farmId)
   fetchAirByDeviceId(0,page_size,farmId)

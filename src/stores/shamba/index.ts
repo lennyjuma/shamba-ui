@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { shambaDropDownT, shambaResT, shambaT } from '@/types'
 import router from '@/router'
@@ -23,6 +23,11 @@ export const useShambaStore = defineStore('shamba', () => {
     useRestController(url, "post", payload)
 
   }
+  const getShambaByID = ()  => {
+    const farm_id = router.currentRoute.value.query["farm_id"]
+    return shamba_res.value.filter((farm) => farm.id == farm_id)
+  }
+
 
   const set_current_shamba = (payload:shambaDropDownT) => {
     current_shamba.value = payload
@@ -39,5 +44,5 @@ export const useShambaStore = defineStore('shamba', () => {
 
   }
 
-  return { addShamba,fetchShamba, get_shamba_res, get_shamba_drop_down,set_current_shamba,get_shamba_current }
+  return {getShambaByID, addShamba,fetchShamba, get_shamba_res, get_shamba_drop_down,set_current_shamba,get_shamba_current }
 })

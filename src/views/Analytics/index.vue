@@ -34,20 +34,15 @@ const air_temp_series = ref<seriesT[]>([] as seriesT[])
 const air_humidity_series =ref<seriesT[]>([] as seriesT[])
 
 const air_categories = ref(['Sep', 'Oct', 'Nov', 'Dec'],)
-const soil_categories = ref(['Sep', 'Oct', 'Nov', 'Dec'],)
+const soil_categories = ref<string[]>([] as string[])
 const current_tab = ref(0)
 const changed_tab_event = (idx:number) =>{
   current_tab.value = idx
 }
 
 onBeforeMount(()=>{
-  if(JSON.stringify(get_shamba_current.value) == "{}") {
-    fetch_charts("5");
-    fetchLatestData()
-  }else {
-    fetch_charts("5",get_shamba_current.value.id);
-    fetchLatestData()
-  }
+  fetch_charts("5");
+  fetchLatestData()
 })
 watch(get_soil_charts,()=>{
   // data must be an array
@@ -71,7 +66,7 @@ const select_item_event = (item:string) =>{
   fetch_charts(item)
 }
 const range_date = (item:rangeT)=>{
-  console.log(item)
+  fetch_charts(page_size.value)
 }
 const tabz = ref([
   { name: 'Soil', href: '#', count: '52', current: true },
@@ -91,14 +86,16 @@ watch(get_shamba_current,()=>{
   <div class="flex flex-col my-4 md:my-0 md:flex-row max-w-9xl mx-auto md:justify-center md:items-center">
     <tabs class="mr-auto ml-4" :tabw="tabz" @current_tab=" args => changed_tab_event(args)"></tabs>
     <div class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
-      <div v-for="(crop,idx) in getLatestSoil.shamba.crop" :key="crop.id" v-show="current_tab == 2"
-           class="block mt-auto capitalize text-normal  font-medium leading-6 text-gray-900" >
-        <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">{{ crop.name }}</span>
-      </div>
 
       <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
 <!--      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>-->
       <date_picker v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
+      <div v-if="current_tab == 2" class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
+        <div v-for="(crop,idx) in getLatestSoil.shamba.crop" :key="crop.id"
+             class="block mt-auto capitalize text-normal  font-medium leading-6 text-gray-900" >
+          <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">{{ crop.name }}</span>
+        </div>
+      </div>
     </div>
   </div>
 

@@ -45,8 +45,8 @@
             </td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">{{ shamba.location }}</td>
             <td class="relative py-4 pl-3 text-right text-sm font-medium">
-              <a href="#" class="text-indigo-600 hover:text-indigo-900"
-              >Edit<span class="sr-only">, {{ shamba.name }}</span></a
+              <router-link :to="`/edit_farm?farm_id=${shamba.id}`" class="text-indigo-600 hover:text-indigo-900"
+              >Edit<span class="sr-only">, {{ shamba.name }}</span></router-link
               >
             </td>
           </tr>

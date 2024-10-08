@@ -36,6 +36,8 @@ import { ref, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOptions } from '@headlessui/vue'
 import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 
+const props = defineProps(["selected_crops"])
+
 const people = [
   { id: 1, name: 'Maize' },
   { id: 2, name: 'Wheat' },
@@ -51,5 +53,9 @@ const selected = ref([] as string[])
 
 watch(selected, (val) => {
   emits("select_crops", val)
+})
+watch(()=>props.selected_crops, (val) => {
+  selected.value = props.selected_crops
+  console.log(props.selected_crops)
 })
 </script>

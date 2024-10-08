@@ -43,7 +43,7 @@ interface items {
   id: number
   name: string
 }
-let props = defineProps(["title", "items_prop"])
+let props = defineProps(["title", "items_prop", "selected_item"])
 let emits = defineEmits(["selected_farming_event"])
 
 const query = ref('')
@@ -61,6 +61,11 @@ onMounted(()=>{
 
 watch(selectedPerson,()=>{
   emits("selected_farming_event",selectedPerson.value.name)
+})
+
+watch(()=>props.selected_item , ()=>{
+  console.log("selected")
+  selectedPerson.value = props.selected_item
 })
 
 </script>

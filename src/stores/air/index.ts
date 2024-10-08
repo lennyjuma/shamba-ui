@@ -42,6 +42,7 @@ export const useAirStore = defineStore('air_store', () => {
   const changePage = (pageNumber: number,size:number,farmId?:string) => {
     fetchAirByDeviceId( pageNumber,size,farmId).then();
   };
+  
   const appendURL = (url:string) => {
     console.log("get_shamba_current",get_shamba_current.value);
     if(JSON.stringify(get_shamba_current.value) !== "{}"){
