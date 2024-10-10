@@ -38,9 +38,9 @@
             </td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{ shamba.farmingType }}</td>
             <td class=" px-3 py-4 text-sm text-gray-500 ">
-              <span class="" v-for="(crop,index) in shamba.crop">
+              <span class="" v-for="(crop,index) in shamba.farmCrops.map(farm => farm.crop)" :key="crop.id">
                 <span class="">{{crop.name}}</span>
-                <span v-if="shamba.crop.length-1 !== index" class="pr-1">,</span>
+                <span v-if="shamba.farmCrops.length-1 !== index" class="pr-1">,</span>
               </span>
             </td>
             <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">{{ shamba.location }}</td>

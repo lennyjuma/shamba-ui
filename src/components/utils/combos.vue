@@ -53,7 +53,7 @@ const filteredPeople = computed(() =>
     ? items.value
     : items.value.filter((person) => {
       return person.name.toLowerCase().includes(query.value.toLowerCase())
-    }),
+    })
 )
 onMounted(()=>{
   items.value = props.items_prop

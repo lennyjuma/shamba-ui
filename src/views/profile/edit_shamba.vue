@@ -19,7 +19,7 @@
 
 
         <div class="sm:col-span-3">
-          <checkbox_drop :selected_crops="crops_selected"  @select_crops="crops => Listen_selected_crops_event(crops)" />
+          <checkbox_drop :selected_crops="crops_selected" :selected_crops_id="crops_selected_id"  @select_crops="crops => Listen_selected_crops_event(crops)" />
         </div>
         <div class="sm:col-span-3">
           <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location (County, Subcounty, location or Nearest town, village)</label>
@@ -32,7 +32,7 @@
       </div>
       <div class="mt-6 flex items-center justify-end gap-x-6">
         <router-link to="/profile" class="text-sm font-semibold leading-6 text-gray-900">Cancel</router-link>
-        <button @click="add_shamba()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
+        <button @click="update_shamba()" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update</button>
       </div>
     </div>
 
@@ -46,9 +46,12 @@ import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
 import { onMounted, ref } from 'vue'
 import type { shambaT } from '@/types'
 import { useShambaStore } from '@/stores/shamba'
+import { useCropStore } from '@/stores/crop'
 
 let shambaStore = useShambaStore()
-const {addShamba,getShambaByID} = shambaStore
+const {updateShamba,getShambaByID} = shambaStore
+const cropStore = useCropStore()
+const {fetch_crop} = cropStore
 const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { "id": 2, "name": 'Mixed cropping' }
@@ -61,14 +64,16 @@ export interface farming_typeT  {
 
 const shamba_payload = ref<shambaT>({} as shambaT)
 const crops_selected= ref<string[]>([] as string[])
+const crops_selected_id= ref<string[]>([] as string[])
 const farming_type_selected= ref<farming_typeT>()
 
 onMounted(()=>{
   const shambaByID = getShambaByID()
-  console.log("shambaByID", shambaByID[0].crop.map(crop => crop.name))
+  console.log("shambaByID", shambaByID[0].farmCrops.map(crop => crop.crop.name))
   shamba_payload.value.name = shambaByID[0].name
   shamba_payload.value.location = shambaByID[0].location
-  crops_selected.value = shambaByID[0].crop.map(crop => crop.name)
+  crops_selected.value = shambaByID[0].farmCrops.map(crop => crop.crop.name)
+  crops_selected_id.value = shambaByID[0].farmCrops.map(crop => crop.crop.id)
   if (shambaByID[0].farmingType == "MixedFarming") {
     farming_type_selected.value = { "id": 2, "name": 'Mixed cropping' }
   }
@@ -88,11 +93,7 @@ const Listen_selected_farming_event = (farimingType:any) => {
   shamba_payload.value.farmingType = farimingType;
 }
 
-const add_shamba = () => {
-  addShamba(shamba_payload.value)
+const update_shamba = () => {
+  updateShamba(shamba_payload.value)
 }
-const obj = [
-  "Maize",
-  "Wheat"
-]
 </script>

@@ -86,7 +86,9 @@ export interface shambaT {
   location: string
   crops: string[]
 }
-
+export interface mimeaT {
+  crop: CropT
+}
 export interface shambaResT {
   createdAt: string
   updatedAt: string
@@ -96,6 +98,7 @@ export interface shambaResT {
   farmingType: string
   location: string
   crop: CropT[]
+  farmCrops: mimeaT[]
 }
 export interface shambaDropDownT {
   id: string
@@ -109,6 +112,11 @@ export interface rangeDateT {
 export interface CropT {
   createdAt: string
   updatedAt: string
+  id: string
+  readingDate: string
+  name: string
+}
+export interface Crop_payloadT {
   id: string
   readingDate: string
   name: string

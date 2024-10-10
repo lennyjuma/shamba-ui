@@ -1,29 +1,56 @@
 <template>
   <Listbox as="div" v-model="selected">
     <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Crop</ListboxLabel>
-    <div class="relative mt-2">
+    <div v-if="other" class="mt-2">
+      <input  type="text" name="farm_name" id="farm_name" @blur="other = false"  autocomplete="given-name" placeholder="Enter crop name " class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+    </div>
+    <div v-if="!other" class="relative mt-2">
       <ListboxButton class="relative flex space-x-2 w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-        <div v-show="selected.length > 0" v-for="(crop,index) in selected" :key="crop" class=" flex flex-row truncate">
+        <div v-show="selected_mimea.length > 0" v-for="(crop,index) in selected_mimea" :key="crop" class=" flex flex-row truncate">
           <p>{{ crop }}</p>
-          <span v-if="selected.length -1 !== index" >,</span>
+          <span v-if="selected_mimea.length -1 !== index" >,</span>
         </div>
-        <span v-show="selected.length == 0" class="block truncate">Select crop(s)</span>
+        <span v-show="selected_mimea.length == 0" class="block truncate">Select crop(s)</span>
         <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
       </ListboxButton>
 
+
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+
         <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-          <div class=" divide-y divide-gray-200 ">
+          <div  class=" divide-y divide-gray-200 ">
+
+            <div class="w-full mx-auto my-2 sm:max-w-xs">
+              <label for="search" class="sr-only">Search</label>
+              <div class="relative">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                  <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <input  v-model="query" id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search" type="search">
+              </div>
+            </div>
+
             <div v-for="(person, personIdx) in people" :key="personIdx" class="relative flex items-start px-5 py-4">
               <div class="min-w-0 flex-1 text-sm leading-6">
                 <label :for="`person-${person.id}`" class="select-none flex font-medium text-gray-900">{{ person.name }}</label>
               </div>
               <div  class="ml-3 flex h-6 items-center">
-                <input v-model="selected" :id="`person-${person.id}`" :name="`person-${person.id}`" :value="person.name" placeholder="Select crop(s)" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                <input v-model="selected" :id="`person-${person.id}`" :name="`person-${person.id}`" :value="person.id" placeholder="Select crop(s)" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
               </div>
             </div>
+            <div @click="other = true" class="relative flex items-start px-5 py-4">
+              <div class="min-w-0 flex-1 text-sm leading-6">
+                <label for="other" class="select-none flex font-medium text-gray-900">Add crop</label>
+              </div>
+              <div  class="ml-3 flex h-6 items-center">
+                <input  id="`other`" name="other"   type="button" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+              </div>
+            </div>
+
           </div>
         </ListboxOptions>
       </transition>
@@ -32,30 +59,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onBeforeMount, onMounted, ref, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOptions } from '@headlessui/vue'
 import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import { useCropStore } from '@/stores/crop'
+import { storeToRefs } from 'pinia'
+import type { CropT } from '@/types'
 
-const props = defineProps(["selected_crops"])
-
-const people = [
-  { id: 1, name: 'Maize' },
-  { id: 2, name: 'Wheat' },
-  { id: 3, name: 'Beans' },
-  { id: 4, name: 'Peas' },
-  { id: 5, name: 'avocado' },
-  { id: 5, name: 'other' },
-]
-
+const props = defineProps(["selected_crops","selected_crops_id"])
+const cropStore = useCropStore()
+const {fetch_crop} = cropStore
+const {get_crop} = storeToRefs(cropStore)
+const people = ref<CropT[]>([] as CropT[])
 const emits = defineEmits(["select_crops"])
 
 const selected = ref([] as string[])
+const selected_mimea = ref([] as string[])
+const other = ref(false)
+const query = ref('')
 
+onBeforeMount(()=>{
+  fetch_crop()
+})
+watch(query,()=>{
+  console.log("query",query.value)
+  people.value = query.value === ''
+    ? get_crop.value
+    : get_crop.value.filter((person) => {
+      return person.name.toLowerCase().includes(query.value.toLowerCase())
+    })
+  console.log("names",people.value)
+})
+watch(get_crop, () => {
+  people.value = get_crop.value
+  console.log("get_crop component",get_crop.value)
+})
 watch(selected, (val) => {
   emits("select_crops", val)
+  if (get_crop.value.length !== 0) {
+    console.log("crop",get_crop.value)
+    selected_mimea.value = get_crop.value.filter((crop) => val.includes(crop.id)).map((crop) => crop.name)
+  }
 })
-watch(()=>props.selected_crops, (val) => {
-  selected.value = props.selected_crops
-  console.log(props.selected_crops)
+watch(()=>props.selected_crops, () => {
+  selected_mimea.value = props.selected_crops
+  selected.value = props.selected_crops_id
+  console.log("props.selected_crops",props.selected_crops)
+  // fetch_crop()
 })
+
+
 </script>
