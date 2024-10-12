@@ -14,9 +14,12 @@ export const useCropStore = defineStore('crop', () => {
       crops.value= responseDTO.value.data
     })
   }
-  function add_crop(payload:Crop_payloadT) {
-    useRestController(path,"post",payload)
+
+  function add_mimea_crop(payload:Crop_payloadT) {
+    useRestController(path,"post",payload).then(()=> fetch_crop())
   }
 
-  return { get_crop, fetch_crop, add_crop }
+
+
+  return { get_crop, fetch_crop, add_mimea_crop }
 })

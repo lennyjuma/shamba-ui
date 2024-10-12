@@ -1,10 +1,10 @@
 <template>
   <Listbox as="div" v-model="selected">
     <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Crop</ListboxLabel>
-    <div v-if="other" class="mt-2">
-      <input  type="text" name="farm_name" id="farm_name" @blur="other = false"  autocomplete="given-name" placeholder="Enter crop name " class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+    <div v-if="add_crop" class="mt-2">
+      <input v-model="crop_payload.name" type="text" name="farm_name" id="farm_name" @blur="add_mimea()" autocomplete="given-name" placeholder="Enter crop name " class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
     </div>
-    <div v-if="!other" class="relative mt-2">
+    <div v-if="!add_crop" class="relative mt-2">
       <ListboxButton class="relative flex space-x-2 w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
         <div v-show="selected_mimea.length > 0" v-for="(crop,index) in selected_mimea" :key="crop" class=" flex flex-row truncate">
           <p>{{ crop }}</p>
@@ -16,12 +16,9 @@
         </span>
       </ListboxButton>
 
-
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-
         <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           <div  class=" divide-y divide-gray-200 ">
-
             <div class="w-full mx-auto my-2 sm:max-w-xs">
               <label for="search" class="sr-only">Search</label>
               <div class="relative">
@@ -42,7 +39,7 @@
                 <input v-model="selected" :id="`person-${person.id}`" :name="`person-${person.id}`" :value="person.id" placeholder="Select crop(s)" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
               </div>
             </div>
-            <div @click="other = true" class="relative flex items-start px-5 py-4">
+            <div @click="add_crop = true" class="relative flex items-start px-5 py-4">
               <div class="min-w-0 flex-1 text-sm leading-6">
                 <label for="other" class="select-none flex font-medium text-gray-900">Add crop</label>
               </div>
@@ -64,19 +61,20 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOptions } from '@headlessu
 import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { useCropStore } from '@/stores/crop'
 import { storeToRefs } from 'pinia'
-import type { CropT } from '@/types'
+import type { Crop_payloadT, CropT } from '@/types'
 
 const props = defineProps(["selected_crops","selected_crops_id"])
 const cropStore = useCropStore()
-const {fetch_crop} = cropStore
+const {fetch_crop, add_mimea_crop} = cropStore
 const {get_crop} = storeToRefs(cropStore)
 const people = ref<CropT[]>([] as CropT[])
 const emits = defineEmits(["select_crops"])
 
 const selected = ref([] as string[])
 const selected_mimea = ref([] as string[])
-const other = ref(false)
+const add_crop = ref(false)
 const query = ref('')
+const crop_payload = ref<Crop_payloadT>({} as Crop_payloadT)
 
 onBeforeMount(()=>{
   fetch_crop()
@@ -108,5 +106,9 @@ watch(()=>props.selected_crops, () => {
   // fetch_crop()
 })
 
+const add_mimea= () => {
+  add_crop.value = false
+  add_mimea_crop(crop_payload.value)
+}
 
 </script>
