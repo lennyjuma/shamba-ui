@@ -8,7 +8,7 @@
 import { ref, onMounted, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
-import { Ref } from '@vue/composition-api';
+// import { Ref } from '@vue/composition-api';
 
 export default {
   components: {
@@ -16,7 +16,7 @@ export default {
   },
 
   props:["title_data","series"],
-  setup(props): { chartOptions: Ref<Highcharts.Options> } {
+  setup(props): { chartOptions: ref<Highcharts.Options> } {
     const color_scheme = (property:string, value: number) =>{
       let color = ''
       let value_format =  0
