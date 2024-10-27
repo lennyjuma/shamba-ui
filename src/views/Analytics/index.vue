@@ -101,15 +101,15 @@ watch(get_shamba_current,()=>{
   </div>
 
   <div v-if="current_tab === 0">
-    <line-chart :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="soil_categories"/>
-    <line-chart :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="soil_categories"/>
-    <line-chart  :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="soil_categories"/>
-    <line-chart :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="soil_categories"/>
-    <line-chart  :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="soil_categories"/>
+    <line-chart :crops="get_soil_charts.crops" :x_axis_unit="`mg/kg`" :title="`Nitrogen, Phosphorus , Potassium (N/P/K)`" :series="npk_categories" :categories="soil_categories"/>
+    <line-chart :crops="get_soil_charts.crops"  :x_axis_unit="`µS/cm`" :title="`Electrical Conductivity`" :series="conductivity_categories" :categories="soil_categories"/>
+    <line-chart :crops="get_soil_charts.crops"   :x_axis_unit="`Percentage (%)`" :title="`Moisture`" :series="moisture_categories" :categories="soil_categories"/>
+    <line-chart :crops="get_soil_charts.crops"  :x_axis_unit="`Degree celsius`" :title="`Soil temperature`" :series="temp_categories" :categories="soil_categories"/>
+    <line-chart :crops="get_soil_charts.crops"   :x_axis_unit="`pH amount`" :title="`pH`" :series="pH_categories" :categories="soil_categories"/>
   </div>
   <div v-else-if="current_tab== 1">
-    <line-chart :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
-    <line-chart  :x_axis_unit="`Degree celsius`" :title="`Temperature`" :series="air_temp_series" :categories="air_categories"  />
+    <line-chart :crops="get_air_charts.crops"  :x_axis_unit="`Percentage (%)`" :title="`Humidity`" :series="air_humidity_series" :categories="air_categories" />
+    <line-chart :crops="get_air_charts.crops"   :x_axis_unit="`Degree celsius`" :title="`Temperature`" :series="air_temp_series" :categories="air_categories"  />
   </div>
   <div class="max-w-9xl mx-auto" v-else>
     <h2 class="max-w-2xl text-xl font-bold tracking-tight text-center sm:text-2xl xl:max-w-none xl:flex-auto mt-2">Soil properties.</h2>

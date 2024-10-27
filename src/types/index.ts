@@ -47,11 +47,13 @@ export type chartsT = {
   temperature: seriesT
   ph: seriesT
   categories: String[]
+  crops: String[]
 };
 export type air_chartsT = {
   temp: seriesT
   humidity: seriesT
   categories: String[]
+  crops: String[]
 };
 
 export interface rangeT {

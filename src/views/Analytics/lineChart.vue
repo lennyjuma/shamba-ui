@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
 import Drop_down from '@/components/utils/drop_down.vue'
@@ -46,10 +46,11 @@ export default defineComponent({
     highcharts: HighchartsVue.component,
   },
 
-  props:["title","series","categories","x_axis_unit"],
+  props:["title","series","categories","x_axis_unit","crops"],
   setup(props) {
     const chart_type = ref(["Line chart","Bar chart","Bar horizontal chart"])
     const title = ref<string>(props.title);
+    const cropStrying = ref("");
     const chartOptions = ref<ChartOptions>({
       chart: {
         type: 'line',
@@ -76,15 +77,24 @@ export default defineComponent({
           let index = map.indexOf(this.y)
           console.log(index);
           let category = props.categories[index]
-          return `Date: <b>${category}</b><br/>Crop: <b>Maize</b><br/>Property: <b>${this.series.name}</b><br/>Value: <b>${this.y}</b>`;
+          return `Date: <b>${category}</b><br/>Crop: <b>${cropStrying.value}</b><br/>Property: <b>${this.series.name}</b><br/>Value: <b>${this.y}</b>`;
         }
       }
+    });
+
+    const get_crop_names_per_farm = () => props.crops.forEach((crop:string)=>{
+      console.log("hhhhhhh",crop)
+      const current_crop_names = cropStrying.value !== "" ? cropStrying.value + " ," : cropStrying.value
+      cropStrying.value = `  ${current_crop_names} ${crop}`;
+      return cropStrying.value;
+
     });
 
     watch(() => props.series, (newTitle) => {
       chartOptions.value.series = props.series;
       // chartOptions.value.xAxis.categories = props.categories;
       console.log("series prop", chartOptions.value.series);
+      get_crop_names_per_farm()
     })
 
     const select_item_event = (item:string) => {
