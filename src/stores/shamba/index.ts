@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { shambaDropDownT, shambaResT, shambaT } from '@/types'
+import type { shambaDropDownT, shambaResT, shambaT, shambaUpdateT } from '@/types'
 import router from '@/router'
 import { useRestController } from '@/compossables/Axios'
 
@@ -24,7 +24,7 @@ export const useShambaStore = defineStore('shamba', () => {
 
   }
 
-  const updateShamba = (payload:shambaT) => {
+  const updateShamba = (payload:shambaUpdateT) => {
     const farm_id = router.currentRoute.value.query["farm_id"]
     const url = `${shamba_path}?farmId=${farm_id}`;
     useRestController(url, "update", payload)

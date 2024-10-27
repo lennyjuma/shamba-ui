@@ -19,7 +19,7 @@
 
 
         <div class="sm:col-span-3">
-          <checkbox_drop :selected_crops="crops_selected" :selected_crops_id="crops_selected_id"  @select_crops="crops => Listen_selected_crops_event(crops)" />
+          <checkbox_drop :selected_crops="crops_selected" :selected_crops_id="crops_selected_id"  @removed-crops="args => shamba_payload.removedCrops = args" @added-crops="args => shamba_payload.addedCrops = args" />
         </div>
         <div class="sm:col-span-3">
           <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location (County, Subcounty, location or Nearest town, village)</label>
@@ -44,7 +44,7 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import Combos from '@/components/utils/combos.vue'
 import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
 import { onMounted, ref } from 'vue'
-import type { shambaT } from '@/types'
+import type { shambaT, shambaUpdateT } from '@/types'
 import { useShambaStore } from '@/stores/shamba'
 import { useCropStore } from '@/stores/crop'
 
@@ -62,7 +62,7 @@ export interface farming_typeT  {
 }
 
 
-const shamba_payload = ref<shambaT>({} as shambaT)
+const shamba_payload = ref<shambaUpdateT>({} as shambaUpdateT)
 const crops_selected= ref<string[]>([] as string[])
 const crops_selected_id= ref<string[]>([] as string[])
 const farming_type_selected= ref<farming_typeT>()
@@ -84,10 +84,7 @@ onMounted(()=>{
 
 
 
-const Listen_selected_crops_event = (crops:string[]) => {
-  console.log('Listen_selected_crops_event',crops)
-  shamba_payload.value.crops = crops;
-}
+
 const Listen_selected_farming_event = (farimingType:any) => {
   console.log('Listen_selected_crops_event',farimingType.name)
   shamba_payload.value.farmingType = farimingType;

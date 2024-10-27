@@ -10,7 +10,7 @@ export const useSoilStore = defineStore('soil_store', () => {
 
   const rangeDateStore = useRangeDateStore()
   const shambaStore = useShambaStore()
-  const {get_range_date} = storeToRefs(rangeDateStore)
+  const {get_range_date, get_end_date,get_start_date} = storeToRefs(rangeDateStore)
   const {get_shamba_current} = storeToRefs(shambaStore)
 
   const path = 'soil'
@@ -51,8 +51,11 @@ export const useSoilStore = defineStore('soil_store', () => {
     if(JSON.stringify(get_shamba_current.value) !== "{}"){
       url = `${url}&farm_id=${get_shamba_current.value.id}`
     }
-    if(get_range_date.value !== undefined){
-      url = `${url}&start=${get_range_date.value.start}&end=${get_range_date.value.end}`
+    if(get_start_date.value !== undefined){
+      url = `${url}&start=${get_start_date.value}`
+    }
+    if(get_end_date.value !== undefined){
+      url = `${url}&end=${get_end_date.value}`
     }
     return url;
   };

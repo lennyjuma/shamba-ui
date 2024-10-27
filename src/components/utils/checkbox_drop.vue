@@ -62,13 +62,14 @@ import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { useCropStore } from '@/stores/crop'
 import { storeToRefs } from 'pinia'
 import type { Crop_payloadT, CropT } from '@/types'
+import router from '@/router'
 
 const props = defineProps(["selected_crops","selected_crops_id"])
 const cropStore = useCropStore()
 const {fetch_crop, add_mimea_crop} = cropStore
 const {get_crop} = storeToRefs(cropStore)
 const people = ref<CropT[]>([] as CropT[])
-const emits = defineEmits(["select_crops"])
+const emits = defineEmits(["select_crops","removedCrops","addedCrops"])
 
 const selected = ref([] as string[])
 const selected_mimea = ref([] as string[])
@@ -98,6 +99,14 @@ watch(selected, (val) => {
     console.log("crop",get_crop.value)
     selected_mimea.value = get_crop.value.filter((crop) => val.includes(crop.id)).map((crop) => crop.name)
   }
+  if( router.currentRoute.value.name == "Edit Farm") {
+    const removed_crops = getArrayDiff(props.selected_crops_id, selected.value)
+    const added_crops = getArrayDiff(selected.value, props.selected_crops_id)
+    emits('addedCrops', added_crops)
+    emits('removedCrops', removed_crops)
+    console.log("added_crops",added_crops)
+    console.log("removed_crops",removed_crops)
+  }
 })
 watch(()=>props.selected_crops, () => {
   selected_mimea.value = props.selected_crops
@@ -109,6 +118,10 @@ watch(()=>props.selected_crops, () => {
 const add_mimea= () => {
   add_crop.value = false
   add_mimea_crop(crop_payload.value)
+}
+
+function getArrayDiff(arr1:string[], arr2:string[]){
+  return  arr1.filter(x => !arr2.includes(x));
 }
 
 </script>

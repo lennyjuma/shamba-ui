@@ -33,9 +33,9 @@
               <div>Temperature - {{ soil.temperature }} °C</div>
               <div>pH - {{ soil.ph }} </div>
               <div class="flex"><span class="font-semibold">Crop(s) -</span>
-                <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id" class="flex pl-1">
-                  <span>{{crop.name}}</span>
-                  <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+                <div v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id" class="flex pl-1">
+                  <span>{{mimea.crop.name}}</span>
+                  <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
                 </div>
               </div>
               <div class="font-semibold"> {{ soil.reading_date }} </div>
@@ -54,9 +54,9 @@
             <div>Temperature - {{ soil.temperature }} °C</div>
             <div>pH - {{ soil.ph }} </div>
             <div class="flex"><span class="font-semibold">Crop(s) -</span>
-              <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id" class="flex pl-1">
-                <span>{{crop.name}}</span>
-                <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+              <div v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id" class="flex pl-1">
+                <span>{{mimea.crop.name}}</span>
+                <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
               </div>
             </div>
             <div class="font-semibold"> {{ soil.reading_date }} </div>
@@ -67,9 +67,9 @@
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.temperature }} °C</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.ph }}</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-5 text-center text-sm text-gray-500 lg:flex justify-center items-center']">
-            <div v-for="(crop,idx) in soil.shamba.crop" :key="crop.id">
-              <span>{{crop.name}}</span>
-              <span v-if="soil.shamba.crop.length - 1 !== idx" class="pl-1">,</span>
+            <div v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id">
+              <span>{{mimea.crop.name}}</span>
+              <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
 
             </div>
           </td>
