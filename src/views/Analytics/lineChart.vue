@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import Highcharts from 'highcharts';
 import HighchartsVue from 'vue-highcharts';
 import Drop_down from '@/components/utils/drop_down.vue'
@@ -83,7 +83,6 @@ export default defineComponent({
     });
 
     const get_crop_names_per_farm = () => props.crops.forEach((crop:string)=>{
-      console.log("hhhhhhh",crop)
       const current_crop_names = cropStrying.value !== "" ? cropStrying.value + " ," : cropStrying.value
       cropStrying.value = `  ${current_crop_names} ${crop}`;
       return cropStrying.value;
@@ -96,6 +95,12 @@ export default defineComponent({
       console.log("series prop", chartOptions.value.series);
       get_crop_names_per_farm()
     })
+    onMounted(()=>{
+      if (props.crops) {
+        get_crop_names_per_farm()
+      }
+    })
+
 
     const select_item_event = (item:string) => {
       if (item == "Line chart"){
