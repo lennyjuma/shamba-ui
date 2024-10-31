@@ -133,3 +133,11 @@ export interface Crop_payloadT {
   readingDate: string
   name: string
 }
+export interface ContactUsT {
+  readingDate: string
+  email: string
+  phoneNumber: string
+  message: string
+  fname: string
+  lname: string
+}
