@@ -39,7 +39,7 @@ const {fetchAirByDeviceId} = airStore
 const {get_shamba_current} = storeToRefs(shambaStore)
 const {get_range_date} = storeToRefs(rangeDateStore)
 
-const page_size = 2;
+const page_size = 10;
 const tabs_arr = ref([
   { name: 'Soil', href: '#', count: '52', current: true },
   { name: 'Air', href: '#', count: '6', current: false }

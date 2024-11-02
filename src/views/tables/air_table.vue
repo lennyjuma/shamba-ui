@@ -52,7 +52,7 @@ const {get_shamba_current} = storeToRefs(shambaStore)
 const {fetchAirByDeviceId,changePage} =  airStore
 const {get_air,getPagination} =  storeToRefs(airStore)
 
-const page_size = 2;
+const page_size = 8;
 const air_properties = ref<airT[]>([] as airT[])
 
 const go_to_maps = () => {
