@@ -1,4 +1,4 @@
-<template>
+<template v-if="false" >
   <Listbox as="div" v-model="selected">
     <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">{{ props.title }}</ListboxLabel>
     <div class="relative mt-2">
@@ -59,4 +59,9 @@ watch( ()=> props.items ,() =>{
   console.log( "post malone",props.items[0])
   selected.value = props.items[0]
 })
+// onMounted(() =>{
+//   console.log( "post malone",props.items[0])
+//   selected.value = props.items[0]
+// })
+
 </script>
