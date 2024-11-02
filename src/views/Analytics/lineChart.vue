@@ -83,7 +83,7 @@ export default defineComponent({
     });
 
     const get_crop_names_per_farm = () => props.crops.forEach((crop:string)=>{
-      const current_crop_names = cropStrying.value !== "" ? cropStrying.value + " ," : cropStrying.value
+      const current_crop_names = cropStrying.value.length > 0 ? cropStrying.value + " ," : cropStrying.value
       cropStrying.value = `  ${current_crop_names} ${crop}`;
       return cropStrying.value;
 
@@ -92,11 +92,15 @@ export default defineComponent({
     watch(() => props.series, (newTitle) => {
       chartOptions.value.series = props.series;
       // chartOptions.value.xAxis.categories = props.categories;
-      console.log("series prop", chartOptions.value.series);
+    })
+    watch(() => props.crops, (newTitle) => {
+      console.log("crops prop watch", props.crops);
+      cropStrying.value = "";
       get_crop_names_per_farm()
     })
     onMounted(()=>{
       if (props.crops) {
+        console.log("crops prop mount", props.crops);
         get_crop_names_per_farm()
       }
     })
