@@ -19,7 +19,8 @@
 
 
         <div class="sm:col-span-3">
-          <checkbox_drop @select_crops="crops => Listen_selected_crops_event(crops)" />
+          <combos_farms v-if="!showDrop" @selected_crop="args => Listen_selected_crops_event(args)" :title="`Crop`" :items_prop="types_of_farming"/>
+          <checkbox_drop v-else @select_crops="crops => Listen_selected_crops_event(crops)" />
         </div>
         <div class="sm:col-span-3">
           <label for="location" class="block text-sm font-medium leading-6 text-gray-900">Location (County, Subcounty, location or Nearest town, village)</label>
@@ -46,23 +47,27 @@ import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
 import { ref } from 'vue'
 import type { shambaT } from '@/types'
 import { useShambaStore } from '@/stores/shamba'
+import Combos_farms from '@/components/utils/combos_farms.vue'
+import { useCropStore } from '@/stores/crop'
 
-let shambaStore = useShambaStore()
-const {addShamba} = shambaStore
+let cropStore = useShambaStore()
+const {addShamba} = cropStore
 const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { id: 2, name: 'Mixed cropping' }
 ]
 const shamba_payload = ref<shambaT>({} as shambaT)
-
+const showDrop = ref(false)
 const Listen_selected_crops_event = (crops:string[]) => {
   console.log('Listen_selected_crops_event',crops)
   shamba_payload.value.crops = crops;
 }
 const Listen_selected_farming_event = (farimingType:any) => {
-  console.log('Listen_selected_crops_event',farimingType.name)
+  console.log('Listen_selected_crops_event',farimingType)
+  showDrop.value = farimingType == "Mixed cropping"
   shamba_payload.value.farmingType = farimingType;
 }
+
 
 const add_shamba = () => {
   addShamba(shamba_payload.value)

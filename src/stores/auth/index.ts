@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { defineStore } from 'pinia'
 import type { loggedInT, loginT, registerT } from '@/types'
 import router from '@/router'
@@ -12,13 +12,14 @@ export const useAuthStore = defineStore('auth', () => {
   const login_path = "auth/"
   const login_payload = ref<loginT>({} as loginT)
   const loggedIn = ref(false)
+  const token = ref(localStorage.getItem('access_token'))
   const login_res = ref<loggedInT>({} as loggedInT)
   const access_token = ref<string>();
 
   const get_login_res = computed(() => login_res.value)
 
 
-  const get_logged_status= computed(() => loggedIn.value || localStorage.getItem('access_token') != null)
+  const get_logged_status= computed(() => /*loggedIn.value ||*/ token.value != null)
 
   function login(payload:loginT) {
     const url = `${login_path}login`;
@@ -35,6 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem("user_full_name" , login_res.value.fullName as string);
         localStorage.setItem("user_email", login_res.value.email as string);
         localStorage.setItem("user_id", login_res.value.id as string);
+        token.value = "jj"
         router.push("/");
       }
 
@@ -67,5 +69,8 @@ export const useAuthStore = defineStore('auth', () => {
     loggedIn.value = false;
     router.push("/"); // redirect to home after log out to make sure charts and tables are hidden
   }
+  watch(token, ()=>{
+    alert("tik tok")
+  })
   return { login, register, get_login_res, get_logged_status,set_loggedIn_to_false}
 })

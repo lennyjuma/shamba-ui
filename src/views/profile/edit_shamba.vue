@@ -19,6 +19,9 @@
 
 
         <div class="sm:col-span-3">
+
+<!--          <combos_farms :title="`Crop`" :selected_item="crops_selected_mono" :selected_crops_id="crops_selected_id"  @removed-crops="args => shamba_payload.removedCrops = args"
+                        @added-crops="args => shamba_payload.addedCrops = args" />-->
           <checkbox_drop :selected_crops="crops_selected" :selected_crops_id="crops_selected_id"  @removed-crops="args => shamba_payload.removedCrops = args" @added-crops="args => shamba_payload.addedCrops = args" />
         </div>
         <div class="sm:col-span-3">
@@ -44,9 +47,10 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import Combos from '@/components/utils/combos.vue'
 import Checkbox_drop from '@/components/utils/checkbox_drop.vue'
 import { onMounted, ref } from 'vue'
-import type { shambaT, shambaUpdateT } from '@/types'
+import type { CropT, shambaT, shambaUpdateT } from '@/types'
 import { useShambaStore } from '@/stores/shamba'
 import { useCropStore } from '@/stores/crop'
+import Combos_farms from '@/components/utils/combos_farms.vue'
 
 let shambaStore = useShambaStore()
 const {updateShamba,getShambaByID} = shambaStore
@@ -64,14 +68,16 @@ export interface farming_typeT  {
 
 const shamba_payload = ref<shambaUpdateT>({} as shambaUpdateT)
 const crops_selected= ref<string[]>([] as string[])
+const crops_selected_mono= ref<CropT[]>([] as CropT[])
 const crops_selected_id= ref<string[]>([] as string[])
 const farming_type_selected= ref<farming_typeT>()
 
 onMounted(()=>{
   const shambaByID = getShambaByID()
-  console.log("shambaByID", shambaByID[0].farmCrops.map(crop => crop.crop.name))
+  console.log("shambaByID", shambaByID[0].farmCrops.map(crop => crop.crop))
   shamba_payload.value.name = shambaByID[0].name
   shamba_payload.value.location = shambaByID[0].location
+  crops_selected_mono.value = shambaByID[0].farmCrops.map(crop => crop.crop)
   crops_selected.value = shambaByID[0].farmCrops.map(crop => crop.crop.name)
   crops_selected_id.value = shambaByID[0].farmCrops.map(crop => crop.crop.id)
   if (shambaByID[0].farmingType == "MixedFarming") {
