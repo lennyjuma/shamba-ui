@@ -79,6 +79,9 @@ watch(get_shamba_current,()=>{
   fetch_charts(page_size.value,farmId)
   fetchLatestData(farmId)
 })
+onMounted(()=>{
+  document.getElementsByName("highcharts-credits").forEach(item=>{item.classList.add("hidden")})
+})
 
 </script>
 

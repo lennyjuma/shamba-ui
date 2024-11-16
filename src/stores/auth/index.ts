@@ -70,7 +70,7 @@ export const useAuthStore = defineStore('auth', () => {
     router.push("/"); // redirect to home after log out to make sure charts and tables are hidden
   }
   watch(token, ()=>{
-    alert("tik tok")
+    // alert("tik tok")
   })
   return { login, register, get_login_res, get_logged_status,set_loggedIn_to_false}
 })

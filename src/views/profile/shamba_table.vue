@@ -48,6 +48,10 @@
               <router-link :to="`/edit_farm?farm_id=${shamba.id}`" class="text-indigo-600 hover:text-indigo-900"
               >Edit<span class="sr-only">, {{ shamba.name }}</span></router-link
               >
+            </td> <td class="relative py-4 pl-3 text-right text-sm font-medium">
+              <router-link :to="`/edit_farm?farm_id=${shamba.id}`" class="text-indigo-600 hover:text-indigo-900"
+              >Delete<span class="sr-only">, {{ shamba.name }}</span></router-link
+              >
             </td>
           </tr>
           </tbody>

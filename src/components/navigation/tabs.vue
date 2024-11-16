@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 import { ref, defineProps, watch, onMounted } from 'vue'
-import { i } from 'vite/dist/node/types.d-aGj9QkWt'
 
 export interface tabT {
   name: string

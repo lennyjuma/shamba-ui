@@ -92,6 +92,9 @@ export default defineComponent({
     watch(() => props.series, (newTitle) => {
       chartOptions.value.series = props.series;
       // chartOptions.value.xAxis.categories = props.categories;
+      const charts = document.querySelectorAll(".highcharts-credits")
+      console.log("high charts",charts);
+      charts.forEach(item=>{item.classList.add("hidden")})
     })
     watch(() => props.crops, (newTitle) => {
       console.log("crops prop watch", props.crops);
