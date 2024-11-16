@@ -1,5 +1,5 @@
 name: Watt CICD
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: shanba lab pipeline triggered by  ${{ github.actor }}🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
