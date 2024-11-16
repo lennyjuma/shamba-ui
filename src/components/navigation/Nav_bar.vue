@@ -12,8 +12,8 @@
             <router-link to="/product" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Product</router-link>
             <router-link to="/blogs" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Blogs</router-link>
             <router-link to="/contact" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Contact us</router-link>
-            <router-link to="/charts?deviceId=SL00000001" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Charts</router-link>
-            <router-link to="/tables?deviceId=SL00000001" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
+            <router-link to="/charts" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Charts</router-link>
+            <router-link to="/tables" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
             <router-link to="/faq" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">FAQ</router-link>
           </div>
 
@@ -23,7 +23,7 @@
           <router-link to="/register" type="button" class="ml-3 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Register</router-link>
         </div>
         <div v-if="get_logged_status" class="hidden sm:ml-6 sm:flex sm:items-center">
-          <farm_drop_down  :items="get_shamba_drop_down"  class="my-auto mx-2"/>
+          <farm_drop_down  :items="get_shamba_drop_down"  class="my-auto farm_id mx-2"/>
 
           <!-- Profile dropdown -->
           <Menu as="div" class="relative ml-3">
@@ -51,6 +51,8 @@
         </div>
         <div class="-mr-2 flex items-center  sm:hidden">
           <!-- Mobile menu button -->
+
+          <farm_drop_down  :items="get_shamba_drop_down"  class="my-auto farm_id mx-2"/>
           <DisclosureButton class="relative inline-flex items-center justify-self-end rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
             <span class="absolute -inset-0.5" />
             <span class="sr-only">Open main menu</span>
@@ -67,7 +69,9 @@
         <router-link as="router-link" to="/" class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">Home</router-link>
         <router-link as="router-link" to="/product" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Product</router-link>
         <router-link as="router-link" to="/blogs" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Blogs</router-link>
-        <router-link as="router-link" to="/contact" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Contact</router-link>
+        <router-link as="router-link" to="/contact" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Contact us</router-link>
+        <router-link as="router-link" to="/charts" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Charts</router-link>
+        <router-link as="router-link" to="/tables" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Tables</router-link>
         <router-link as="router-link" to="/faq" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">FAQ</router-link>
       </div>
 
@@ -104,10 +108,11 @@ import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 import Farm_drop_down from '@/components/utils/farm_drop_down.vue'
 import { useShambaStore } from '@/stores/shamba'
-import { onMounted } from 'vue'
+import { onMounted, ref, watch } from 'vue'
+import router from '@/router'
 
 let shambaStore = useShambaStore()
-
+const showFarmDropDown = ref(false)
 let authStore = useAuthStore()
 const {get_logged_status} = storeToRefs(authStore)
 const {set_loggedIn_to_false} = authStore
@@ -124,4 +129,25 @@ function signOut(): void {
   localStorage.removeItem("access_token");
   set_loggedIn_to_false()
 }
+const getRoute= ()=>{
+  const route_name = router.currentRoute.value.name
+  console.log("route_name",route_name)
+  return route_name
+}
+watch(()=>router.currentRoute.value.name,()=>{ //show farm drop down in tables and charts
+  const farm_drops = document.querySelectorAll(".farm_id")
+  const showFarmDrops = getRoute() === "Tables" || getRoute() === "Analytics"
+  if (showFarmDrops){
+    farm_drops.forEach(item=>{
+      item.classList.remove("hidden")
+    })
+  }else{
+    farm_drops.forEach(item=>{
+      item.classList.add("hidden")
+    })
+  }
+
+  // fetchShamba()
+  console.log("showFarmDropDown",farm_drops)
+})
 </script>

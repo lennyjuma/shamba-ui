@@ -1,8 +1,8 @@
 <template>
   <Listbox as="div" v-model="selected">
-    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Crop</ListboxLabel>
+    <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Crops</ListboxLabel>
     <div v-if="add_crop" class="mt-2">
-      <input v-model="crop_payload.name" type="text" name="farm_name" id="farm_name" @blur="add_mimea()" autocomplete="given-name" placeholder="Enter crop name " class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+      <input v-model="crop_payload.name" type="text" name="farm_name" id="farm_name" @blur="add_mimea()" autocomplete="given-name" placeholder="Select crop names " class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
     </div>
     <div v-if="!add_crop" class="relative mt-2">
       <ListboxButton class="relative flex space-x-2 w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -112,7 +112,6 @@ watch(()=>props.selected_crops, () => {
   selected_mimea.value = props.selected_crops
   selected.value = props.selected_crops_id
   console.log("props.selected_crops",props.selected_crops)
-  // fetch_crop()
 })
 
 const add_mimea= () => {

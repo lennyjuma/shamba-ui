@@ -79,6 +79,9 @@ watch(get_shamba_current,()=>{
   fetch_charts(page_size.value,farmId)
   fetchLatestData(farmId)
 })
+onMounted(()=>{
+  document.getElementsByName("highcharts-credits").forEach(item=>{item.classList.add("hidden")})
+})
 
 </script>
 
@@ -89,11 +92,11 @@ watch(get_shamba_current,()=>{
 
       <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
 <!--      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>-->
-      <date_picker :state="`start`" :name="`Start date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
-      <date_picker :state="`end`" :name="`End date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto   my-2 md:my-0"/>
-      <div v-if="current_tab == 2" class="flex flex-col  md:flex-row  md:space-x-2 ml-4 md:">
+      <date_picker :state="`start`" :name="`Start date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto pr-4 my-2 md:my-0"/>
+      <date_picker :state="`end`" :name="`End date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto pr-4 my-2 md:my-0"/>
+      <div v-if="current_tab == 2" class="flex  md:space-x-2 mt-2 sm:mt-0">
         <div v-for="(mimea,idx) in getLatestSoil.shamba.farmCrops" :key="mimea.crop.id"
-             class="block mt-auto capitalize text-normal  font-medium leading-6 text-gray-900" >
+             class="block mt-auto capitalize text-normal mr-2 font-medium leading-6 text-gray-900 " >
           <span class="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">{{ mimea.crop.name }}</span>
         </div>
       </div>

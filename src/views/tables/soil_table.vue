@@ -98,7 +98,7 @@ import type { soilT } from '@/types'
 import router from '@/router'
 import { useShambaStore } from '@/stores/shamba'
 
-const page_size = 2;
+const page_size = 8;
 
 const soil_store = useSoilStore();
 const {fetchSoilByDeviceId,changePage} = soil_store
