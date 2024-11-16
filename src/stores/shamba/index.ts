@@ -30,6 +30,11 @@ export const useShambaStore = defineStore('shamba', () => {
     useRestController(url, "update", payload)
 
   }
+  const deleteShamba = (farm_id:string) => {
+    const url = `${shamba_path}?farmId=${farm_id}`;
+    useRestController(url, "delete", {})
+
+  }
   const getShambaByID = ()  => {
     const farm_id = router.currentRoute.value.query["farm_id"]
     return shamba_res.value.filter((farm) => farm.id == farm_id)
@@ -51,5 +56,5 @@ export const useShambaStore = defineStore('shamba', () => {
 
   }
 
-  return {getShambaByID, addShamba,fetchShamba, get_shamba_res, get_shamba_drop_down,set_current_shamba,get_shamba_current,updateShamba }
+  return {getShambaByID, addShamba,fetchShamba, get_shamba_res, get_shamba_drop_down,set_current_shamba,get_shamba_current,updateShamba,deleteShamba }
 })

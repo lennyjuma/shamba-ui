@@ -98,7 +98,17 @@ export async function useRestController(
       break;
     }
     case "delete": {
-      //statements;
+      axios
+        .delete(url, data)
+        .then(function (response) {
+          responseDTO.value = response;
+          if (response.status === 200) {
+            toggleNotification("success", `${msg} deleted !`);
+          }
+        })
+        .catch(function (error) {
+          redirectToLoginAfter403(error);
+        });
       break;
     }
     default: {

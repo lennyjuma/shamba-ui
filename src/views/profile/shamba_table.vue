@@ -49,9 +49,8 @@
               >Edit<span class="sr-only">, {{ shamba.name }}</span></router-link
               >
             </td> <td class="relative py-4 pl-3 text-right text-sm font-medium">
-              <router-link :to="`/edit_farm?farm_id=${shamba.id}`" class="text-indigo-600 hover:text-indigo-900"
-              >Delete<span class="sr-only">, {{ shamba.name }}</span></router-link
-              >
+              <button @click="deleteShamba(shamba.id)" class="text-indigo-600 hover:text-indigo-900"
+              >Delete<span class="sr-only">, {{ shamba.name }}</span></button>
             </td>
           </tr>
           </tbody>
@@ -70,7 +69,7 @@ import type { shambaResT } from '@/types'
 const shambaList = ref<shambaResT[]>([] as shambaResT[])
 
 let shambaStore = useShambaStore()
-const {fetchShamba} = shambaStore
+const {fetchShamba,deleteShamba} = shambaStore
 const {get_shamba_res} = storeToRefs(shambaStore)
 
 onMounted(()=>{
