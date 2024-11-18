@@ -100,11 +100,15 @@ export default defineComponent({
       console.log("crops prop watch", props.crops);
       cropStrying.value = "";
       get_crop_names_per_farm()
+
     })
     onMounted(()=>{
       if (props.crops) {
         console.log("crops prop mount", props.crops);
         get_crop_names_per_farm()
+        const charts = document.querySelectorAll(".highcharts-credits")
+        console.log("high charts",charts);
+        charts.forEach(item=>{item.classList.add("hidden")})
       }
     })
 

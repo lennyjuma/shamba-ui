@@ -78,8 +78,14 @@ watch(get_shamba_current,()=>{
   let farmId = get_shamba_current.value.id
   fetch_charts(page_size.value,farmId)
   fetchLatestData(farmId)
+
+
 })
 onMounted(()=>{
+
+  const charts = document.querySelectorAll(".highcharts-credits")
+  console.log("high charts",charts);
+  charts.forEach(item=>{item.classList.add("hidden")})
   document.getElementsByName("highcharts-credits").forEach(item=>{item.classList.add("hidden")})
 })
 

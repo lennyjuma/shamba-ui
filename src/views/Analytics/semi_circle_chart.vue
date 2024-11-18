@@ -189,6 +189,12 @@ export default {
         chartOptions.value.title.text = props.title_data + "<br>  " + props.series[0]
       }
 
+
+    })
+    onMounted(()=>{
+      const charts = document.querySelectorAll(".highcharts-credits")
+      console.log("high charts",charts);
+      charts.forEach(item=>{item.classList.add("hidden")})
     })
 
 
