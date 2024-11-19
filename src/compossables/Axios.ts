@@ -3,6 +3,7 @@ import axios, { AxiosError } from "axios";
 import router from "@/router";
 import { useMainStore } from '@/stores/shared/notificaton'
 import { useAuthStore } from '@/stores/auth'
+import { useNotificationStore } from '@/stores/notification'
 
 // by convention, composable function names start with "use"
 export async function useRestController(
@@ -11,7 +12,7 @@ export async function useRestController(
   data: object,
   msg?: string
 ) {
-  const notificationStore = useMainStore();
+  const notificationStore = useNotificationStore();
   const authStore = useAuthStore()
   const { toggleNotification } = notificationStore;
   const { set_loggedIn_to_false } = authStore;
@@ -49,9 +50,15 @@ export async function useRestController(
       await axios
         .get(url)
         .then((response) => {
+
           responseDTO.value = response;
         })
         .catch((error: AxiosError) => {
+          if (error.status === 502) {
+            console.log("response ++++++++++++++",error);
+            toggleNotification("error", "niiice")
+
+          }
           redirectToLoginAfter403(error);
         });
       break;
@@ -116,6 +123,7 @@ export async function useRestController(
       break;
     }
   }
+  console.log("responseDTO",responseDTO)
 
   return {
     responseDTO,

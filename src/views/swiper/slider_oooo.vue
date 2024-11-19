@@ -15,7 +15,7 @@
       @swiperprogress="onProgress"
       @swiperslidechange="onSlideChange"
   >
-    <swiper-slide v-for="cont in contents">
+    <swiper-slide v-for="cont in contents" :key="cont.img">
       <hero :img_url="cont.img" :description="cont.description"/>
     </swiper-slide>
   </swiper-container>

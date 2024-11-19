@@ -122,6 +122,12 @@ const {fetchShamba} = shambaStore
 onMounted(()=>{
   if (get_logged_status.value) {
     fetchShamba()
+    fetchShamba()
+    fetchShamba()
+    fetchShamba()
+    fetchShamba()
+    fetchShamba()
+    fetchShamba()
   }
 })
 
