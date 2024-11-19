@@ -23,9 +23,11 @@ export const useShambaStore = defineStore('shamba', () => {
   const addShamba = (payload:shambaT) => {
     const url = `${shamba_path}`;
     useRestController(url, "post", payload).then(()=>{
+      router.push("/profile")
+      // fetchShamba()
     }).catch((error: Error) => {
       console.log("error +++++++",error);
-      toggleNotification("ss",error.response.data.description);
+      toggleNotification("Error",error.response.data.description);
     })
 
   }
@@ -38,7 +40,11 @@ export const useShambaStore = defineStore('shamba', () => {
   }
   const deleteShamba = (farm_id:string) => {
     const url = `${shamba_path}?farmId=${farm_id}`;
-    useRestController(url, "delete", {})
+    useRestController(url, "delete", {}).then(()=>{
+      window.location.reload()
+      // router.push("/profile")
+      // fetchShamba()
+    })
 
   }
   const getShambaByID = ()  => {

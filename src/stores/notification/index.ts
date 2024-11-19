@@ -11,13 +11,7 @@ export const useNotificationStore = defineStore("notificationStore", () => {
   const msg = ref<string>("To be notification message");
   function toggleNotification(param: string, msgIn: string) {
     msg.value = msgIn;
-    // alert(param)
-    // alert("ll")
-    // notificationStatus.value = !notificationStatus.value;
-    // setTimeout(() => {
-    //   notificationStatus.value = !notificationStatus.value;
-    // }, 2500);
-    create_notification( msgIn)
+    create_notification( msgIn,param)
   }
 
   // Ensure the container exists
@@ -25,14 +19,14 @@ export const useNotificationStore = defineStore("notificationStore", () => {
     container.value = document.getElementById('source_page');
   });
 
-  function create_notification(msg:string) {
+  function create_notification(msg:string,param:string) {
     // Create a unique div for each child component
     const childContainer = document.createElement('div');
     childContainer.id = `child-${componentCount.value++}`;
     container.value.appendChild(childContainer);
 
     // Create a vnode for the ChildComponent
-    const vnode = createVNode(Notification, { msg: msg });
+    const vnode = createVNode(Notification, { msg: msg,status: param });
 
     // Render the vnode into the newly created container
     render(vnode, childContainer);

@@ -66,11 +66,11 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref, watch } from 'vue'
 import type { shambaResT } from '@/types'
 
-const shambaList = ref<shambaResT[]>([] as shambaResT[])
 
 let shambaStore = useShambaStore()
 const {fetchShamba,deleteShamba} = shambaStore
 const {get_shamba_res} = storeToRefs(shambaStore)
+const shambaList = ref<shambaResT[]>([] as shambaResT[])
 
 onMounted(()=>{
   fetchShamba()

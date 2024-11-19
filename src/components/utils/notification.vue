@@ -8,10 +8,11 @@
           <div class="p-4">
             <div class="flex items-start">
               <div class="shrink-0">
-                <CheckCircleIcon class="size-6 text-green-400" aria-hidden="true" />
+                <CheckCircleIcon v-if="props.status.toLowerCase() == 'success'" class="size-6 text-green-400" aria-hidden="true" />
+                <ExclamationCircleIcon v-if="props.status.toLowerCase() == 'error'" class="size-6 text-red-400" aria-hidden="true" />
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
-                <p class="text-sm font-medium text-gray-900">Successfully saved!</p>
+                <p class="text-sm font-medium capitalize text-gray-900">{{ props.status }} !</p>
                 <p class="mt-1 text-sm text-gray-500">{{props.msg}}.</p>
               </div>
               <div class="ml-4 flex shrink-0">
@@ -30,7 +31,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { CheckCircleIcon } from '@heroicons/vue/24/outline'
+import { CheckCircleIcon , ExclamationCircleIcon} from '@heroicons/vue/24/outline'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
 import { useNotificationStore } from '@/stores/notification/index.js'
 import { storeToRefs } from 'pinia'
@@ -38,17 +39,13 @@ let notificationStore = useNotificationStore()
 const {notificationStatus} = storeToRefs(notificationStore)
 const show = ref(true)
 const uuid = ref(Math.random())
-let props = defineProps(["msg"])
+let props = defineProps(["msg","status"])
 onMounted(function(){
   console.log("+++++++++++++++  " + uuid.value + "++++++++++++++++++",notificationStatus.value)
   if (notificationStatus){
     setTimeout(()=>{
-      show.value = false
       const child = document.getElementById(uuid.value);
-
-// Get the parent element of the child
       let parentElement = child.parentElement as HTMLDivElement
-      parentElement.classList.add('hidden');
       parentElement.remove()
     },3500)
   }

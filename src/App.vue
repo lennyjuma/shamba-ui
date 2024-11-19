@@ -6,7 +6,7 @@ useNotificationStore()
 </script>
 
 <template>
-  <div class="flex-col absolute top-0 right-1.5 z-10" id="source_page">
+  <div class="flex-col-reverse absolute top-0 right-1.5 z-10" id="source_page">
   </div>
 
   <Nav_bar/>
