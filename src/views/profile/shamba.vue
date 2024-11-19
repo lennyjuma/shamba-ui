@@ -8,7 +8,7 @@
         <div class="sm:col-span-3">
           <label for="farm_name" class="block text-sm font-medium leading-6 text-gray-900">Farm name</label>
           <div class="mt-2">
-            <input v-model="shamba_payload.name" type="text" name="farm_name" id="farm_name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input v-model="shamba_payload.name"  type="text" name="farm_name" id="farm_name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
 
@@ -56,7 +56,7 @@ const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { id: 2, name: 'Mixed cropping' }
 ]
-const shamba_payload = ref<shambaT>({} as shambaT)
+const shamba_payload = ref<shambaT>({name:"farmB"} as shambaT)
 const showDrop = ref(false)
 const Listen_selected_crops_event = (crops:string[]) => {
   console.log('Listen_selected_crops_event',crops)

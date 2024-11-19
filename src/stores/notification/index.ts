@@ -17,7 +17,7 @@ export const useNotificationStore = defineStore("notificationStore", () => {
     // setTimeout(() => {
     //   notificationStatus.value = !notificationStatus.value;
     // }, 2500);
-    create_notification( "Hello world " + componentCount.value)
+    create_notification( msgIn)
   }
 
   // Ensure the container exists

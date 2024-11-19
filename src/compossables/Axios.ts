@@ -54,11 +54,7 @@ export async function useRestController(
           responseDTO.value = response;
         })
         .catch((error: AxiosError) => {
-          if (error.status === 502) {
-            console.log("response ++++++++++++++",error);
-            toggleNotification("error", "niiice")
 
-          }
           redirectToLoginAfter403(error);
         });
       break;
@@ -73,6 +69,8 @@ export async function useRestController(
         })
         .catch(function (error: AxiosError) {
           redirectToLoginAfter403(error);
+          throw error;
+
         });
       break;
     }

@@ -1,6 +1,6 @@
 <template>
   <!-- Global notification live region, render this permanently at the end of the document -->
-  <div aria-live="assertive" class="pointer-events-none  w-96 flex items-end my-2 sm:items-start">
+  <div aria-live="assertive" :id="uuid" class="pointer-events-none px-3 sm:px-1 w-96 flex items-end my-2 sm:items-start">
     <div class="flex w-full flex-col items-center space-y-4 sm:items-end">
       <!-- Notification panel, dynamically insert this into the live region when it needs to be displayed -->
       <transition enter-active-class="transform ease-out duration-300 transition" enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" enter-to-class="translate-y-0 opacity-100 sm:translate-x-0" leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
@@ -37,12 +37,19 @@ import { storeToRefs } from 'pinia'
 let notificationStore = useNotificationStore()
 const {notificationStatus} = storeToRefs(notificationStore)
 const show = ref(true)
+const uuid = ref(Math.random())
 let props = defineProps(["msg"])
 onMounted(function(){
-  console.log("++++++++++++++++++++++++++++++++",notificationStatus.value)
+  console.log("+++++++++++++++  " + uuid.value + "++++++++++++++++++",notificationStatus.value)
   if (notificationStatus){
     setTimeout(()=>{
       show.value = false
+      const child = document.getElementById(uuid.value);
+
+// Get the parent element of the child
+      let parentElement = child.parentElement as HTMLDivElement
+      parentElement.classList.add('hidden');
+      parentElement.remove()
     },3500)
   }
 })

@@ -3,8 +3,10 @@ import { defineStore } from 'pinia'
 import type { shambaDropDownT, shambaResT, shambaT, shambaUpdateT } from '@/types'
 import router from '@/router'
 import { useRestController } from '@/compossables/Axios'
+import { useNotificationStore } from '@/stores/notification'
 
 export const useShambaStore = defineStore('shamba', () => {
+  const {toggleNotification} =  useNotificationStore()
   const shamba_path = "shamba"
   const shamba_res = ref<shambaResT[]>([] as shambaResT[])
   const current_shamba = ref<shambaDropDownT>({} as shambaDropDownT)
@@ -20,7 +22,11 @@ export const useShambaStore = defineStore('shamba', () => {
 
   const addShamba = (payload:shambaT) => {
     const url = `${shamba_path}`;
-    useRestController(url, "post", payload)
+    useRestController(url, "post", payload).then(()=>{
+    }).catch((error: Error) => {
+      console.log("error +++++++",error);
+      toggleNotification("ss",error.response.data.description);
+    })
 
   }
 
