@@ -49,7 +49,7 @@
               >Edit<span class="sr-only">, {{ shamba.name }}</span></router-link
               >
             </td> <td class="relative py-4 pl-3 text-right text-sm font-medium">
-              <button @click="deleteShamba(shamba.id)" class="text-indigo-600 hover:text-indigo-900"
+              <button @click="deleteShamba(shamba.id,shamba.name)" class="text-indigo-600 hover:text-indigo-900"
               >Delete<span class="sr-only">, {{ shamba.name }}</span></button>
             </td>
           </tr>

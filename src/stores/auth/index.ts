@@ -4,10 +4,13 @@ import type { loggedInT, loginT, registerT } from '@/types'
 import router from '@/router'
 import { useRestController } from '@/compossables/Axios'
 import { useShambaStore } from '@/stores/shamba'
+import { useNotificationStore } from '@/stores/notification'
 
 export const useAuthStore = defineStore('auth', () => {
   let shambaStore = useShambaStore()
+  let notificationStore = useNotificationStore()
   const {fetchShamba} = shambaStore
+  const {toggleNotification} = notificationStore
 
   const login_path = "auth/"
   const login_payload = ref<loginT>({} as loginT)
@@ -42,6 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     }).finally(()=>{
       fetchShamba()
+      toggleNotification("success","Logged in successfully.")
     });
 
   }
@@ -62,6 +66,8 @@ export const useAuthStore = defineStore('auth', () => {
       }
       router.push("/");
 
+    }).finally(()=>{
+      toggleNotification("success","Created account successfully.")
     });
 
   }

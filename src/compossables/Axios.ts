@@ -54,8 +54,8 @@ export async function useRestController(
           responseDTO.value = response;
         })
         .catch((error: AxiosError) => {
-
           redirectToLoginAfter403(error);
+          throw error;
         });
       break;
     }
@@ -65,7 +65,7 @@ export async function useRestController(
         .then(function (response) {
           responseDTO.value = response;
           console.log("Post response", response);
-          toggleNotification("success", `Created account !`);
+          // toggleNotification("success", `Created account !`);
         })
         .catch(function (error: AxiosError) {
           redirectToLoginAfter403(error);
@@ -81,10 +81,11 @@ export async function useRestController(
         .then(function (response) {
           responseDTO.value = response;
           console.log("Post response", response);
-          toggleNotification("success", `Created account !`);
+          // toggleNotification("success", `Created account !`);
         })
         .catch(function (error: AxiosError) {
           redirectToLoginAfter403(error);
+          throw error;
         });
       break;
     }
@@ -99,6 +100,7 @@ export async function useRestController(
         })
         .catch(function (error) {
           redirectToLoginAfter403(error);
+          throw error;
         });
       break;
     }
@@ -113,6 +115,7 @@ export async function useRestController(
         })
         .catch(function (error) {
           redirectToLoginAfter403(error);
+          throw error;
         });
       break;
     }

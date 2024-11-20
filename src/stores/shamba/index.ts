@@ -24,6 +24,7 @@ export const useShambaStore = defineStore('shamba', () => {
     const url = `${shamba_path}`;
     useRestController(url, "post", payload).then(()=>{
       router.push("/profile")
+      toggleNotification("success",`${payload.name} has been successfully added`);
       // fetchShamba()
     }).catch((error: Error) => {
       console.log("error +++++++",error);
@@ -38,10 +39,12 @@ export const useShambaStore = defineStore('shamba', () => {
     useRestController(url, "update", payload)
 
   }
-  const deleteShamba = (farm_id:string) => {
+  const deleteShamba = (farm_id:string,farm_name:string) => {
     const url = `${shamba_path}?farmId=${farm_id}`;
     useRestController(url, "delete", {}).then(()=>{
       window.location.reload()
+
+      toggleNotification("success",`${payload.name} has been successfully deleted`);
       // router.push("/profile")
       // fetchShamba()
     })
