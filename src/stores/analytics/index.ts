@@ -48,9 +48,8 @@ export const useChartsStore = defineStore('charts_store', () => {
   }
 
   const appendURL = (url:string) => {
-    console.log("get_shamba_current",get_shamba_current.value);
-    if(JSON.stringify(get_shamba_current.value) !== "{}"){
-      url = `${url}&farm_id=${get_shamba_current.value.id}`
+    if(localStorage.getItem("active_shamba_id")){
+      url = `${url}&farm_id=${localStorage.getItem("active_shamba_id")}`
     }
     if(get_start_date.value !== undefined){
       url = `${url}&start=${get_start_date.value}`

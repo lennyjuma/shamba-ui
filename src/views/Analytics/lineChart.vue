@@ -75,7 +75,7 @@ export default defineComponent({
           let data = this.series.data
           let map = data.map(function (item:any) {return item.y; })
           let index = map.indexOf(this.y)
-          console.log(index);
+          //console.log(index);
           let category = props.categories[index]
           return `Date: <b>${category}</b><br/>Crop: <b>${cropStrying.value}</b><br/>Property: <b>${this.series.name}</b><br/>Value: <b>${this.y}</b>`;
         }
@@ -93,21 +93,21 @@ export default defineComponent({
       chartOptions.value.series = props.series;
       // chartOptions.value.xAxis.categories = props.categories;
       const charts = document.querySelectorAll(".highcharts-credits")
-      console.log("high charts",charts);
+      //console.log("high charts",charts);
       charts.forEach(item=>{item.classList.add("hidden")})
     })
     watch(() => props.crops, (newTitle) => {
-      console.log("crops prop watch", props.crops);
+      //console.log("crops prop watch", props.crops);
       cropStrying.value = "";
       get_crop_names_per_farm()
 
     })
     onMounted(()=>{
       if (props.crops) {
-        console.log("crops prop mount", props.crops);
+        //console.log("crops prop mount", props.crops);
         get_crop_names_per_farm()
         const charts = document.querySelectorAll(".highcharts-credits")
-        console.log("high charts",charts);
+        //console.log("high charts",charts);
         charts.forEach(item=>{item.classList.add("hidden")})
       }
     })

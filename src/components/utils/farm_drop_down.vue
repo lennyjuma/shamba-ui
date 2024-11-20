@@ -43,21 +43,34 @@ let shambaStore = useShambaStore()
 const {set_current_shamba} = shambaStore
 
 
-const select_item = (item:shambaDropDownT) => {
-  console.log(item)
-  emits("select_item", item)
+function set_query_farm_id(item: shambaDropDownT) {
   router.push({
     name: router.currentRoute.value.name, // Use the name of the route
     query: {
-      farm_id:item.id // Set your desired query params here
+      farm_id: item.id // Set your desired query params here
     }
   })
+}
 
+const select_item = (item:shambaDropDownT) => {
+  console.log(item)
+  emits("select_item", item)
+  set_query_farm_id(item)
   set_current_shamba(item)
 }
 watch( ()=> props.items ,() =>{
-  console.log( "post malone",props.items[0])
-  selected.value = props.items[0]
+  console.log("watch shamba ********************")
+  let active_shamba_name = localStorage.getItem("active_shamba_name")
+  let active_shamba_id = localStorage.getItem("active_shamba_id")
+  if (active_shamba_name){
+    const index = props.items.findIndex(obj => obj.name === active_shamba_name);
+    selected.value = props.items[index]
+    setTimeout(function() {
+      set_query_farm_id({ id:active_shamba_id,name:active_shamba_name })
+    },1000)
+  }else {
+    selected.value = props.items[0]
+  }
 })
 // onMounted(() =>{
 //   console.log( "post malone",props.items[0])

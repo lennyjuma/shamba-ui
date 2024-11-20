@@ -122,12 +122,6 @@ const {fetchShamba} = shambaStore
 onMounted(()=>{
   if (get_logged_status.value) {
     fetchShamba()
-    fetchShamba()
-    fetchShamba()
-    fetchShamba()
-    fetchShamba()
-    fetchShamba()
-    fetchShamba()
   }
 })
 
@@ -153,7 +147,6 @@ watch(()=>router.currentRoute.value.name,()=>{ //show farm drop down in tables a
     })
   }
 
-  // fetchShamba()
   console.log("showFarmDropDown",farm_drops)
 })
 </script>

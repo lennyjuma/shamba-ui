@@ -31,6 +31,7 @@ export async function useRestController(
   }
 
 
+
   function redirectToLoginAfter403(error: AxiosError<unknown, any>) {
     if (error.response && error.response.status === 403) {
       console.log("Received a 403 response. Redirecting to login page...");
@@ -109,9 +110,7 @@ export async function useRestController(
         .delete(url, data)
         .then(function (response) {
           responseDTO.value = response;
-          if (response.status === 200) {
-            toggleNotification("success", `${msg} deleted !`);
-          }
+
         })
         .catch(function (error) {
           redirectToLoginAfter403(error);

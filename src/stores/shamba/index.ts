@@ -29,6 +29,10 @@ export const useShambaStore = defineStore('shamba', () => {
     }).catch((error: Error) => {
       console.log("error +++++++",error);
       toggleNotification("Error",error.response.data.description);
+    }).finally(function() {
+      setTimeout(function() {
+        fetchShamba()
+      },2500)
     })
 
   }
@@ -43,12 +47,10 @@ export const useShambaStore = defineStore('shamba', () => {
     const url = `${shamba_path}?farmId=${farm_id}`;
     useRestController(url, "delete", {}).then(()=>{
       toggleNotification("success",`${farm_name} has been successfully deleted`);
-      // router.push("/profile")
-      // fetchShamba()
     }).finally(()=>{
       setTimeout(function() {
         fetchShamba()
-      },2500)
+      },2000)
 
     })
 
@@ -61,6 +63,8 @@ export const useShambaStore = defineStore('shamba', () => {
 
   const set_current_shamba = (payload:shambaDropDownT) => {
     current_shamba.value = payload
+    localStorage.setItem("active_shamba_name", payload.name as string);
+    localStorage.setItem("active_shamba_id", payload.id as string);
 
   }
   const fetchShamba = () => {
@@ -68,8 +72,8 @@ export const useShambaStore = defineStore('shamba', () => {
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       shamba_res.value= responseDTO.value.data;
-      current_shamba.value.name = shamba_res.value[0].name;
-      current_shamba.value.id = shamba_res.value[0].id;
+      // current_shamba.value.name = shamba_res.value[0].name;
+      // current_shamba.value.id = shamba_res.value[0].id;
     });
 
   }
