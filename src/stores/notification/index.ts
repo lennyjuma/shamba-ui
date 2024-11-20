@@ -4,9 +4,9 @@ import Notification from '@/components/utils/notification.vue'
 
 export const useNotificationStore = defineStore("notificationStore", () => {
   const notificationStatus = ref(false);
-  const container = ref(null);
+  const container = ref(null) as any  ;
   const componentCount = ref(0);
-  let getnotificationStatus = computed(()=>{notificationStatus.value })
+  const getnotificationStatus = computed(()=>notificationStatus.value )
   const count = ref(0);
   const msg = ref<string>("To be notification message");
   function toggleNotification(param: string, msgIn: string) {
@@ -16,7 +16,7 @@ export const useNotificationStore = defineStore("notificationStore", () => {
 
   // Ensure the container exists
   onMounted(() => {
-    container.value = document.getElementById('source_page');
+    container.value = document.getElementById('source_page') as HTMLDivElement ;
   });
 
   function create_notification(msg:string,param:string) {
@@ -30,11 +30,11 @@ export const useNotificationStore = defineStore("notificationStore", () => {
 
     // Render the vnode into the newly created container
     render(vnode, childContainer);
-    if (notificationStatus){
-      setTimeout(()=>{
-        // toggleNotification("ggg","kk")
-      },1000)
-    }
+    // if (notificationStatus){
+    //   setTimeout(()=>{
+    //     // toggleNotification("ggg","kk")
+    //   },1000)
+    // }
   }
 
   return {  msg, getnotificationStatus, notificationStatus, toggleNotification };

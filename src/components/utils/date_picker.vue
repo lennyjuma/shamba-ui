@@ -10,9 +10,7 @@
 import { ref, onMounted, watch, defineEmits } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { Listbox, ListboxLabel } from '@headlessui/vue'
 import { useRangeDateStore } from '@/stores/date/index'
-import * as readline from 'node:readline'
 
 let rangeDateStore = useRangeDateStore()
 const {set_date} = rangeDateStore
@@ -64,4 +62,30 @@ watch(date, ()=>{
   console.log("Date bla bla", date[0])
 
 })*/
+onMounted(()=>{
+
+  if(props.name.toLowerCase() == "start date"){
+    const start_date = localStorage.getItem("start_date") as string
+    getDate(start_date)
+  }else {
+    const end_date = localStorage.getItem("end_date")  as string
+    getDate(end_date)
+  }
+})
+const getDate = (dateString:string) => {
+  if (dateString !== null || dateString !== undefined ) {
+  const [datePart, timePart] = dateString.split(' ');
+
+// Split the date into day, month, and year
+  const [day, month, year] = datePart.split('/').map(Number);
+
+// Split the time into hours and minutes
+  const [hours, minutes] = timePart.split(':').map(Number);
+
+// Create the Date object
+  const dateR = new Date(year, month - 1, day, hours, minutes);
+  date.value = dateR;
+
+  }
+}
 </script>

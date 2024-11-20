@@ -28,6 +28,7 @@ export const useShambaStore = defineStore('shamba', () => {
       // fetchShamba()
     }).catch((error: Error) => {
       console.log("error +++++++",error);
+      // @ts-ignore
       toggleNotification("Error",error.response.data.description);
     }).finally(function() {
       setTimeout(function() {
