@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <h1 class="block text-sm font-medium leading-6 text-gray-900">{{ props.name }}</h1>
-    <VueDatePicker class=" mt-1 " :is-24="true" time-picker-inline v-model="date" :placeholder="`Pick ${props.name.toLowerCase()}`" @update:model-value="handleDate"></VueDatePicker>
+    <VueDatePicker class=" mt-1 " @date-update="handleDate" @cleared="clearDate()" :is-24="true" time-picker-inline v-model="date" :placeholder="`Pick ${props.name.toLowerCase()}`" ></VueDatePicker>
   </div>
 
 </template>
@@ -73,7 +73,7 @@ onMounted(()=>{
   }
 })
 const getDate = (dateString:string) => {
-  if (dateString !== null || dateString !== undefined ) {
+  if (dateString !== null ) {
   const [datePart, timePart] = dateString.split(' ');
 
 // Split the date into day, month, and year
@@ -87,5 +87,13 @@ const getDate = (dateString:string) => {
   date.value = dateR;
 
   }
+}
+function clearDate(){
+  if(props.name.toLowerCase() == "start date"){
+    localStorage.removeItem("start_date")
+  }else {
+    localStorage.removeItem("end_date")
+  }
+
 }
 </script>
