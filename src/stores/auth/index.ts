@@ -41,11 +41,14 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem("user_id", login_res.value.id as string);
         token.value = "jj"
         router.push("/");
+
+        toggleNotification("success","Logged in successfully.")
       }
 
+    }).catch((error: Error)=>{
+      toggleNotification("error","Please check your credentials")
     }).finally(()=>{
       fetchShamba()
-      toggleNotification("success","Logged in successfully.")
     });
 
   }
@@ -66,10 +69,9 @@ export const useAuthStore = defineStore('auth', () => {
       }
       router.push("/");
 
-    }).finally(()=>{
       toggleNotification("success","Created account successfully.")
-    });
 
+    })
   }
   const set_loggedIn_to_false = () =>{
     loggedIn.value = false;
