@@ -42,11 +42,14 @@ export const useShambaStore = defineStore('shamba', () => {
   const deleteShamba = (farm_id:string,farm_name:string) => {
     const url = `${shamba_path}?farmId=${farm_id}`;
     useRestController(url, "delete", {}).then(()=>{
-      window.location.reload()
-
-      toggleNotification("success",`${payload.name} has been successfully deleted`);
+      toggleNotification("success",`${farm_name} has been successfully deleted`);
       // router.push("/profile")
       // fetchShamba()
+    }).finally(()=>{
+      setTimeout(function() {
+        fetchShamba()
+      },2500)
+
     })
 
   }

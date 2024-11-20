@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem("user_id", login_res.value.id as string);
         token.value = "jj"
         router.push("/");
-
         toggleNotification("success","Logged in successfully.")
       }
 
