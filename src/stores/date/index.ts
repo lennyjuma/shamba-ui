@@ -12,11 +12,15 @@ export const useRangeDateStore = defineStore('range_date', () => {
   const get_end_date = computed(() => end_date.value);
   const set_date = (date: string, state:string) => {
     if (state === 'start') {
-      localStorage.setItem("start_date", date as string);
+      if (date !== "clear") {
+        localStorage.setItem('start_date', date as string)
+      }
       start_date.value = date
       range_date.value.start = date
     }else {
-      localStorage.setItem("end_date", date as string);
+      if (date !== "clear") {
+        localStorage.setItem('end_date', date as string)
+      }
       end_date.value = date
       range_date.value.end = date
     }

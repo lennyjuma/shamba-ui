@@ -51,11 +51,11 @@ export const useChartsStore = defineStore('charts_store', () => {
     if(localStorage.getItem("active_shamba_id")){
       url = `${url}&farm_id=${localStorage.getItem("active_shamba_id")}`
     }
-    if(get_start_date.value !== undefined){
-      url = `${url}&start=${get_start_date.value}`
+    if(localStorage.getItem("start_date") as string){
+      url = `${url}&start=${localStorage.getItem("start_date") as string}`
     }
-    if(get_end_date.value !== undefined){
-      url = `${url}&end=${get_end_date.value}`
+    if(localStorage.getItem("end_date") as string){
+      url = `${url}&end=${localStorage.getItem("end_date") as string}`
     }
     return url;
   };

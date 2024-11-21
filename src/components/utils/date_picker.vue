@@ -91,8 +91,10 @@ const getDate = (dateString:string) => {
 function clearDate(){
   if(props.name.toLowerCase() == "start date"){
     localStorage.removeItem("start_date")
+    set_date("clear",props.state)
   }else {
     localStorage.removeItem("end_date")
+    set_date("clear",props.state)
   }
 
 }
