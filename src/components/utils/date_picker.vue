@@ -92,10 +92,13 @@ function clearDate(){
   if(props.name.toLowerCase() == "start date"){
     localStorage.removeItem("start_date")
     set_date("clear",props.state)
+    emits("range","ss");
   }else {
     localStorage.removeItem("end_date")
     set_date("clear",props.state)
+    emits("range","ss");
   }
+
 
 }
 </script>
