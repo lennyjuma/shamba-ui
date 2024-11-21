@@ -10,7 +10,7 @@
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
             <router-link  to="/" :class="[getRoute() == 'Home' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Home</router-link>
             <router-link to="/product" :class="[getRoute() == 'product' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Product</router-link>
-            <router-link to="/blogs" :class="[getRoute() == 'blog' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Blogs</router-link>
+<!--            <router-link to="/blogs" :class="[getRoute() == 'blog' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Blogs</router-link>-->
             <router-link to="/contact" :class="[getRoute() == 'contact' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Contact us</router-link>
             <router-link to="/charts" v-if="get_logged_status" :class="[getRoute() == 'Analytics' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Charts</router-link>
             <router-link to="/tables" v-if="get_logged_status" :class="[getRoute() == 'Tables' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Tables</router-link>
@@ -68,7 +68,7 @@
         <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
         <router-link as="router-link" to="/" class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">Home</router-link>
         <router-link as="router-link" to="/product" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Product</router-link>
-        <router-link as="router-link" to="/blogs" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Blogs</router-link>
+<!--        <router-link as="router-link" to="/blogs" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Blogs</router-link>-->
         <router-link as="router-link" to="/contact" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Contact us</router-link>
         <router-link as="router-link" to="/charts" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Charts</router-link>
         <router-link as="router-link" to="/tables" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Tables</router-link>
