@@ -4,17 +4,17 @@
       <div class="flex h-16 justify-between">
         <div class="flex justify-start">
           <div class="flex hidden lg:inline-block my-auto flex-shrink-0 items-center">
-            <h1 class="text-indigo-600 uppercase">Shamba lab</h1>
+            <router-link to="/" class="text-indigo-600 uppercase">Shamba lab</router-link>
           </div>
           <div class="hidden pl-5 sm:ml-6 sm:flex sm:space-x-8">
             <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-            <router-link to="/" class="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900">Home</router-link>
-            <router-link to="/product" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Product</router-link>
-            <router-link to="/blogs" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Blogs</router-link>
-            <router-link to="/contact" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Contact us</router-link>
-            <router-link to="/charts" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Charts</router-link>
-            <router-link to="/tables" v-if="get_logged_status" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Tables</router-link>
-            <router-link to="/faq" class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">FAQ</router-link>
+            <router-link  to="/" :class="[getRoute() == 'Home' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Home</router-link>
+            <router-link to="/product" :class="[getRoute() == 'product' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Product</router-link>
+            <router-link to="/blogs" :class="[getRoute() == 'blog' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Blogs</router-link>
+            <router-link to="/contact" :class="[getRoute() == 'contact' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Contact us</router-link>
+            <router-link to="/charts" v-if="get_logged_status" :class="[getRoute() == 'Analytics' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Charts</router-link>
+            <router-link to="/tables" v-if="get_logged_status" :class="[getRoute() == 'Tables' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">Tables</router-link>
+            <router-link to="/faq" :class="[getRoute() == 'faq' ? 'border-indigo-500' : 'border-transparent','inline-flex  items-center border-b-2  px-1 pt-1 text-sm font-medium text-gray-900']">FAQ</router-link>
           </div>
 
         </div>
@@ -28,22 +28,22 @@
           <!-- Profile dropdown -->
           <Menu as="div" class="relative ml-3">
             <div>
-              <MenuButton class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <MenuButton @click="openMenu = true" class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
                 <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
               </MenuButton>
             </div>
-            <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+            <transition  enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
               <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <MenuItem v-slot="{ active }">
-                  <router-link to="/profile" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Your farms</router-link>
+                <MenuItem  v-slot="{ active }">
+                  <button @click="goToFarms()" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full text-left py-2 text-sm text-gray-700']">Your farm</button>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
+                  <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2  text-sm text-gray-700']">Settings</a>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
-                  <button @click="signOut()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</button>
+                  <button @click="signOut()" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full py-2 text-left text-sm text-gray-700']">Sign out</button>
                 </MenuItem>
               </MenuItems>
             </transition>
@@ -125,6 +125,8 @@ onMounted(()=>{
   }
 })
 
+const openMenu = ref(false)
+
 function signOut(): void {
   localStorage.removeItem("access_token");
   set_loggedIn_to_false()
@@ -133,6 +135,9 @@ const getRoute= ()=>{
   const route_name = router.currentRoute.value.name
   console.log("route_name",route_name)
   return route_name
+}
+const goToFarms= ()=>{
+  router.push("/profile")
 }
 watch(()=>router.currentRoute.value.name,()=>{ //show farm drop down in tables and charts
   const farm_drops = document.querySelectorAll(".farm_id")
