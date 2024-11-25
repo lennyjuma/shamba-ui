@@ -39,7 +39,6 @@ export async function useRestController(
       axios.defaults.headers.common["Authorization"] = "None";
       // router.push("/");
       set_loggedIn_to_false()
-      router.replace("/")
     } else {
       // console.log("Error:", error.message);
       console.log("Error:");

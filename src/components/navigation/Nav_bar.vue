@@ -128,7 +128,6 @@ onMounted(()=>{
 const openMenu = ref(false)
 
 function signOut(): void {
-  localStorage.removeItem("access_token");
   set_loggedIn_to_false()
 }
 const getRoute= ()=>{

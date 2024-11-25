@@ -7,8 +7,8 @@ import { useShambaStore } from '@/stores/shamba'
 import { useNotificationStore } from '@/stores/notification'
 
 export const useAuthStore = defineStore('auth', () => {
-  let shambaStore = useShambaStore()
-  let notificationStore = useNotificationStore()
+  const shambaStore = useShambaStore()
+  const notificationStore = useNotificationStore()
   const {fetchShamba} = shambaStore
   const {toggleNotification} = notificationStore
 
@@ -20,9 +20,10 @@ export const useAuthStore = defineStore('auth', () => {
   const access_token = ref<string>();
 
   const get_login_res = computed(() => login_res.value)
+  const get_token = computed(() => token.value != null)
 
 
-  const get_logged_status= computed(() => /*loggedIn.value ||*/ token.value != null)
+  const get_logged_status= computed(() => loggedIn.value || get_token)
 
   function login(payload:loginT) {
     const url = `${login_path}login`;
@@ -73,6 +74,8 @@ export const useAuthStore = defineStore('auth', () => {
     })
   }
   const set_loggedIn_to_false = () =>{
+    token.value = null
+    localStorage.removeItem("access_token");
     loggedIn.value = false;
     router.push("/"); // redirect to home after log out to make sure charts and tables are hidden
   }
