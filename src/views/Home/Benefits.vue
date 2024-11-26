@@ -8,12 +8,13 @@
       <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-8 lg:max-w-none">
         <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
           <div v-for="feature in features" :key="feature.name" class="flex flex-col">
-            <dt class="text-base font-semibold leading-7 text-gray-900">
+            <div class="text-base font-semibold leading-7 text-gray-900 flex sm:flex-col">
               <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
+                <component :is="feature.icon" class="h-6 w-6 te
+                xt-white" aria-hidden="true" />
               </div>
-              {{ feature.name }}
-            </dt>
+              <div class="ml-2  sm:ml-0">{{ feature.name }}</div>
+            </div>
             <dd class="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-600">
               <p class="flex-auto">{{ feature.description }}</p>
               <p class="mt-6 hidden">

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white">
-    <div class="mx-auto mt-2 lg:mt-5 max-w-7xl py-10">
+    <div class="mx-auto mt-2 lg:mt-5 max-w-7xl py-10 px-6 py-6 sm:py-12 lg:px-8">
       <div class="mx-auto max-w-lg md:grid md:max-w-none md:grid-rows-2 md:gap-8">
         <div>
           <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl sm:tracking-tight">Sales Support</h2>
@@ -10,7 +10,7 @@
           <div class="mt-9">
             <div class="flex">
               <div class="flex-shrink-0">
-                <PhoneIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
+                <PhoneIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
               </div>
               <div class="ml-3 text-base text-gray-500">
                 <p>+25470523645</p>
@@ -45,7 +45,7 @@
           <div class="mt-9">
             <div class="flex">
               <div class="flex-shrink-0">
-                <PhoneIcon class="h-6 w-6 text-gray-400" aria-hidden="true" />
+                <PhoneIcon class="h-8 w-8 h text-gray-400" aria-hidden="true" />
               </div>
               <div class="ml-3 text-base text-gray-500">
                 <p>+254706754174</p>
