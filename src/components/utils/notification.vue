@@ -13,7 +13,7 @@
               </div>
               <div class="ml-3 w-0 flex-1 pt-0.5">
                 <p class="text-sm font-medium capitalize text-gray-900">{{ props.status }} !</p>
-                <p class="mt-1 text-sm capitalize text-gray-500">{{props.msg}}.</p>
+                <p class="mt-1 text-sm normal-case text-gray-500">{{props.msg}}.</p>
               </div>
               <div class="ml-4 flex shrink-0">
                 <button type="button" @click="show = false" class="inline-flex rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

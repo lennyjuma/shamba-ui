@@ -37,7 +37,7 @@ import { useShambaStore } from '@/stores/shamba'
 
 let props = defineProps(["title","items"])
 let emits = defineEmits(["select_item"])
-const selected = ref<shambaDropDownT>({} as shambaDropDownT)
+const selected = ref<shambaDropDownT>({name:"Please add farms"} as shambaDropDownT)
 
 let shambaStore = useShambaStore()
 const {set_current_shamba} = shambaStore
@@ -68,8 +68,10 @@ watch( ()=> props.items ,() =>{
     setTimeout(function() {
       set_query_farm_id(active_shamba_id)
     },1000)
-  }else {
+  }else if(props.items.length > 0){
     selected.value = props.items[0]
+  }else {
+    selected.value = {name: "Please add farm"} as shambaDropDownT
   }
 })
 // onMounted(() =>{

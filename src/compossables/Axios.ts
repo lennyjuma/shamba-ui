@@ -32,16 +32,23 @@ export async function useRestController(
 
 
 
-  function redirectToLoginAfter403(error: AxiosError<unknown, any>) {
+  function redirectToLoginAfter403(error: AxiosError<any, any>) {
     if (error.response && error.response.status === 403) {
       console.log("Received a 403 response. Redirecting to login page...");
       localStorage.removeItem("access_token");
       axios.defaults.headers.common["Authorization"] = "None";
       // router.push("/");
       set_loggedIn_to_false()
-    } else {
+    }
+    /*if (error.response && error.response.status === 400) {
+      const error_description = error.response.data.description
+      console.log("Received a 400 bad request. Redirecting to login page...", error_description);
+      if(error_description == "You do not have any farms yet") {
+        toggleNotification('error', error_description)
+      }
+    } */else {
       // console.log("Error:", error.message);
-      console.log("Error:");
+      console.log("Error: " + JSON.stringify(error) );
     }
   }
 

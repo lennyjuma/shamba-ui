@@ -5,11 +5,14 @@ import { useRestController } from '@/compossables/Axios'
 import router from '@/router'
 import { useRangeDateStore } from '@/stores/date'
 import { useShambaStore } from '@/stores/shamba'
+import { useNotificationStore } from '@/stores/notification'
+import type { AxiosError } from 'axios'
 
 export const useChartsStore = defineStore('charts_store', () => {
 
   const rangeDateStore = useRangeDateStore()
   const shambaStore = useShambaStore()
+  const { toggleNotification } = useNotificationStore()
   const {get_end_date,get_start_date} = storeToRefs(rangeDateStore)
   const {get_shamba_current} = storeToRefs(shambaStore)
 
@@ -26,6 +29,15 @@ export const useChartsStore = defineStore('charts_store', () => {
     useRestController(url, "get", {}).then(({ responseDTO }) => {
       // @ts-ignore
       soil_chart.value= responseDTO.value.data;
+    }).catch((error: AxiosError<any,any>) => {
+      if (error.response && error.response.status === 400) {
+        const error_description = error.response.data.description
+        console.log("Received a 400 bad request. Redirecting to login page...", error_description);
+        if(error_description == "You do not have any farms yet") {
+          toggleNotification('error', "Please add a farm")
+          router.push("/profile")
+        }
+      }
     });
     return soil_chart.value
 

@@ -11,6 +11,5 @@ export const useContactUSStore = defineStore('contact_us', () => {
         const url = `${contact_us_path}`;
     useRestController(url, "post", contact)
   }
-
   return { get_contact_us, post_contact_us }
 })

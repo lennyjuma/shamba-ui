@@ -5,11 +5,15 @@ import { useRestController } from '@/compossables/Axios'
 import router from '@/router'
 import { useRangeDateStore } from '@/stores/date'
 import { useShambaStore } from '@/stores/shamba'
+import type { AxiosError } from 'axios'
+import { useNotificationStore } from '@/stores/notification'
 
 export const useAirStore = defineStore('air_store', () => {
 
   const rangeDateStore = useRangeDateStore()
   const shambaStore = useShambaStore()
+  const notificationStore = useNotificationStore()
+  const {toggleNotification} = notificationStore
   const {get_end_date,get_start_date} = storeToRefs(rangeDateStore)
   const {get_shamba_current} = storeToRefs(shambaStore)
   const path = 'air'
@@ -36,6 +40,15 @@ export const useAirStore = defineStore('air_store', () => {
         first: response.first as boolean,
         last: response.last as boolean,
       };
+    }).catch((error: AxiosError<any,any>) => {
+      if (error.response && error.response.status === 400) {
+        const error_description = error.response.data.description
+        console.log("Received a 400 bad request. Redirecting to login page...", error_description);
+        if(error_description == "You do not have any farms yet") {
+          toggleNotification('error', "Please add a farm")
+          router.push("/profile")
+        }
+      }
     });
   }
 
