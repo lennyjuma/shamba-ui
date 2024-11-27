@@ -10,8 +10,7 @@
           <div v-for="feature in features" :key="feature.name" class="flex flex-col">
             <div class="text-base font-semibold leading-7 text-gray-900 flex sm:flex-col">
               <div class="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                <component :is="feature.icon" class="h-6 w-6 te
-                xt-white" aria-hidden="true" />
+                <component :is="feature.icon" class="h-6 w-6 text-white" aria-hidden="true" />
               </div>
               <div class="ml-2  sm:ml-0">{{ feature.name }}</div>
             </div>
