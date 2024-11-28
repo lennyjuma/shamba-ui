@@ -1,5 +1,5 @@
 <template>
-  <div :id="title" class="`mx-auto max-w-9xl px-6 lg:px-8`">
+  <div :id="title" class="mx-auto max-w-9xl px-0 lg:px-8">
     <drop_down @select_item="args => select_item_event(args)" :items="chart_type" :title="`Chart type`"/>
     <highcharts :options="chartOptions"></highcharts>
   </div>

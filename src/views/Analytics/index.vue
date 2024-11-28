@@ -98,7 +98,7 @@ onMounted(()=>{
 
       <drop_down v-if="current_tab !== 2" @select_item="args => select_item_event(args)" :items="frequency" :title="`Frequency`" class=" md:ml-auto"/>
 <!--      <farm_drop_down @select_item="args => changed_farm_event(args)  " :items="get_shamba_drop_down" :title="`Farm`" class="md:ml-auto"/>-->
-      <date_picker :state="`start`" :name="`Start date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto pr-4 my-2 md:my-0"/>
+      <date_picker :state="`start`" :name="`Start date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto pr-4 my-2  md:my-0"/>
       <date_picker :state="`end`" :name="`End date`" v-if="current_tab !== 2" @range=" (args) => range_date(args)" class="md:mt-auto pr-4 my-2 md:my-0"/>
       <div v-if="current_tab == 2" class="flex  md:space-x-2 mt-2 sm:mt-0">
         <div v-for="(mimea,idx) in getLatestSoil.shamba.farmCrops" :key="mimea.crop.id"

@@ -24,6 +24,7 @@ export interface airT {
   temperature: string
   crop: string
   deviceId: string
+  shamba: shambaResT
 }
 
 export type paginationT = {
