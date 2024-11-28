@@ -135,7 +135,7 @@ export default {
         type: 'pie'
       },
       title: {
-        text:props.title_data.toString().toUpperCase() + "<br>  " + props.series[0] ,
+        text:props.title_data + "<br>  " + props.series[0] ,
         align: 'center',
         verticalAlign: 'middle',
         y: 60
