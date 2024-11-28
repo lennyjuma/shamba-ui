@@ -90,8 +90,9 @@ export async function useRestController(
           console.log("Post response", response);
           // toggleNotification("success", `Created account !`);
         })
-        .catch(function (error: AxiosError) {
+        .catch(function (error: AxiosError<any,any>) {
           redirectToLoginAfter403(error);
+          // alert("kkkk")
           throw error;
         });
       break;

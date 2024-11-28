@@ -5,6 +5,7 @@ import router from '@/router'
 import { useRestController } from '@/compossables/Axios'
 import { useShambaStore } from '@/stores/shamba'
 import { useNotificationStore } from '@/stores/notification'
+import { AxiosError } from 'axios'
 
 export const useAuthStore = defineStore('auth', () => {
   const shambaStore = useShambaStore()
@@ -74,6 +75,8 @@ export const useAuthStore = defineStore('auth', () => {
 
       toggleNotification("success","Created account successfully.")
 
+    }).catch((error: Error)=>{
+      toggleNotification("error",error.response.data.description as string);
     })
   }
   const set_loggedIn_to_false = () =>{
