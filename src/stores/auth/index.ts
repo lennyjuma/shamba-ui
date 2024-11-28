@@ -66,6 +66,8 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem("access_token");
         localStorage.setItem("access_token", access_token.value as string);
         localStorage.setItem("user_full_name" , login_res.value.fullName as string);
+        localStorage.removeItem("active_shamba_id");
+        localStorage.removeItem("active_shamba_name");
         localStorage.setItem("user_email", login_res.value.email as string);
       }
       router.push("/profile");
@@ -77,6 +79,8 @@ export const useAuthStore = defineStore('auth', () => {
   const set_loggedIn_to_false = () =>{
     token.value = null
     localStorage.removeItem("access_token");
+    localStorage.removeItem("active_shamba_id");
+    localStorage.removeItem("active_shamba_name");
     loggedIn.value = false;
     router.push("/"); // redirect to home after log out to make sure charts and tables are hidden
   }
