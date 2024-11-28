@@ -30,6 +30,9 @@ export default {
         }else if( value >= 1501 && value <= 2000){
           color = 'green'
           value_format = 90
+        }else if( value >= 3000){
+          color = 'green'
+          value_format = 98
         }
       }
       else if (property === 'Temperature' ||property === 'temperature' || property === 'temp' ) {
@@ -118,6 +121,7 @@ export default {
       return {
         name: property,
         y: value_format,
+        // y: value,
         color: color // Change color of this segment
       }
 
@@ -131,13 +135,13 @@ export default {
         type: 'pie'
       },
       title: {
-        text:props.title_data + "<br>  " + props.series[0] ,
+        text:props.title_data.toString().toUpperCase() + "<br>  " + props.series[0] ,
         align: 'center',
         verticalAlign: 'middle',
         y: 60
       },
       tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: `${props.title_data}`
       },
       accessibility: {
         point: {
@@ -183,6 +187,7 @@ export default {
         let chart_data = chartOptions.value.series[0].data
         chart_data[0] = color_scheme(props.series[0], props.series[1])
         chart_data[1].y = 100 - color_scheme(props.series[0], props.series[1]).y
+        // chart_data[1].y = props.series[1]
         console.log("series prop", chart_data );
       }
       if (chartOptions.value.title !== undefined){
