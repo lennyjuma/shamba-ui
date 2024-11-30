@@ -40,10 +40,10 @@
               </div>
               <div class="font-semibold"> {{ soil.reading_date }} </div>
             </div>
-            <div class="mt-1 flex flex-col text-gray-500 sm:hidden md:block lg:hidden">
-              <div>Nitrogen - {{ soil.conductivity }} µS/cm</div>
-              <div>Phosphorus - {{ soil.moisture }} %</div>
-              <div>Potassium - {{ soil.temperature }} °C</div>
+            <div class="mt-1 text-gray-500  hidden md:block lg:hidden">
+              <div>Nitrogen ********** - {{ soil.nitrogen }} µS/cm</div>
+              <div>Phosphorus - {{ soil.phosphorous }} %</div>
+              <div>Potassium - {{ soil.potassium }} °C</div>
               <div>Conductivity - {{ soil.conductivity }} µS/cm</div>
               <div>Moisture - {{ soil.moisture }} %</div>
             </div>
