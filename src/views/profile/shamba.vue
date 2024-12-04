@@ -19,7 +19,7 @@
 
 
         <div class="sm:col-span-3">
-          <combos_farms v-if="!showDrop" @selected_crop="args => Listen_selected_crops_event(args)" :title="`Crop`" :items_prop="types_of_farming"/>
+          <combos_farms v-if="showDrop" @selected_crop="args => Listen_selected_crops_event(args)" :title="`Crop`" :items_prop="types_of_farming"/>
           <checkbox_drop v-else @select_crops="crops => Listen_selected_crops_event(crops)" />
         </div>
         <div class="sm:col-span-3">

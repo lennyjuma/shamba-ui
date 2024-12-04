@@ -4,7 +4,8 @@
     <div v-if="add_crop" class="mt-2 flex">
       <input v-model="crop_payload.name" type="text" name="farm_name" id="farm_name" autocomplete="given-name" placeholder="Enter crop name "
              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-      <div id="price-currency" @click="add_mimea()" class="shrink-0 select-none text-base text-white bg-indigo-600 rounded-md m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Add crop</div>
+      <div id="price-currency" @click="add_crop = false" class="shrink-0 select-none text-base bg-white text-indigo-600 shadow-2xl hover:scale-105 rounded-md m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Cancel</div>
+      <div id="price-currency" @click="add_mimea()" class="shrink-0 select-none text-base text-white bg-indigo-600 rounded-md hover:scale-105 m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Add crop</div>
     </div>
     <div v-if="!add_crop" class="relative mt-2">
       <ListboxButton class="relative flex space-x-2 w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -21,15 +22,20 @@
       <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
           <div  class=" divide-y divide-gray-200 ">
-            <div class="w-full mx-auto my-2 sm:max-w-xs">
-              <label for="search" class="sr-only">Search</label>
-              <div class="relative">
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                    <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
-                  </svg>
+            <div class="flex justify-between items-center mx-3">
+              <div class="w-full mx-auto my-2 sm:max-w-xs">
+                <label for="search" class="sr-only">Search</label>
+                <div class="relative flex">
+                  <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                      <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <input  v-model="query" id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search" type="search">
                 </div>
-                <input  v-model="query" id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Search" type="search">
+              </div>
+              <div class="min-w-0 flex-1 flex justify-center hidden text-sm leading-6">
+                <label for="other" class="select-none flex text-white bg-indigo-600 rounded-md m-auto p-1.5 mx-2 font-medium mx-auto">Add crop</label>
               </div>
             </div>
 
@@ -42,8 +48,8 @@
               </div>
             </div>
             <div @click="add_crop = true" class="relative flex items-start px-5 py-4">
-              <div class="min-w-0 flex-1 text-sm leading-6">
-                <label for="other" class="select-none flex font-medium text-gray-900">Add crop</label>
+              <div class="min-w-0 flex-1 flex justify-center text-sm leading-6">
+                <label for="other" class="select-none flex text-white bg-indigo-600 rounded-md m-auto p-1.5 mx-2 font-medium mx-auto">New crop</label>
               </div>
               <div  class="ml-3 flex h-6 items-center">
                 <input  id="`other`" name="other"   type="button" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
