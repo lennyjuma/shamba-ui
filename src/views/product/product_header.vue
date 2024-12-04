@@ -43,7 +43,7 @@
             </div>
             <div class="absolute inset-0 flex items-end rounded-lg p-6">
               <div>
-                <p aria-hidden="true" class="text-sm text-white">Shop the collection</p>
+<!--                <p aria-hidden="true" class="text-sm text-white">Shop the collection</p>-->
                 <h3 class="mt-1 font-semibold text-white">
                   <a :href="collection.href">
                     <span class="absolute inset-0" />
@@ -67,25 +67,25 @@ import barley_field from "@/assets/agriculture/plants/maize.jpg"
 
 const collections = [
   {
-    name: "Hardware",
+    name: "Shamba Lab device",
     href: '#',
-    position: 'object-center object-scale-down',
+    position: 'object-center ',
     imageSrc: screenUp_charger_sensor,
-    imageAlt: 'Woman wearing an off-white cotton t-shirt.',
+    imageAlt: 'Shamba lab soil testing device.',
   },
   {
-    name: "Software",
+    name: "Soil sensor",
     href: '#',
-    position: 'object-right object-cover object-scale-down',
+    position: 'object-right object-cover ',
     imageSrc: screen,
-    imageAlt: 'Man wearing a charcoal gray cotton t-shirt.',
+    imageAlt: 'soil sensor shamba lab.',
   },
   {
-    name: 'Sensors',
+    name: 'Attach sensor to device',
     href: '#',
     position: 'object-left',
     imageSrc: device_hands,
-    imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
+    imageAlt: 'attach sensor to shamba lab.',
   },
 ]
 </script>
