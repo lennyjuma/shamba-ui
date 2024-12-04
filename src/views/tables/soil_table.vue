@@ -59,7 +59,7 @@
                 <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
               </div>
             </div>
-            <div class="font-semibold"> {{ soil.reading_date }} </div>
+            <div class="font-semibold"> {{ soil.readingDate }} </div>
           </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.potassium }} mg/kg</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.conductivity }} µS/cm</td>
