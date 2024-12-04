@@ -56,7 +56,7 @@ const types_of_farming = [
   { id: 1, name: 'Mono cropping' },
   { id: 2, name: 'Mixed cropping' }
 ]
-const shamba_payload = ref<shambaT>({name:"farmB"} as shambaT)
+const shamba_payload = ref<shambaT>({} as shambaT)
 const showDrop = ref(false)
 const Listen_selected_crops_event = (crops:string[]) => {
   console.log('Listen_selected_crops_event',crops)

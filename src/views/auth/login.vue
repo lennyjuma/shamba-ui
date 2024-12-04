@@ -47,7 +47,7 @@ import type { loginT } from '@/types'
 import { useAuthStore } from '@/stores/auth'
 import { storeToRefs } from 'pinia'
 
-const login_payload = ref<loginT>({email: 'lenny@watt.com', password: '2fpLxthn'})
+const login_payload = ref<loginT>({} as loginT)
 
 let authStore = useAuthStore()
 

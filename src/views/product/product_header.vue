@@ -4,7 +4,7 @@
     <div aria-hidden="true" class="absolute inset-0 hidden sm:flex sm:flex-col">
       <div class="relative w-full flex-1 bg-gray-800">
         <div class="absolute inset-0 overflow-hidden">
-          <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="h-full w-full object-cover object-center" />
+          <img :src="barley_field" alt="" class="h-full  w-full object-cover object-center" />
         </div>
         <div class="absolute inset-0 bg-gray-900 opacity-50" />
       </div>
@@ -33,7 +33,7 @@
     <section aria-labelledby="collection-heading" class="relative -mt-96 sm:mt-0">
       <h2 id="collection-heading" class="sr-only">Collections</h2>
       <div class="mx-auto grid max-w-md grid-cols-1 gap-y-6 px-4 sm:max-w-7xl sm:grid-cols-3 sm:gap-x-6 sm:gap-y-0 sm:px-6 lg:gap-x-8 lg:px-8">
-        <div v-for="collection in collections" :key="collection.name" class="group relative h-96 rounded-lg bg-white shadow-xl sm:aspect-h-5 sm:aspect-w-4 sm:h-auto">
+        <div v-for="collection in collections" :key="collection.name" :class="collection.position" class="group relative h-96 rounded-lg bg-white shadow-xl sm:aspect-h-5 sm:aspect-w-4 sm:h-auto">
           <div>
             <div aria-hidden="true" class="absolute inset-0 overflow-hidden rounded-lg">
               <div class="absolute inset-0 overflow-hidden group-hover:opacity-75">
@@ -60,23 +60,31 @@
 </template>
 
 <script setup lang="ts">
+import screen from "@/assets/device/device_hands.jpg"
+import screenUp_charger_sensor from "@/assets/device/screenUp_charger_sensor.jpg"
+import device_hands from "@/assets/device/attach-sensor.jpg"
+import barley_field from "@/assets/agriculture/plants/maize.jpg"
+
 const collections = [
   {
     name: "Hardware",
     href: '#',
-    imageSrc: 'https://images.unsplash.com/photo-1614846027182-cecfee3a427b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    position: 'object-center object-scale-down',
+    imageSrc: screenUp_charger_sensor,
     imageAlt: 'Woman wearing an off-white cotton t-shirt.',
   },
   {
     name: "Software",
     href: '#',
-    imageSrc: 'https://images.unsplash.com/photo-1613843433065-819a04a47a09?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    position: 'object-right object-cover object-scale-down',
+    imageSrc: screen,
     imageAlt: 'Man wearing a charcoal gray cotton t-shirt.',
   },
   {
     name: 'Sensors',
     href: '#',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-04-collection-03.jpg',
+    position: 'object-left',
+    imageSrc: device_hands,
     imageAlt: 'Person sitting at a wooden desk with paper note organizer, pencil and tablet.',
   },
 ]
