@@ -66,10 +66,14 @@ export interface loginT {
   email: string
   password: string
 }
+export interface form_validation_errorT {
+  status: boolean
+  message: string
+}
 
 export interface login_errorT {
-  email: boolean
-  password: boolean
+  email: form_validation_errorT
+  password: form_validation_errorT
 }
 export interface loggedInT {
   token: string
