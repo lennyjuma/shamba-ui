@@ -3,8 +3,8 @@
     <div class="space-y-12">
 
       <div class="border-b border-gray-900/10 pb-12">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Account registration</h2>
+        <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent email address and phone number  where you can receive mail/sms.</p>
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
           <CInput class="sm:col-span-3" :validation_error="reg_validation_error.f_name" v-model:input_value="register_payload.f_name"
@@ -24,8 +24,6 @@
 
           <CInput class="sm:col-span-3" :validation_error="reg_validation_error.password_confirm" v-model:input_value="register_payload.password_confirm"
                   placeholder="Enter your password confirmations" label_name="Confirm password" input_type="password"/>
-
-
 
           <div class="sm:col-span-3">
             <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
