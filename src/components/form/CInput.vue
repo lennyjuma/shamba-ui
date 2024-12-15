@@ -5,9 +5,9 @@ import { ref, defineProps } from 'vue'
 const input_value = defineModel('input_value')
 const props = defineProps<{
   input_type: string
-  input_class_style: string
+  input_class_style?: string
   label_name: string
-  placeholder: string
+  placeholder?: string
   validation_error: form_validation_errorT ,
 }>()
 

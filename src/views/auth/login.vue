@@ -7,13 +7,23 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="space-y-6"  >
-        <CInput :label_name="'Email address'" :input_type="'email'" v-model:input_value="login_payload.email"
+        <CInput :placeholder="`Enter your email`"  :label_name="'Email address'" :input_type="'email'" v-model:input_value="login_payload.email"
                 :validation_error="login_validation_error.email" />
-        <CInput :label_name="'Password'" :input_type="'password'" v-model:input_value="login_payload.password"
+        <CInput :placeholder="`Enter your password`" :label_name="'Password'" :input_type="'password'" v-model:input_value="login_payload.password"
                 :validation_error="login_validation_error.password" />
 
       <div>
           <button @click="sign_in(login_payload)" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
+        <div class="sm:col-span-3 mt-4">
+          <label for="country" class="block text-sm font-light leading-6 text-gray-900">Don't have an account?
+            <router-link to="/register" class="text-indigo-600 font-medium text-base ">&emsp13;
+              <span class="underline">Create account</span>
+            </router-link>
+          </label>
+
+        </div>
+
+
         </div>
       </div>
 
