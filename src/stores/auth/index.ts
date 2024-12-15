@@ -53,7 +53,9 @@ export const useAuthStore = defineStore('auth', () => {
         toggleNotification('error', 'Please check your credentials')
       }
     }).finally(()=>{
-      fetchShamba()
+      if( loggedIn.value) {
+        fetchShamba()
+      }
     });
 
   }
