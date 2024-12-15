@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-full my-40 flex-1 flex-col justify-center px-6  lg:px-8">
+  <div class="flex min-h-full mt-14 mb-40 flex-1 flex-col justify-center px-6  lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
 <!--      <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Shamba lab" />-->
       <h2 class="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in</h2>

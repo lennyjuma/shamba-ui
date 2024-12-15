@@ -47,7 +47,11 @@ export const useAuthStore = defineStore('auth', () => {
       }
 
     }).catch((error: Error)=>{
-      toggleNotification("error","Please check your credentials")
+      if (error.response.data.description == "Email or password is incorrect"){
+        toggleNotification("error", error.response.data.description as string)
+      }else {
+        toggleNotification('error', 'Please check your credentials')
+      }
     }).finally(()=>{
       fetchShamba()
     });
