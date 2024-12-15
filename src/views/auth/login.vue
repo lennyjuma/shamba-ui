@@ -7,8 +7,10 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <div class="space-y-6"  >
-        <CInput :label_name="'Email address'" :input_type="'email'" v-model:input_value="login_payload.email" :validation_error="login_validation_error.email" />
-        <CInput :label_name="'Password'" :input_type="'password'" v-model:input_value="login_payload.password" :validation_error="login_validation_error.password" />
+        <CInput :label_name="'Email address'" :input_type="'email'" v-model:input_value="login_payload.email"
+                :validation_error="login_validation_error.email" />
+        <CInput :label_name="'Password'" :input_type="'password'" v-model:input_value="login_payload.password"
+                :validation_error="login_validation_error.password" />
 
       <div>
           <button @click="sign_in(login_payload)" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
@@ -49,8 +51,8 @@ const sign_in =  (payload:loginT) => {
     }
   }
   if (hasValidationErrors) {
-    // login(payload)
-    console.log('*** login ***')
+    login(payload)
+    // console.log('*** login ***')
   }
 
 
