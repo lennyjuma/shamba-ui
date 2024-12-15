@@ -89,8 +89,17 @@ export interface registerT {
   f_name: string
   l_name: string
   password: string
+  password_confirm: string
   country: string
   phoneNumber: string
+}
+export interface register_errorT {
+  email: form_validation_errorT
+  f_name: form_validation_errorT
+  l_name: form_validation_errorT
+  password: form_validation_errorT
+  password_confirm: form_validation_errorT
+  phoneNumber: form_validation_errorT
 }
 export interface shambaT {
   name: string

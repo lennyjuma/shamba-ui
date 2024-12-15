@@ -7,47 +7,25 @@
         <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
 
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-          <div class="sm:col-span-3">
-            <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
-            <div class="mt-2">
-              <input required v-model="register_payload.f_name" type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.f_name" v-model:input_value="register_payload.f_name"
+                  placeholder="Enter your first name" :label_name="`First name`" :input_type="`text`"/>
 
-          <div class="sm:col-span-3">
-            <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
-            <div class="mt-2">
-              <input v-model="register_payload.l_name" type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.l_name" v-model:input_value="register_payload.l_name"
+                  placeholder="Enter your last  name" label_name="Last name" input_type="text"/>
 
-          <div class="sm:col-span-3">
-            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
-            <div class="mt-2">
-              <input v-model="register_payload.email" id="email" name="email" type="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.email" v-model:input_value="register_payload.email"
+                  placeholder="Enter your email address" label_name="Email address" input_type="email"/>
 
-          <div class="sm:col-span-3">
-            <label for="contact" class="block text-sm font-medium leading-6 text-gray-900">Phone number</label>
-            <div class="mt-2">
-              <input v-model="register_payload.phoneNumber  " id="contact" name="contact" type="text" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.phoneNumber" v-model:input_value="register_payload.phoneNumber"
+                  placeholder="Enter your contact number" label_name="Phone number" input_type="text"/>
 
-          <div class="sm:col-span-3">
-            <label for="pass" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
-            <div class="mt-2">
-              <input v-model="register_payload.password" id="pass" name="pass" type="password" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.password" v-model:input_value="register_payload.password"
+                  placeholder="Enter your password" label_name="Password" input_type="password"/>
 
-          <div class="sm:col-span-3">
-            <label for="c_pass" class="block text-sm font-medium leading-6 text-gray-900">Confirm password</label>
-            <div class="mt-2">
-              <input id="c_pass" name="c_pass" type="password" autocomplete="c_pass" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
+          <CInput class="sm:col-span-3" :validation_error="reg_validation_error.password_confirm" v-model:input_value="register_payload.password_confirm"
+                  placeholder="Enter your password confirmations" label_name="Confirm password" input_type="password"/>
+
+
 
           <div class="sm:col-span-3">
             <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Country</label>
@@ -65,7 +43,7 @@
 
     <div class="mt-6 flex items-center justify-end gap-x-6">
       <button @click="clear_payload()" type="button" class="text-sm font-semibold leading-6 text-gray-900">Clear</button>
-      <button @click="submit_payload()" type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+      <button @click="submit_payload()" type="button"  class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
     </div>
   </div>
 </template>
@@ -73,15 +51,54 @@
 <script setup lang="ts">
 import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
-import type { registerT } from '@/types/index.js'
+import type { form_validation_errorT, login_errorT, register_errorT, registerT } from '@/types/index.js'
 import { useAuthStore } from '@/stores/auth'
+import CInput from '@/components/form/CInput.vue'
 
 let authStore = useAuthStore()
 const {register} = authStore
 const register_payload = ref<registerT>({} as registerT)
+const reg_validation_error = ref<register_errorT>(
+  {
+    email:{} as form_validation_errorT,
+    f_name:{} as form_validation_errorT,
+    l_name:{} as form_validation_errorT,
+    phoneNumber:{} as form_validation_errorT,
+    password:{} as form_validation_errorT,
+    password_confirm:{} as form_validation_errorT
+  } as register_errorT)
+
 
 const submit_payload = () =>{
-  register(register_payload.value)
+  const validatePayload = validate_payload()
+  let hasValidationErrors:boolean = true
+  for (const [key, value] of Object.entries(validatePayload)) {
+    if (value.status) {
+      hasValidationErrors = false
+    }
+  }
+  if (hasValidationErrors) {
+    register(register_payload.value)
+  }else {
+    console.log("validation errors occurred")
+  }
+  // register(register_payload.value)
+}
+const validate_payload = () =>{
+  reg_validation_error.value.email.status = !register_payload.value.email
+  reg_validation_error.value.email.message = "Email address is empty"
+  reg_validation_error.value.password.status = !register_payload.value.password
+  reg_validation_error.value.password.message = "Please enter password"
+  reg_validation_error.value.password_confirm.status = !register_payload.value.password_confirm
+  reg_validation_error.value.password_confirm.message = "Please enter password confirmation"
+  reg_validation_error.value.f_name.status = !register_payload.value.f_name
+  reg_validation_error.value.f_name.message = "First name is empty"
+  reg_validation_error.value.l_name.status = !register_payload.value.l_name
+  reg_validation_error.value.l_name.message = "Last name is empty"
+  reg_validation_error.value.phoneNumber.status = !register_payload.value.phoneNumber
+  reg_validation_error.value.phoneNumber.message = "Please enter your phone number"
+  return reg_validation_error.value
+
 }
 const clear_payload = () =>{
   register_payload.value = {} as registerT
