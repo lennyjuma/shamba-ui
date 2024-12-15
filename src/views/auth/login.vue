@@ -14,8 +14,8 @@
 
       <div>
           <button @click="sign_in(login_payload)" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-          <span class="mt-2 inline-block text-sm font-light text-center w-full">Don't have an account? </span>
-          <router-link  to="/register" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">Sign up</router-link>
+          <span class="mt-2 inline-block text-xs font-light text-left w-full">Don't have an account? </span>
+          <router-link  to="/register" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ">Create account</router-link>
         </div>
       </div>
 

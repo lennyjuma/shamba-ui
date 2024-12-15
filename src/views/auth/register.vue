@@ -34,6 +34,14 @@
                 <option>Uganda</option>
               </select>
             </div>
+          <div class="sm:col-span-3 mt-4">
+            <label for="country" class="block text-sm font-light leading-6 text-gray-900">Already have an account?
+                <router-link to="/login" class="text-indigo-600 font-medium text-base ">&emsp13;
+                  <span class="underline">Login</span>
+                </router-link>
+              </label>
+
+            </div>
           </div>
         </div>
       </div>
