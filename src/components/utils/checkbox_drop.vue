@@ -2,10 +2,12 @@
   <Listbox as="div" v-model="selected">
     <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">Crops</ListboxLabel>
     <div v-if="add_crop" class="mt-2 flex">
+      <CInput input_class_style="py-1.5" class="w-full py-0" :validation_error="crop_name_err" input_type="text" placeholder="Enter crop name." label_name="" v-model:input_value="crop_payload.name"/>
       <input v-model="crop_payload.name" type="text" name="farm_name" id="farm_name" autocomplete="given-name" placeholder="Enter crop name "
-             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-      <div id="price-currency" @click="add_crop = false" class="shrink-0 select-none text-base bg-white text-indigo-600 shadow-2xl hover:scale-105 rounded-md m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Cancel</div>
-      <div id="price-currency" @click="add_mimea()" class="shrink-0 select-none text-base text-white bg-indigo-600 rounded-md hover:scale-105 m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Add crop</div>
+             class="block hidden w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400
+             focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+      <div id="cancel_btn" @click="add_crop = false" class="shrink-0 select-none text-base bg-white text-indigo-600 shadow-2xl hover:scale-105 rounded-md m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Cancel</div>
+      <div id="submit_btn" @click="add_mimea()" class="shrink-0 select-none text-base text-white bg-indigo-600 rounded-md hover:scale-105 m-auto p-1.5 mx-2 font-medium sm:text-sm/6">Add crop</div>
     </div>
     <div v-if="!add_crop" class="relative mt-2">
       <ListboxButton class="relative flex space-x-2 w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -69,9 +71,10 @@ import { Listbox, ListboxButton, ListboxLabel, ListboxOptions } from '@headlessu
 import {  ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { useCropStore } from '@/stores/crop'
 import { storeToRefs } from 'pinia'
-import type { Crop_payloadT, CropT } from '@/types'
+import type { Crop_payloadT, CropT, form_validation_errorT } from '@/types'
 import router from '@/router'
 import { useNotificationStore } from '@/stores/notification'
+import CInput from '@/components/form/CInput.vue'
 
 const props = defineProps(["selected_crops","selected_crops_id"])
 const cropStore = useCropStore()
@@ -87,10 +90,11 @@ const selected_mimea = ref([] as string[])
 const add_crop = ref(false)
 const query = ref('')
 const crop_payload = ref<Crop_payloadT>({} as Crop_payloadT)
-
+const crop_name_err = ref<form_validation_errorT>({status:false, message:"Enter crop name."} as form_validation_errorT)
 onBeforeMount(()=>{
   fetch_crop()
 })
+
 watch(query,()=>{
   console.log("query",query.value)
   people.value = query.value === ''
@@ -126,11 +130,12 @@ watch(()=>props.selected_crops, () => {
 })
 
 const add_mimea= () => {
-  add_crop.value = false
+  crop_name_err.value.status = !crop_payload.value.name
+  // add_crop.value = false
   const crop_name = crop_payload.value
   if (crop_name.name)
   {
-    add_mimea_crop(crop_name)
+    // add_mimea_crop(crop_name)
   }else {
     toggleNotification('error', 'Empty crop name')
   }
