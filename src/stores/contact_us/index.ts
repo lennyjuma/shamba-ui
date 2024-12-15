@@ -12,7 +12,7 @@ export const useContactUSStore = defineStore('contact_us', () => {
   const get_contact_us = computed(() => contact_us.value)
   function post_contact_us(contact: ContactUsT) {
         const url = `${contact_us_path}`;
-    useRestController(url, "post", contact).catch((error:Error) => {
+    useRestController(url, "post", contact).catch((error:AxiosError<Any,Any>) => {
       toggleNotification("error", error.response.data.description as string)
     })
   }
