@@ -62,10 +62,10 @@ const Listen_selected_crops_event = (crops:string[]) => {
   console.log('Listen_selected_crops_event',crops)
   shamba_payload.value.crops = crops;
 }
-const Listen_selected_farming_event = (farimingType:any) => {
-  console.log('Listen_selected_crops_event',farimingType)
-  showDrop.value = farimingType !== "Mixed cropping"
-  shamba_payload.value.farmingType = farimingType;
+const Listen_selected_farming_event = (farmingType:any) => {
+  console.log('Listen_selected_crops_event',farmingType)
+  showDrop.value = farmingType !== "Mixed cropping"
+  shamba_payload.value.farmingType = farmingType;
 }
 
 
