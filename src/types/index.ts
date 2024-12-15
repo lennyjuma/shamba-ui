@@ -66,6 +66,11 @@ export interface loginT {
   email: string
   password: string
 }
+
+export interface login_errorT {
+  email: boolean
+  password: boolean
+}
 export interface loggedInT {
   token: string
   id: string

@@ -63,6 +63,11 @@ const router = createRouter({
       path: '/add_farm',
       name: 'Add Farm',
       component: () => import('../views/profile/shamba.vue')
+    },
+    {
+      path: '/ai',
+      name: 'ai',
+      component: () => import('../views/ai/aiResponse.vue')
     }
   ]
 })

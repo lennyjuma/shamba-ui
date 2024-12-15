@@ -71,10 +71,13 @@ import { useCropStore } from '@/stores/crop'
 import { storeToRefs } from 'pinia'
 import type { Crop_payloadT, CropT } from '@/types'
 import router from '@/router'
+import { useNotificationStore } from '@/stores/notification'
 
 const props = defineProps(["selected_crops","selected_crops_id"])
 const cropStore = useCropStore()
+const notificationStore = useNotificationStore()
 const {fetch_crop, add_mimea_crop} = cropStore
+const {toggleNotification} = notificationStore
 const {get_crop} = storeToRefs(cropStore)
 const people = ref<CropT[]>([] as CropT[])
 const emits = defineEmits(["select_crops","removedCrops","addedCrops"])
@@ -124,7 +127,14 @@ watch(()=>props.selected_crops, () => {
 
 const add_mimea= () => {
   add_crop.value = false
-  add_mimea_crop(crop_payload.value)
+  const crop_name = crop_payload.value
+  if (crop_name.name)
+  {
+    add_mimea_crop(crop_name)
+  }else {
+    toggleNotification('error', 'Empty crop name')
+  }
+
 }
 
 function getArrayDiff(arr1:string[], arr2:string[]){

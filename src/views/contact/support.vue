@@ -13,7 +13,7 @@
                 <PhoneIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
               </div>
               <div class="ml-3 text-base text-gray-500">
-                <p>+25470523645</p>
+                <p>+254706086296</p>
                 <p class="mt-1">Mon-Fri 8am to 6pm EAT</p>
               </div>
             </div>
@@ -81,6 +81,6 @@
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/vue/24/outline'
 const getWhatsapp = (phone_number:string) => {
 
-  window.open(`https://api.whatsapp.com/send/?phone=${phone_number}&text=Hello shamba lab.&type=phone_number&app_absent=0`, '_blank');
+  window.open(`https://api.whatsapp.com/send/?phone=${phone_number}&text=Hello there, thank you for reaching out.&type=phone_number&app_absent=0`, '_blank');
 }
 </script>
