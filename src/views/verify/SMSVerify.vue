@@ -14,17 +14,20 @@ const verify_phone_number = () => {
 </script>
 
 <template>
-  <div class="w-full max-w-7xl mx-auto my-20">
-    <CInput placeholder="Enter the OTP sent to your phone." v-model:input_value="otp" :validation_error="otp_err"
-            input_type="text" label_name="One Time Password (OTP)" input_class_style="sm:mx-4" class=" "/>
-    <div class="mt-5 flex flex-col sm:flex-row justify-center space-y-1 items-center">
-      <label for="country" class="block text-sm font-light leading-6 text-gray-900">OTP expired ?
+  <div class="max-w-xl w-full flex-col items-center mx-auto   my-20">
+    <div class="flex justify-evenly items-center">
+      <CInput placeholder="Enter the OTP sent to your phone." v-model:input_value="otp" :validation_error="otp_err"
+              input_type="text" label_name="One Time Password (OTP)" input_class_style=" " class=" flex-grow justify-self-center flex-grow w-1/2 px-4"/>
+      <button @click="verify_phone_number()"
+              class="flex  mt-auto justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Verify OTP</button>
+    </div>
+
+    <div class="mt-5 flex flex-col sm:flex-row  justify-center space-y-1 items-center">
+      <label for="country" class="block text-left text-sm font-light leading-6 text-gray-900">OTP expired ?
         <router-link to="/verify/otp" class="text-indigo-600 font-medium">&emsp13;
           <span class="underline">Generate new OTP</span>
         </router-link>
       </label>
-      <button @click="verify_phone_number()"
-              class="flex w-1/2 ml-auto mr-auto sm:mr-2 sm:w-auto  justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Verify OTP</button>
 
     </div>
 
