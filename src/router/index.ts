@@ -68,6 +68,16 @@ const router = createRouter({
       path: '/ai',
       name: 'ai',
       component: () => import('../views/ai/aiResponse.vue')
+    },
+    {
+      path: '/verify/email',
+      name: 'verify email',
+      component: () => import('../views/verify/Emailverified.vue')
+    },
+    {
+      path: '/verify/otp',
+      name: 'verify sms',
+      component: () => import('../views/verify/SMSVerify.vue')
     }
   ]
 })

@@ -1,0 +1,33 @@
+<script setup lang="ts">
+
+import CInput from '@/components/form/CInput.vue'
+import { ref } from 'vue'
+import type { form_validation_errorT } from '@/types'
+
+const otp_err = ref<form_validation_errorT>({status:false,message: "OTP is required"} as form_validation_errorT)
+const otp = ref("")
+
+const verify_phone_number = () => {
+  otp_err.value.status = !otp.value
+  console.log("verify phone number")
+}
+</script>
+
+<template>
+  <div class="w-full max-w-7xl mx-auto my-20">
+    <CInput placeholder="Enter the OTP sent to your phone." v-model:input_value="otp" :validation_error="otp_err"
+            input_type="text" label_name="One Time Password (OTP)" class="px-2"/>
+    <div class="sm:col-span-3 mt-5 ml-2 flex flex-col sm:flex-row   justify-center space-y-1 items-center">
+      <label for="country" class="block text-sm font-light leading-6 text-gray-900 ">OTP expired ?
+        <router-link to="/verify/otp" class="text-indigo-600 font-medium  ">&emsp13;
+          <span class="underline">Generate new OTP</span>
+        </router-link>
+      </label>
+      <button @click="verify_phone_number()"
+              class="flex w-1/2 ml-auto mr-auto sm:mr-2 sm:w-auto  justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Verify OTP</button>
+
+    </div>
+
+  </div>
+
+</template>

@@ -20,7 +20,6 @@
               <span class="underline">Create account</span>
             </router-link>
           </label>
-
         </div>
 
 
