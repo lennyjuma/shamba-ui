@@ -26,7 +26,7 @@ export async function useRestController(
   const responseDTO = ref({}); //make this a state
 
   const key = localStorage.getItem("access_token");
-  if (method !== "auth") {
+  if (method != "auth") {
     axios.defaults.headers.common["Authorization"] = `Bearer ${key}`;
   }
 
