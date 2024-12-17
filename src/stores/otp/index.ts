@@ -12,18 +12,26 @@ export const useOTPStore = defineStore('otp_store', () => {
     const otp_id = router.currentRoute.value.query["otp_id"]
     const url = `${path}/email?otp_id=${otp_id}`
     useRestController(url,"post",{}).then(({ responseDTO }) =>{
-
       toggleNotification("success", responseDTO.value.data as string)
-
     }).catch((err:Error) => {
       toggleNotification("error", err.response.data.description as string)
     })
   }
   function verify_SMS(otp:string) {
     const url = `${path}/sms?otp=${otp}`
-    useRestController(url,"post",{}).catch((err:Error) => {
+    useRestController(url,"post",{}).then(({ responseDTO }) =>{
+      toggleNotification("success", responseDTO.value.data as string)
+    }).catch((err:Error) => {
       toggleNotification("error", err.response.data.description as string)
     })
   }
-  return {verify_Email,verify_SMS}
+  function generateNewOTP() {
+    const url = `otp/generate`
+    useRestController(url,"post",{}).then(({ responseDTO }) =>{
+      toggleNotification("success", responseDTO.value.data as string)
+    }).catch((err:Error) => {
+      toggleNotification("error", err.response.data.description as string)
+    })
+  }
+  return {verify_Email,verify_SMS,generateNewOTP}
 })
