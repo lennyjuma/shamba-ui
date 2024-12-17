@@ -69,6 +69,7 @@ export interface loginT {
 export interface form_validation_errorT {
   status: boolean
   message: string
+  message_extra?: string
 }
 
 export interface login_errorT {

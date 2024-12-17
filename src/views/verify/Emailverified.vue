@@ -17,5 +17,13 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useOTPStore } from '@/stores/otp/index.js'
+
+const {verify_Email} = useOTPStore()
+onMounted(function() {
+  verify_Email()
+  console.log('emailverified')
+})
 </script>
