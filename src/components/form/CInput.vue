@@ -22,6 +22,6 @@ const props = defineProps<{
              :placeholder="validation_error.status ? validation_error.message : placeholder" aria-invalid="true" aria-describedby="email-error" />
       <ExclamationCircleIcon v-if="validation_error.status" class="pointer-events-none col-start-1 row-start-1  size-5 self-center justify-self-end text-red-500 sm:size-4" aria-hidden="true" />
     </div>
-    <p v-if="validation_error.status" class="mt-2 hidden text-sm text-red-600" id="email-error">{{validation_error.message}}</p>
+    <p v-if="validation_error.status && validation_error.message_extra" class="mt-2  text-sm text-red-600" id="email-error">{{validation_error.message_extra}}</p>
   </div>
 </template>

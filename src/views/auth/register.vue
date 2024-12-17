@@ -103,6 +103,14 @@ const validate_payload = () =>{
   reg_validation_error.value.l_name.message = "Last name is empty"
   reg_validation_error.value.phoneNumber.status = !register_payload.value.phoneNumber
   reg_validation_error.value.phoneNumber.message = "Please enter your phone number"
+  const password_match = register_payload.value.password !== register_payload.value.password_confirm
+  if(password_match){
+    // alert("Passwords do not match")
+    reg_validation_error.value.password_confirm.message_extra = "Password do not match!"
+    reg_validation_error.value.password.message_extra = "Password do not match!"
+    reg_validation_error.value.password_confirm.status = true
+    reg_validation_error.value.password.status = true
+  }
   return reg_validation_error.value
 
 }
