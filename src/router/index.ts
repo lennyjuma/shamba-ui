@@ -70,6 +70,11 @@ const router = createRouter({
       component: () => import('../views/ai/aiResponse.vue')
     },
     {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/settings/settings.vue')
+    },
+    {
       path: '/verify/email',
       name: 'verify email',
       component: () => import('../views/verify/Emailverified.vue')
