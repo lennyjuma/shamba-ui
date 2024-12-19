@@ -20,7 +20,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody class="w-full">
         <tr v-for="(soil, planIdx) in soil_properties" :key="soil.id">
           <td :class="[planIdx === 0 ? '' : 'border-t border-transparent', 'relative py-4 pl-4 pr-3 text-sm sm:pl-6']">
             <div class="font-medium text-gray-500 hidden lg:inline-block">
@@ -32,7 +32,7 @@
               <div>Moisture - {{ soil.moisture }} %</div>
               <div>Temperature - {{ soil.temperature }} °C</div>
               <div>pH - {{ soil.ph }} </div>
-              <div class="flex"><span class="font-semibold">Crop(s) -</span>
+              <div class="flex"><span class="font-semibold">Crop(s): </span>
                 <div v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id" class="flex pl-1">
                   <span>{{mimea.crop.name}}</span>
                   <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
@@ -66,14 +66,15 @@
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.moisture }} %</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.temperature }} °C</td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-sm text-gray-500 lg:table-cell']">{{ soil.ph }}</td>
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-5 text-center text-sm text-gray-500 lg:flex justify-center items-center']">
-            <div v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id">
-              <span>{{mimea.crop.name}}</span>
-              <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
-
-            </div>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-5 text-center text-sm text-gray-500 lg:table-cell']">
+           <div class="flex justify-center items-center">
+             <div class="my-auto" v-for="(mimea,idx) in soil.shamba.farmCrops" :key="mimea.crop.id">
+               <span>{{mimea.crop.name}}</span>
+               <span v-if="soil.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>
+             </div>
+           </div>
           </td>
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 my-auto text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
 
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'relative flex flex-col items-center justify-center py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
             <button @click="go_to_ai(soil.id)" type="button" class="inline-flex mx-2 my-2 items-center rounded-md  px-2.5 py-1.5 text-sm font-semibold text-gray-900  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" :disabled="soil.isCurrent">

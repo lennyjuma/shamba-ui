@@ -1,13 +1,14 @@
 <template>
   <div class="bg-white">
-    <div class="mx-auto max-w-9xl py-8 sm:px-2 sm:py-2 lg:px-4 ">
-      <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
+    <div class="mx-auto max-w-9xl py-8 sm:px-2 sm:py-2 lg:px-4 mt-2.5">
+      <empty-a-i v-if="!ai.summary"/>
+      <div v-else class="mx-auto max-w-2xl px-4 lg:max-w-none">
         <div class="max-w-9xl">
-          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">AI Analysis and Recommendation </h2>
-          <p class="mt-3 text-gray-500"><span class="text-gray-800">Summary :</span> {{ai.summary}}</p>
+          <h2 class="text-3xl sm:text-4xl font-bold mt-2 tracking-tight text-gray-900">AI Analysis and Recommendation </h2>
+          <p class="my-3 text-gray-500"><span class="text-gray-800">Summary :</span> {{ai.summary}}</p>
         </div>
-        <soil-analysis :analysis="ai.soilProperties"/>
-        <fertiliser-recommendation :recommendation="ai.fertilizer_recommendation"/>
+        <soil-analysis  :analysis="ai.soilProperties"/>
+        <fertiliser-recommendation  :recommendation="ai.fertilizer_recommendation"/>
       </div>
     </div>
   </div>
@@ -20,67 +21,13 @@ import FertiliserRecommendation from '@/views/ai/fertiliserRecommendation.vue'
 import SoilAnalysis from '@/views/ai/soilAnalysis.vue'
 import { useAIStore } from '@/stores/ai'
 import { storeToRefs } from 'pinia'
+import EmptyAI from '@/views/ai/emptyAI.vue'
 
 const aiStore = useAIStore()
 const { get_ai } = storeToRefs(aiStore)
 const { fetch_ai_soil } = aiStore
 
-const ai = ref<aisoilT>({
-  "crop": "maize",
-  "soilProperties": [
-    {
-      "status": "Low",
-      "name": "nitrogen",
-      "importance": "High",
-      "recommendation": "Increase nitrogen levels to support vegetative growth and yield potential."
-    },
-    {
-      "status": "Adequate",
-      "name": "phosphorus",
-      "importance": "High",
-      "recommendation": "Adequate phosphorus levels; maintain current levels for optimal root development."
-    },
-    {
-      "status": "Optimal",
-      "name": "potassium",
-      "importance": "High",
-      "recommendation": "Potassium levels are sufficient for maize, no additional application required."
-    },
-    {
-      "status": "Optimal",
-      "name": "conductivity",
-      "importance": "Moderate",
-      "recommendation": "Maintain current levels as they are within the acceptable range for maize."
-    },
-    {
-      "status": "Sufficient",
-      "name": "moisture",
-      "importance": "High",
-      "recommendation": "Ensure consistent moisture levels through irrigation to prevent stress."
-    },
-    {
-      "status": "Acceptable",
-      "name": "temperature",
-      "importance": "Moderate",
-      "recommendation": "Monitor temperature as it is within acceptable range for maize growth."
-    },
-    {
-      "status": "null",
-      "name": "pH",
-      "importance": "null",
-      "recommendation": "null"
-    }
-  ],
-  "summary": "The soil conditions are mostly adequate for maize; adjust nitrogen and manage pH for best results.",
-  "fertilizer_recommendation": {
-    "ideal_type_of_fertilizer": "Balanced NPK fertilizer with emphasis on nitrogen and phosphorus to support growth.",
-    "suggested_nutrient_ratios": "A 10-20-10 NPK ratio is recommended to provide balanced nutrition for maize.",
-    "application_rate": "Apply fertilizer at a rate of 150 kg/ha to meet nutrient requirements.",
-    "application_method": "Broadcast application followed by incorporation into the soil to ensure even distribution.",
-    "supplementary_practices": "Consider lime application to reduce soil pH and improve nutrient availability.",
-    "importance_of_recommended": "Essential for optimizing maize yield by correcting nutrient imbalances in the soil."
-  }
-})
+const ai = ref<aisoilT>({} as aisoilT)
 onMounted(function(){
   fetch_ai_soil()
 })
