@@ -14,10 +14,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { aisoilT, SoilPropertiesT, soilPropertyConfigT } from '@/types/ai'
+import { onMounted, ref, watch } from 'vue'
+import type { aisoilT,  } from '@/types/ai'
 import FertiliserRecommendation from '@/views/ai/fertiliserRecommendation.vue'
 import SoilAnalysis from '@/views/ai/soilAnalysis.vue'
+import { useAIStore } from '@/stores/ai'
+import { storeToRefs } from 'pinia'
+
+const aiStore = useAIStore()
+const { get_ai } = storeToRefs(aiStore)
+const { fetch_ai_soil } = aiStore
 
 const ai = ref<aisoilT>({
   "crop": "maize",
@@ -75,10 +81,11 @@ const ai = ref<aisoilT>({
     "importance_of_recommended": "Essential for optimizing maize yield by correcting nutrient imbalances in the soil."
   }
 })
-// const transformSoilProperties = (obj:SoilPropertiesT)=>{
-//   Object.keys(obj).map((key:string) => ({
-//     ...obj[key],
-//     key, // Optional: include the original key if needed
-//   }));
-// }
+onMounted(function(){
+  fetch_ai_soil()
+})
+watch(get_ai, (newVal) => {
+  ai.value = newVal
+})
+
 </script>
