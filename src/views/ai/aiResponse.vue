@@ -3,30 +3,9 @@
     <div class="mx-auto max-w-9xl py-8 sm:px-2 sm:py-2 lg:px-4 ">
       <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
         <div class="max-w-9xl">
-          <h2 class="text-4xl font-bold tracking-tight text-gray-900">AI Analysis and Recommendation </h2>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">AI Analysis and Recommendation </h2>
           <p class="mt-3 text-gray-500"><span class="text-gray-800">Summary :</span> {{ai.summary}}</p>
         </div>
-<!--        <div class="mt-5 grid grid-cols-1 gap-x-8 gap-y-2 lg:grid-cols-2">
-          <div v-for="(soil_property,id) in ai.soilProperties" :key="id" class="sm:flex lg:block">
-            <div class="mt-4 rounded-md shadow-md px-4 py-2 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-2">
-              <h3 :class="[ soil_property.name === `pH` ? '' : 'capitalize'   ,'text-base font-medium  text-gray-900']">{{ soil_property.name }}</h3>
-              <dl class="sm:col-span-2 ml-1 sm:ml-0 sm:mt-0" >
-                <div class="">
-                  <span class="text-sm font-medium text-gray-900">Status </span>
-                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.status  }}</span>
-                </div>
-                <div class=" ">
-                  <span class="text-sm font-medium text-gray-700">Importance </span>
-                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.importance }} </span>
-                </div>
-                <div class=" ">
-                  <span class="text-sm font-medium text-gray-700">Recommendation </span>
-                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.recommendation }}</span>
-                </div>
-              </dl>
-            </div>
-          </div>
-        </div>-->
         <soil-analysis :analysis="ai.soilProperties"/>
         <fertiliser-recommendation :recommendation="ai.fertilizer_recommendation"/>
       </div>
