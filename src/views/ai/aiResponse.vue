@@ -1,103 +1,105 @@
 <template>
-  <div class="overfLow-hidden bg-white shadow-lg sm:rounded-lg max-w-7xl mx-auto my-5 sm:my-16">
-    <div class="px-4 py-6 sm:px-6">
-      <h3 class="text-lg/7 font-semibold text-gray-900">Soil properties </h3>
-      <p class="mt-1 max-w-2xl text-sm/6 text-gray-600">Soil properties level status explanation and recommendation .</p>
-    </div>
-    <div class="border-t border-gray-100 mx-5">
-      <dl class="divide-y divide-gray-100">
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-bold text-gray-900 sm:text-base">Nitrogen </dt>
-          <dl class="sm:col-span-2 ml-1 space-y-1 sm:ml-0 sm:mt-0" >
-            <div class="">
-              <span class="text-sm font-medium text-gray-700">Status </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Importance </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low nitrogen levels can limit maize growth, as it is a critical macronutrient.</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Recommendation </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Supplement with nitrogen-based fertilizers to meet crop demands.</span>
-            </div>
-          </dl>
+  <div class="bg-white">
+    <div class="mx-auto max-w-9xl py-8 sm:px-2 sm:py-2 lg:px-4 ">
+      <div class="mx-auto max-w-2xl px-4 lg:max-w-none">
+        <div class="max-w-9xl">
+          <h2 class="text-4xl font-bold tracking-tight text-gray-900">AI Analysis and Recommendation </h2>
+          <p class="mt-3 text-gray-500"><span class="text-gray-800">Summary :</span> {{ai.summary}}</p>
         </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-bold text-gray-900 sm:text-base">Potassium </dt>
-          <dl class="sm:col-span-2 ml-1 space-y-1 sm:ml-0 sm:mt-0" >
-            <div class="">
-              <span class="text-sm font-medium text-gray-700">Status </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Importance </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low nitrogen levels can limit maize growth, as it is a critical macronutrient.</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Recommendation </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Supplement with nitrogen-based fertilizers to meet crop demands.</span>
-            </div>
-          </dl>
-        </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-bold text-gray-900 sm:text-base">Phosphorus </dt>
-          <dl class="sm:col-span-2 ml-1 space-y-1 sm:ml-0 sm:mt-0" >
-            <div class="">
-              <span class="text-sm font-medium text-gray-700">Status </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Importance </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Low nitrogen levels can limit maize growth, as it is a critical macronutrient.</span>
-            </div>
-            <div class=" ">
-              <span class="text-sm font-medium text-gray-700">Recommendation </span>
-              <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">Supplement with nitrogen-based fertilizers to meet crop demands.</span>
-            </div>
-          </dl>
-        </div>
-
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-900">About</dt>
-          <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</dd>
-        </div>
-        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm/6 font-medium text-gray-900">Attachments</dt>
-          <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-            <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-              <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
-                <div class="flex w-0 flex-1 items-center">
-                  <PaperClipIcon class="size-5 shrink-0 text-gray-400" aria-hidden="true" />
-                  <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span class="truncate font-medium">resume_back_end_developer.pdf</span>
-                    <span class="shrink-0 text-gray-400">2.4mb</span>
-                  </div>
+<!--        <div class="mt-5 grid grid-cols-1 gap-x-8 gap-y-2 lg:grid-cols-2">
+          <div v-for="(soil_property,id) in ai.soilProperties" :key="id" class="sm:flex lg:block">
+            <div class="mt-4 rounded-md shadow-md px-4 py-2 sm:ml-6 sm:mt-0 lg:ml-0 lg:mt-2">
+              <h3 :class="[ soil_property.name === `pH` ? '' : 'capitalize'   ,'text-base font-medium  text-gray-900']">{{ soil_property.name }}</h3>
+              <dl class="sm:col-span-2 ml-1 sm:ml-0 sm:mt-0" >
+                <div class="">
+                  <span class="text-sm font-medium text-gray-900">Status </span>
+                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.status  }}</span>
                 </div>
-                <div class="ml-4 shrink-0">
-                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
+                <div class=" ">
+                  <span class="text-sm font-medium text-gray-700">Importance </span>
+                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.importance }} </span>
                 </div>
-              </li>
-              <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm/6">
-                <div class="flex w-0 flex-1 items-center">
-                  <PaperClipIcon class="size-5 shrink-0 text-gray-400" aria-hidden="true" />
-                  <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                    <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                    <span class="shrink-0 text-gray-400">4.5mb</span>
-                  </div>
+                <div class=" ">
+                  <span class="text-sm font-medium text-gray-700">Recommendation </span>
+                  <span class="pl-3 sm:pl-5 text-sm/6 text-gray-500  ">{{ soil_property.recommendation }}</span>
                 </div>
-                <div class="ml-4 shrink-0">
-                  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                </div>
-              </li>
-            </ul>
-          </dd>
-        </div>
-      </dl>
+              </dl>
+            </div>
+          </div>
+        </div>-->
+        <soil-analysis :analysis="ai.soilProperties"/>
+        <fertiliser-recommendation :recommendation="ai.fertilizer_recommendation"/>
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { PaperClipIcon } from '@heroicons/vue/20/solid'
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { aisoilT, SoilPropertiesT, soilPropertyConfigT } from '@/types/ai'
+import FertiliserRecommendation from '@/views/ai/fertiliserRecommendation.vue'
+import SoilAnalysis from '@/views/ai/soilAnalysis.vue'
+
+const ai = ref<aisoilT>({
+  "crop": "maize",
+  "soilProperties": [
+    {
+      "status": "Low",
+      "name": "nitrogen",
+      "importance": "High",
+      "recommendation": "Increase nitrogen levels to support vegetative growth and yield potential."
+    },
+    {
+      "status": "Adequate",
+      "name": "phosphorus",
+      "importance": "High",
+      "recommendation": "Adequate phosphorus levels; maintain current levels for optimal root development."
+    },
+    {
+      "status": "Optimal",
+      "name": "potassium",
+      "importance": "High",
+      "recommendation": "Potassium levels are sufficient for maize, no additional application required."
+    },
+    {
+      "status": "Optimal",
+      "name": "conductivity",
+      "importance": "Moderate",
+      "recommendation": "Maintain current levels as they are within the acceptable range for maize."
+    },
+    {
+      "status": "Sufficient",
+      "name": "moisture",
+      "importance": "High",
+      "recommendation": "Ensure consistent moisture levels through irrigation to prevent stress."
+    },
+    {
+      "status": "Acceptable",
+      "name": "temperature",
+      "importance": "Moderate",
+      "recommendation": "Monitor temperature as it is within acceptable range for maize growth."
+    },
+    {
+      "status": "null",
+      "name": "pH",
+      "importance": "null",
+      "recommendation": "null"
+    }
+  ],
+  "summary": "The soil conditions are mostly adequate for maize; adjust nitrogen and manage pH for best results.",
+  "fertilizer_recommendation": {
+    "ideal_type_of_fertilizer": "Balanced NPK fertilizer with emphasis on nitrogen and phosphorus to support growth.",
+    "suggested_nutrient_ratios": "A 10-20-10 NPK ratio is recommended to provide balanced nutrition for maize.",
+    "application_rate": "Apply fertilizer at a rate of 150 kg/ha to meet nutrient requirements.",
+    "application_method": "Broadcast application followed by incorporation into the soil to ensure even distribution.",
+    "supplementary_practices": "Consider lime application to reduce soil pH and improve nutrient availability.",
+    "importance_of_recommended": "Essential for optimizing maize yield by correcting nutrient imbalances in the soil."
+  }
+})
+// const transformSoilProperties = (obj:SoilPropertiesT)=>{
+//   Object.keys(obj).map((key:string) => ({
+//     ...obj[key],
+//     key, // Optional: include the original key if needed
+//   }));
+// }
 </script>
