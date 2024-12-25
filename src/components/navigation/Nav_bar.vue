@@ -31,15 +31,17 @@
               <MenuButton @click="openMenu = true" class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
-                <span class="inline-flex size-10 items-center justify-center rounded-full bg-gray-500">
-                  <span class="font-medium text-white focus:ring-indigo-500">TW</span>
+                <span class="inline-block size-10 overflow-hidden rounded-full bg-gray-100">
+                  <svg class="size-full text-indigo-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
                 </span>
               </MenuButton>
             </div>
             <transition  enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
               <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem  v-slot="{ active }">
-                  <button @click="goToFarms()" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full text-left py-2 text-sm text-gray-700']">Your farm</button>
+                  <button @click="goToFarms()" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full text-left py-2 text-sm text-gray-700']">Your farms</button>
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
                   <router-link to="/settings" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2  text-sm text-gray-700']">Settings</router-link>
@@ -125,6 +127,7 @@ onMounted(()=>{
   if (get_logged_status.value) {
     fetchShamba()
   }
+  console.log("getUSerName",getUserNameFromLocalStorage())
 })
 
 const openMenu = ref(false)
@@ -155,4 +158,18 @@ watch(()=>router.currentRoute.value.name,()=>{ //show farm drop down in tables a
 
   console.log("showFarmDropDown",farm_drops)
 })
+
+const getUserNameFromLocalStorage = ()=>{
+  const user = localStorage.getItem("user_full_name")
+  if (user){
+    const names = user.split(" ")
+    let initials = ""
+    //get initials 1st character of the full name
+    names.forEach(name=>{
+      initials += name[0]
+    })
+    return initials
+  }
+  return ""
+}
 </script>
