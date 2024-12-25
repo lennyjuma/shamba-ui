@@ -26,7 +26,7 @@
           <farm_drop_down  :items="get_shamba_drop_down"  class="my-auto farm_id mx-2"/>
 
           <!-- Profile dropdown -->
-          <Menu as="div" class="relative ml-3">
+          <Menu v-slot="{ close }" as="div" class="relative ml-3">
             <div>
               <MenuButton @click="openMenu = true" class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <span class="absolute -inset-1.5" />
@@ -39,10 +39,11 @@
               </MenuButton>
             </div>
             <transition  enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <MenuItems @click="close()" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem  v-slot="{ active }">
-                  <button @click="goToFarms()" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full text-left py-2 text-sm text-gray-700']">Your farms</button>
+                  <router-link  to="/profile" :class="[active ? 'bg-gray-100' : '', 'block px-4 w-full text-left py-2 text-sm text-gray-700']">Your farms</router-link>
                 </MenuItem>
+
                 <MenuItem v-slot="{ active }">
                   <router-link to="/settings" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2  text-sm text-gray-700']">Settings</router-link>
                 </MenuItem>
@@ -102,7 +103,7 @@
         </div>
         <div class="mt-3 space-y-1">
           <DisclosureButton as="a" href="/profile" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Your farms</DisclosureButton>
-          <DisclosureButton as="a" href="#" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Settings</DisclosureButton>
+          <DisclosureButton as="a" href="/settings" class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Settings</DisclosureButton>
           <DisclosureButton as="a" @click="signOut()"  class="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">Sign out</DisclosureButton>
         </div>
       </div>
