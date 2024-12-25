@@ -11,28 +11,27 @@
             <div class="pt-6 sm:flex">
               <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">Full name</dt>
               <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                <div class="text-gray-900">Tom Cook</div>
-                <button type="button" class="font-semibold text-indigo-600 hover:text-indigo-500">Update</button>
+                <div class="text-gray-900 capitalize">{{ user_full_name() }}</div>
               </dd>
             </div>
             <div class="pt-6 sm:flex">
               <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">Email address</dt>
               <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                <div class="text-gray-900">tom.cook@example.com</div>
-                <button type="button" class="font-semibold text-indigo-600 hover:text-indigo-500">Update</button>
+                <div class="text-gray-900">{{ user_email() }}</div>
+<!--                <button type="button" class="font-semibold text-indigo-600 hover:text-indigo-500">Update</button>-->
               </dd>
             </div>
             <div class="pt-6 sm:flex">
               <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">Phone number</dt>
               <dd class="mt-1 flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
                 <div class="text-gray-900">+254706755253</div>
-                <button type="button" class="font-semibold text-indigo-600 hover:text-indigo-500">Update</button>
+<!--                <button type="button" class="font-semibold text-indigo-600 hover:text-indigo-500">Update</button>-->
               </dd>
             </div>
-            <div class="pt-6 sm:flex">
+            <div class="pt-6 flex">
               <dt class="font-medium text-gray-900 sm:w-64 sm:flex-none sm:pr-6">Password</dt>
-              <dd class=" flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
-                <button type="button" class="font-semibold text-white rounded-md px-2 py-1 bg-indigo-600 hover:bg-indigo-500">Change password</button>
+              <dd class="ml-auto flex justify-between gap-x-6 sm:mt-0 sm:flex-auto">
+                <router-link to="/change_password" type="button" class="font-semibold text-white rounded-md px-2 py-1 bg-indigo-600 hover:bg-indigo-500">Change password</router-link>
               </dd>
             </div>
           </dl>
@@ -120,21 +119,11 @@ import {
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 
-const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Invoices', href: '#' },
-  { name: 'Clients', href: '#' },
-  { name: 'Expenses', href: '#' },
-]
-const secondaryNavigation = [
-  { name: 'General', href: '#', icon: UserCircleIcon, current: true },
-  { name: 'Security', href: '#', icon: FingerPrintIcon, current: false },
-  { name: 'Notifications', href: '#', icon: BellIcon, current: false },
-  { name: 'Plan', href: '#', icon: CubeIcon, current: false },
-  { name: 'Billing', href: '#', icon: CreditCardIcon, current: false },
-  { name: 'Team members', href: '#', icon: UsersIcon, current: false },
-]
 
-const mobileMenuOpen = ref(false)
 const automaticTimezoneEnabled = ref(true)
+// get username from local storage
+const user_full_name = () => localStorage.getItem('user_full_name');
+
+const user_email = () => localStorage.getItem('user_email');
+
 </script>

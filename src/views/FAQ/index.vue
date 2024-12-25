@@ -40,7 +40,7 @@ const faqs = [
       "Soils can be tested any time during the year. However, allow enough time for the analysis and for fertilizer and lime application after initial analysis. Lime reacts slowly and, if possible, it should be mixed with the soil two to three months before planting. A soil test should be conducted at least 1 time every year and multiple times depending on the crop rotation schedule or as recommended by an agronomist.",
   },
   {
-    question: "How do i get the result?",
+    question: "How do I get the result?",
     answer:
       "Results on basic soil analysis are available on site.",
   },
