@@ -16,7 +16,7 @@
       <div aria-hidden="true" class="absolute inset-0 flex flex-col sm:hidden">
         <div class="relative w-full flex-1 bg-gray-800">
           <div class="absolute inset-0 overflow-hidden">
-            <img src="https://tailwindui.com/img/ecommerce-images/home-page-04-hero-full-width.jpg" alt="" class="h-full w-full object-cover object-center" />
+            <img :src="barley_field" alt="" class="h-full w-full object-cover object-center" />
           </div>
           <div class="absolute inset-0 bg-gray-900 opacity-50" />
         </div>
@@ -25,7 +25,7 @@
       <div class="relative py-32">
         <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">Shamba Lab</h1>
         <div class="mt-4 sm:mt-6">
-          <a href="#" class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700">Get product</a>
+          <router-link to="/contact" class="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 font-medium text-white hover:bg-indigo-700">Get product</router-link>
         </div>
       </div>
     </div>
@@ -37,7 +37,7 @@
           <div>
             <div aria-hidden="true" class="absolute inset-0 overflow-hidden rounded-lg">
               <div class="absolute inset-0 overflow-hidden group-hover:opacity-75">
-                <img :src="collection.imageSrc" :alt="collection.imageAlt" class="h-full w-full object-cover object-center" />
+                <img :src="collection.imageSrc" :alt="collection.imageAlt" class="object-cover h-full" />
               </div>
               <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-50" />
             </div>
@@ -60,16 +60,16 @@
 </template>
 
 <script setup lang="ts">
-import screen from "@/assets/device/device_hands.jpg"
-import screenUp_charger_sensor from "@/assets/device/screenUp_charger_sensor.jpg"
-import device_hands from "@/assets/device/attach-sensor.jpg"
-import barley_field from "@/assets/agriculture/plants/maize.jpg"
+import screen from "@/assets/device/device_hands.webp"
+import screenUp_charger_sensor from "@/assets/device/screenUp_charger_sensor.webp"
+import device_hands from "@/assets/device/attach-sensor.webp"
+import barley_field from "@/assets/agriculture/plants/maize.webp"
 
 const collections = [
   {
     name: "Shamba Lab device",
     href: '#',
-    position: 'object-center ',
+    position: 'object-center',
     imageSrc: screenUp_charger_sensor,
     imageAlt: 'Shamba lab soil testing device.',
   },
