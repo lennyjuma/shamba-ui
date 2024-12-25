@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
+  <Disclosure as="nav" class="bg-white shadow" v-slot="{ open , close }">
     <div class="mx-auto max-w-9xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
         <div class="flex justify-start">
@@ -32,7 +32,7 @@
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Open user menu</span>
                 <span class="inline-block size-10 overflow-hidden rounded-full bg-gray-100">
-                  <svg class="size-full text-indigo-300" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="size-full text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </span>
@@ -68,9 +68,10 @@
     </div>
 
     <DisclosurePanel class="sm:hidden">
-      <div class="space-y-1 pb-3 pt-2">
+      <div @click="close()" class="space-y-1 pb-3 pt-2">
         <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
         <router-link as="router-link" to="/" class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">Home</router-link>
+
         <router-link as="router-link" to="/product" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Product</router-link>
 <!--        <router-link as="router-link" to="/blogs" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Blogs</router-link>-->
         <router-link as="router-link" to="/contact" class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">Contact us</router-link>
@@ -84,7 +85,7 @@
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
              <span class="inline-block size-10 overflow-hidden rounded-full bg-gray-100">
-                  <svg class="size-full text-indigo-300" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="size-full text-indigo-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 </span>
