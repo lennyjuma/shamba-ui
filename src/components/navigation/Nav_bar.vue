@@ -83,11 +83,15 @@
       <div class="border-t border-gray-200 pb-3 pt-4">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+             <span class="inline-block size-10 overflow-hidden rounded-full bg-gray-100">
+                  <svg class="size-full text-indigo-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
           </div>
           <div class="ml-3">
-            <div class="text-base font-medium text-gray-800">Tom Cook</div>
-            <div class="text-sm font-medium text-gray-500">tom@example.com</div>
+            <div class="text-base capitalize font-medium text-gray-800">{{ getUserNameFromLocalStorage() }}</div>
+            <div class="text-sm font-medium text-gray-500">{{ getUserEmailFromLocalStorage() }}</div>
           </div>
           <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <span class="absolute -inset-1.5" />
@@ -162,13 +166,14 @@ watch(()=>router.currentRoute.value.name,()=>{ //show farm drop down in tables a
 const getUserNameFromLocalStorage = ()=>{
   const user = localStorage.getItem("user_full_name")
   if (user){
-    const names = user.split(" ")
-    let initials = ""
-    //get initials 1st character of the full name
-    names.forEach(name=>{
-      initials += name[0]
-    })
-    return initials
+    return user
+  }
+  return ""
+}
+const getUserEmailFromLocalStorage = ()=>{
+  const email = localStorage.getItem("user_email")
+  if (email){
+    return email
   }
   return ""
 }
