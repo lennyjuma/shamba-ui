@@ -102,6 +102,14 @@ export interface register_errorT {
   password_confirm: form_validation_errorT
   phoneNumber: form_validation_errorT
 }
+export interface change_passT {
+  password: string
+  password_confirm: string
+}
+export interface change_pass_errorT {
+  password: form_validation_errorT
+  password_confirm: form_validation_errorT
+}
 export interface shambaT {
   name: string
   farmingType: string

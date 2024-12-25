@@ -8,7 +8,7 @@
       <h1 class="mt-4 text-3xl font-bold tracking-tight uppercase text-white sm:text-5xl">Shamba Lab</h1>
       <p class="mt-4 text-semibold text-white sm:mt-6">{{props.description}}</p>
       <div class="mt-10 flex items-center justify-start gap-x-6">
-        <router-link to="/contact" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get yours</router-link>
+        <router-link to="/contact" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Lets talk</router-link>
         <router-link to="/product" class="text-sm/6 font-semibold text-white">Learn more <span aria-hidden="true">→</span></router-link>
       </div>
     </div>
