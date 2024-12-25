@@ -103,11 +103,13 @@ export interface register_errorT {
   phoneNumber: form_validation_errorT
 }
 export interface change_passT {
+  old_password: string
   password: string
   password_confirm: string
 }
 export interface change_pass_errorT {
   password: form_validation_errorT
+  old_password: form_validation_errorT
   password_confirm: form_validation_errorT
 }
 export interface shambaT {
