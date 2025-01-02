@@ -30,7 +30,7 @@ export const useAIStore = defineStore('ai', () => {
       ai.value= responseDTO.value.data
       isLoading.value = false
     }).catch((error:Error) => {
-      to
+      // to
       isLoading.value = false
     })
   }

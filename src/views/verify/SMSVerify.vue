@@ -18,14 +18,13 @@ const verify_phone_number = () => {
     console.log("otp: ", otp.value)
     otp_err.value.status = true
   }
-
   if (!otp_err.value.status) {
     verify_SMS(otp.value)
   }
 }
 watch(otp,()=>{
   // console.log("otp: ", otp.value)
-  const status = otp.value.toString().length > 5
+  const status = otp.value.toString().length > 6
   otp_err.value.status = status
   if(status) {
     otp_err.value.message_extra = 'OTP contains extra characters'

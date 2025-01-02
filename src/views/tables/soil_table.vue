@@ -16,7 +16,7 @@
           <th scope="col" class="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">pH</th>
           <th scope="col" class="hidden px-3 py-3.5 text-center text-sm font-semibold text-gray-900 lg:table-cell">Crop</th>
           <th scope="col" class="hidden px-3 py-3.5 text-center text-sm font-semibold text-gray-900 lg:table-cell">Date</th>
-          <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Location</th>
+          <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">Extras</th>
 
         </tr>
         </thead>
@@ -76,7 +76,7 @@
           </td>
           <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'hidden px-3 py-3.5 my-auto text-center text-sm text-gray-500 lg:table-cell']">{{ formatDate(soil.readingDate )}}</td>
 
-          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'relative flex flex-col items-center justify-center py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
+          <td :class="[planIdx === 0 ? '' : 'border-t border-gray-200', 'relative flex-col sm:flex items-center justify-center py-3.5 pl-3 pr-4 text-center font-medium sm:pr-6']">
             <button @click="go_to_ai(soil.id)" type="button" class="inline-flex mx-2 my-2 items-center rounded-md  px-2.5 py-1.5 text-sm font-semibold text-gray-900  ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white" :disabled="soil.isCurrent">
               AI analysis
             </button>
@@ -137,9 +137,9 @@ const formatDate = (tarehe:string) => {
 
 // Convert to local readable format with names
   return date.toLocaleString('en-US', {
-    weekday: 'long',   // Day name
+    // weekday: 'long',   // Day name
     year: 'numeric',
-    month: 'long',
+    month: 'numeric',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
