@@ -35,7 +35,7 @@
           <td class="hidden md:table-cell px-3 py-4 text-sm text-gray-900 md:text-gray-500 lg:table-cell">
             {{ air.humidity }} %
           </td>
-          <td class="hidden px-3 py-4 text-sm text-gray-500 overflow-auto md:flex ">
+          <td class="hidden   px-3 py-4 text-sm text-gray-500 overflow-auto md:flex ">
             <span v-for="(mimea,idx) in air.shamba.farmCrops" :key="mimea.crop.id" class="flex overflow-auto pl-1">
               <span>{{mimea.crop.name}}</span>
               <span v-if="air.shamba.farmCrops.length - 1 !== idx" class="pl-1">,</span>

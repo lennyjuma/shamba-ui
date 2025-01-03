@@ -18,21 +18,18 @@ export const useAIStore = defineStore('ai', () => {
     useRestController(path,"get",{}).then(({ responseDTO })=>{
       // @ts-ignore
       ai.value= responseDTO.value.data
-    }).catch((error:Error) => {
-      alert("error")
     })
   }
 
   function generate_ai_recommendation() {
     isLoading.value = true
-    const reading_id = router.currentRoute.value.query["reading_id"]
+    const reading_id = router.currentRoute.value.params["reading_id"]
     const path = `ai/generate?soilReadingId=${reading_id}`
     useRestController(path,"get",{}).then(({ responseDTO })=>{
       // @ts-ignore
       ai.value= responseDTO.value.data
       isLoading.value = false
     }).catch((error:Error) => {
-      // to
       isLoading.value = false
     })
   }
