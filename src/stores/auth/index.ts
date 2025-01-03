@@ -77,7 +77,7 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem("active_shamba_name");
         localStorage.setItem("user_email", login_res.value.email as string);
       }
-      router.push("/profile");
+      router.push("/verify/otp");
 
       toggleNotification("success","Created account successfully.")
 

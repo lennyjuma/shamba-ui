@@ -4,6 +4,7 @@ import CInput from '@/components/form/CInput.vue'
 import { ref, watch } from 'vue'
 import type { form_validation_errorT } from '@/types'
 import { useOTPStore } from '@/stores/otp'
+import router from '@/router'
 
 const otp_err = ref<form_validation_errorT>({status:false,message: "OTP is required"} as form_validation_errorT)
 const otp = ref("")
@@ -19,7 +20,9 @@ const verify_phone_number = () => {
     otp_err.value.status = true
   }
   if (!otp_err.value.status) {
-    verify_SMS(otp.value)
+    verify_SMS(otp.value).then((res) => {
+      router.push("/profile");
+    })
   }
 }
 watch(otp,()=>{

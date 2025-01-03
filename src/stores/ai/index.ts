@@ -13,11 +13,13 @@ export const useAIStore = defineStore('ai', () => {
   const get_isLoading = computed(() => isLoading.value)
 
   function fetch_ai_soil() {
-    const reading_id = router.currentRoute.value.query["reading_id"]
+    const reading_id = router.currentRoute.value.params["reading_id"]
     const path = `ai?soilReadingId=${reading_id}`
     useRestController(path,"get",{}).then(({ responseDTO })=>{
       // @ts-ignore
       ai.value= responseDTO.value.data
+    }).catch((error:Error) => {
+      alert("error")
     })
   }
 

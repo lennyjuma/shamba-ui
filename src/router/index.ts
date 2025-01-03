@@ -65,7 +65,7 @@ const router = createRouter({
       component: () => import('../views/profile/shamba.vue')
     },
     {
-      path: '/ai',
+      path: '/ai/:reading_id',
       name: 'ai',
       component: () => import('../views/ai/aiResponse.vue')
     },

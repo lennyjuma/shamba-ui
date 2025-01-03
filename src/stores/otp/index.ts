@@ -17,10 +17,12 @@ export const useOTPStore = defineStore('otp_store', () => {
       toggleNotification("error", err.response.data.description as string)
     })
   }
-  function verify_SMS(otp:string) {
+  async function verify_SMS(otp:string) {
     const url = `${path}/sms?otp=${otp}`
     useRestController(url,"post",{}).then(({ responseDTO }) =>{
       toggleNotification("success", responseDTO.value.data as string)
+
+
     }).catch((err:Error) => {
       toggleNotification("error", err.response.data.description as string)
     })

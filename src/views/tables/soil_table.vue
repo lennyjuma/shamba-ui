@@ -114,7 +114,7 @@ const go_to_maps = () => {
 
 }
 const go_to_ai = (reading_id:string) => {
-  router.push(`/ai?reading_id=${reading_id}`)
+  router.push(`/ai/${reading_id}`)
 
 }
 
